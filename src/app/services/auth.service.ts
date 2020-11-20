@@ -38,7 +38,8 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
-        this.presentAlert(err.message);
+        let errorM:string = err.message + " ::: " + email + ":" + password;
+        this.presentAlert(errorM);
       });
   }
 

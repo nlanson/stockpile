@@ -15,7 +15,7 @@ export class AccountSettingsPage implements OnInit {
   email: string;
   password: string;
   LoginForm: FormGroup;
-  savedUser: any;
+  savedUser: {email, password};
   showLogin: boolean = false;
   accountExists: boolean;
   cAccount: any;
@@ -37,16 +37,19 @@ export class AccountSettingsPage implements OnInit {
   ngOnInit() {
     this.getSavedAccount();
     this.refreshAccount();
+    console.log("saved user email: " + this.savedUser.email);
   }
 
   refreshAccount() {
-    if( this.savedUser == undefined || null ) {
+    if( this.savedUser.email == undefined || null ) {
       console.log("user not set");
       this.accountExists = false;
     } else {
       this.accountExists = true;
       this.email = this.savedUser.email;
       this.password = this.savedUser.password;
+      console.log("Account Exists: " + this.accountExists);
+      console.log(this.email);
     }
   }
 

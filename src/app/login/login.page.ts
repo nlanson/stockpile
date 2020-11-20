@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
   async login() {
     await this.getAccount();
 
-    if ( this.savedUser.email || this.savedUser.password != null) {
+    if ( this.savedUser.email || this.savedUser.password != undefined || null) {
       this.auth.login(this.savedUser.email, this.savedUser.password);
     } else {
       this.presentAlert("No account set.")

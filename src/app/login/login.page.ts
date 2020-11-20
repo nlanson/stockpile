@@ -54,7 +54,11 @@ export class LoginPage implements OnInit {
   }
 
   getAccount() {
-    this.savedUser = this.ns.getItem('account');
+    this.ns.getItem('account')
+    .then(data=>
+      {
+        this.savedUser = data;
+      });
   }
 
   async presentAlert(error) {

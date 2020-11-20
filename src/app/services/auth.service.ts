@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import firebase from 'firebase/app';
 import{ Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs'; 
+import { AlertController } from '@ionic/angular';
 
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
@@ -19,7 +20,8 @@ export class AuthService {
   constructor(
     private firebaseAuth: AngularFireAuth,
     private navroute: Router,
-    public fdb: AngularFireDatabase
+    public fdb: AngularFireDatabase,
+    private ac: AlertController
   ) { 
     this.users = this.getUsers();
     this.currentUser = null;
@@ -36,6 +38,7 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
+        this.presentAlert(err.message);
       });
   }
 
@@ -70,6 +73,17 @@ export class AuthService {
     }).catch(function(error) {
       console.log("failed")
     });
+  }
+
+  async presentAlert(error) {
+    const alert = await this.ac.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      message: error,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 

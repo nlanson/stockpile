@@ -33,7 +33,7 @@ export class SettingsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.ns.setItem('account', {user: "admin@t2g.com", pass: "admin1"})
+    this.ns.setItem('account', {email: "admin@t2g.com", password: "admin1"})
     .then(
       () => console.log('Stored account!'),
       error => console.error('Error storing item', error)

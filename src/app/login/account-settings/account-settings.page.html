@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="settingsHeading">Account Settings</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    
+    <div *ngIf="accountExists">
+      <p> Logged in as: </p>
+      <br>
+      <h4> {{ this.email }} </h4> 
+      <br>
+      <ion-buttons (click)="showLoginForm()" class="loginLink">Change Account</ion-buttons>
+    </div>
+  
+    <div *ngIf="!accountExists">
+      <p>No account connected.</p>
+      <ion-buttons (click)="showLoginForm()" class="loginLink" size="small">Login</ion-buttons>
+    </div>
+    
+    <div *ngIf="showLogin">
+      <form [formGroup]="LoginForm" (ngSubmit)="setAccount()">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password" id="key"></ion-input>
+        </ion-item>
+        <ion-button type="submit" color="primary" class="ion-margin" expand="block">Set Account</ion-button>
+      </form>
+    </div>
+
+  </div>
+</ion-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { SettingsComponent } from './settings/settings.component';
+import { AccountSettingsPage } from './account-settings/account-settings.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AlertController } from '@ionic/angular';
@@ -20,13 +20,17 @@ export class LoginPage implements OnInit {
   constructor(
     private auth: AuthService,
     private modalController: ModalController,
-    private sc: SettingsComponent,
+    private asc: AccountSettingsPage,
     private ns: NativeStorage,
     private ac: AlertController
   ) { }
 
   ngOnInit() {
     this.getAccount();
+
+    if( this.savedUser == undefined || null ) {
+      this.presentSettings();
+    }
     
     //on load, check native storage for any saved accounts, and if empty, open LoginSettings Modal.
     //if not empty, prompt login with faio/pin
@@ -46,7 +50,7 @@ export class LoginPage implements OnInit {
 
   async presentSettings() {
     const modal = await this.modalController.create({
-      component: SettingsComponent,
+      component: AccountSettingsPage,
       swipeToClose: true,
       cssClass: 'default-modal'
     });

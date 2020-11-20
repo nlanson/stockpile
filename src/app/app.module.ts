@@ -17,7 +17,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FirebaseService } from './services/firebase.service';
 import { AuthService } from './services/auth.service';
 
-import { SettingsComponent } from './login/settings/settings.component'; 
+import { AccountSettingsPage } from './login/account-settings/account-settings.page'; 
 
 
 
@@ -50,7 +50,7 @@ var firebaseConfig = {
     FirebaseService,
     SplashScreen,
     AuthService,
-    SettingsComponent,
+    AccountSettingsPage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]

@@ -40,7 +40,7 @@ export class AccountSettingsPage implements OnInit {
   }
 
   refreshAccount() {
-    if( this.savedUser == undefined ) {
+    if( this.savedUser == undefined || null ) {
       console.log("user not set");
       this.accountExists = false;
     } else {

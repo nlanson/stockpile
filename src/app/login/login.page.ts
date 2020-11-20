@@ -5,6 +5,7 @@ import { AccountSettingsPage } from './account-settings/account-settings.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AlertController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 
 
 
@@ -22,23 +23,28 @@ export class LoginPage implements OnInit {
     private modalController: ModalController,
     private asc: AccountSettingsPage,
     private ns: NativeStorage,
-    private ac: AlertController
+    private ac: AlertController,
+    private platform: Platform
   ) { }
 
   ngOnInit() {
-    this.getAccount();
+    this.platform.ready().then(async () => {
+      await this.getAccount();
 
-    if( this.savedUser == undefined || null ) {
-      this.presentSettings();
-    }
+      if( this.savedUser == undefined || null ) {
+        this.presentSettings();
+      }
+    });
+  }
+    
+    
     
     //on load, check native storage for any saved accounts, and if empty, open LoginSettings Modal.
     //if not empty, prompt login with faio/pin
-  }
 
 
-  login() {
-    this.getAccount();
+  async login() {
+    await this.getAccount();
 
     if ( this.savedUser.email || this.savedUser.password != null) {
       this.auth.login(this.savedUser.email, this.savedUser.password);
@@ -58,11 +64,14 @@ export class LoginPage implements OnInit {
   }
 
   getAccount() {
-    this.ns.getItem('account')
-    .then(data=>
-      {
-        this.savedUser = data;
-      });
+    return new Promise((resolve, reject) => {
+      this.ns.getItem('account')
+      .then(data=>
+        {
+          this.savedUser = data;
+          resolve("resolved");
+        });
+    });
   }
 
   async presentAlert(error) {

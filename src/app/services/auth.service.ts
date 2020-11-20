@@ -31,25 +31,25 @@ export class AuthService {
   }
 
   setAccount(email, password) {
-    // this.ns.setItem('account', {email: email, password: password})
-    // .then(
-    //   () => console.log('Account stored for ' + email),
-    //   error => console.error('Error storing item', error)
-    // );
+    this.ns.setItem('account', {email: email, password: password})
+    .then(
+      () => console.log('Account stored for ' + email),
+      error => console.error('Error storing item', error)
+    );
 
-    localStorage.setItem('account', JSON.stringify({"email": email, "password": password}));
+    //localStorage.setItem('account', JSON.stringify({"email": email, "password": password}));
   }
 
   getSavedAccounts() {
-    // this.ns.getItem('account')
-    // .then(data=>{
-    //     this.savedUser = data;
-    // })
-    // .catch(err=> {
-    //   console.log(err);
-    // });
+    this.ns.getItem('account')
+    .then(data=>{
+        this.savedUser = data;
+    })
+    .catch(err=> {
+      console.log(err);
+    });
 
-    this.savedUser = JSON.parse(localStorage.getItem('account'));
+    //this.savedUser = JSON.parse(localStorage.getItem('account'));
 
     return this.savedUser;
   }

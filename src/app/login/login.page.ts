@@ -34,7 +34,7 @@ export class LoginPage implements OnInit {
    }
 
   ngOnInit() {
-    this.platform.ready().then(async () => {
+    setTimeout(function() {
       this.savedUser = this.auth.getSavedAccounts();
 
       if( 
@@ -44,7 +44,7 @@ export class LoginPage implements OnInit {
         ) {
           this.presentSettings();
         }
-    });
+    }, 1750)
   }
     
     
@@ -58,7 +58,7 @@ export class LoginPage implements OnInit {
 
     if ( this.savedUser.email || this.savedUser.password != undefined || null) {
       let idAvail = await this.faio.isAvailable();
-      if ( idAvail == true ) {
+      
         this.faio.show({
           title: 'Login', // (Android Only) | optional |
           subtitle: 'Unlock to use', // (Android Only) | 
@@ -70,9 +70,6 @@ export class LoginPage implements OnInit {
         .catch((error: any) => {
           console.log('err: ', error);
         });
-      } else {
-        this.presentAlert("No login method detected.")
-      }
     } else {
       this.presentAlert("No account set.")
     }

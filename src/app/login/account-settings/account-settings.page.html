@@ -19,7 +19,7 @@
   
     <div *ngIf="!accountExists">
       <p>No account connected.</p>
-      <ion-buttons (click)="hideLoginForm()" class="loginLink" *ngIf="!showLogin">Login</ion-buttons>
+      <ion-buttons (click)="showLoginForm()" class="loginLink" *ngIf="!showLogin">Login</ion-buttons>
       <ion-buttons (click)="hideLoginForm()" class="loginLink" *ngIf="showLogin">Hide</ion-buttons>
     </div>
     

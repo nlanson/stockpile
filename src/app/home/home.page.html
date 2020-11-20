@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar [color]="toolbarColour">
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
@@ -8,7 +8,7 @@
     </ion-buttons>
   </ion-toolbar>
   
-  <ion-toolbar>
+  <ion-toolbar [color]="toolbarColour">
     <ion-segment value="Locations">
       <ion-segment-button *ngFor="let location of locations | async" (click)="showLocation(location.name);">{{location.name}}</ion-segment-button>
     </ion-segment>

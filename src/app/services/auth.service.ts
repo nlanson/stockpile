@@ -4,6 +4,7 @@ import firebase from 'firebase/app';
 import{ Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs'; 
 import { AlertController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 
@@ -13,6 +14,7 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 export class AuthService {
 
   user: Observable<firebase.User>;
+  savedUser: any;
   users: Array<any>;
   authState: boolean;
   currentUser: any;
@@ -21,10 +23,35 @@ export class AuthService {
     private firebaseAuth: AngularFireAuth,
     private navroute: Router,
     public fdb: AngularFireDatabase,
-    private ac: AlertController
+    private ac: AlertController,
+    private ns: NativeStorage
   ) { 
     this.users = this.getUsers();
     this.currentUser = null;
+  }
+
+  setAccount(email, password) {
+    // this.ns.setItem('account', {email: email, password: password})
+    // .then(
+    //   () => console.log('Account stored for ' + email),
+    //   error => console.error('Error storing item', error)
+    // );
+
+    localStorage.setItem('account', JSON.stringify({"email": email, "password": password}));
+  }
+
+  getSavedAccounts() {
+    // this.ns.getItem('account')
+    // .then(data=>{
+    //     this.savedUser = data;
+    // })
+    // .catch(err=> {
+    //   console.log(err);
+    // });
+
+    this.savedUser = JSON.parse(localStorage.getItem('account'));
+
+    return this.savedUser;
   }
 
   login(email: string, password: string) {
@@ -38,8 +65,7 @@ export class AuthService {
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
-        let errorM:string = err.message + " ::: " + email + ":" + password;
-        this.presentAlert(errorM);
+        this.presentAlert(err.message);
       });
   }
 

@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AuthService } from '../../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-account-settings',
@@ -24,7 +25,8 @@ export class AccountSettingsPage implements OnInit {
     private fb: FormBuilder,
     private modalController: ModalController,
     private ns: NativeStorage,
-    private auth: AuthService
+    private auth: AuthService,
+    private ac: AlertController
   ) { 
     
     this.LoginForm = this.fb.group({
@@ -35,46 +37,86 @@ export class AccountSettingsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getSavedAccount();
-    this.refreshAccount();
-    console.log("saved user email: " + this.savedUser.email);
+    this.savedUser = this.auth.getSavedAccounts();
+
+    if( 
+      (this.savedUser == null || undefined) ||
+      (this.savedUser.email == null || undefined) ||
+      (this.savedUser.password == null || undefined)
+      ) {
+        this.accountExists = false;
+        this.showLogin = true;
+      } else {
+        this.accountExists = true;
+      }
   }
 
   refreshAccount() {
-    if( this.savedUser.email == undefined || null ) {
-      console.log("user not set");
-      this.accountExists = false;
-    } else {
-      this.accountExists = true;
-      this.email = this.savedUser.email;
-      this.password = this.savedUser.password;
-      console.log("Account Exists: " + this.accountExists);
-      console.log(this.email);
-    }
+    if( 
+      (this.savedUser == null || undefined) ||
+      (this.savedUser.email == null || undefined) ||
+      (this.savedUser.password == null || undefined)
+      ) {
+        this.presentAlert("Account set failed.");
+      } else {
+        this.accountExists = true;
+      }
   }
 
-  setAccount() {
-    this.email = this.LoginForm.value.email;
-    this.password = this.LoginForm.value.password;
-    this.ns.setItem('account', {email: this.email, password: this.password})
-    .then(
-      () => console.log('Stored account!'),
-      error => console.error('Error storing item', error)
-    );
-    this.refreshAccount();
+  setAccount(){
+    this.auth.setAccount(this.LoginForm.value.email, this.LoginForm.value.password);
+    this.LoginForm.reset();
+
+    this.savedUser = this.auth.getSavedAccounts();
+    this.modalController.dismiss();
   }
 
-  getSavedAccount() {
-    this.ns.getItem('account')
-    .then(data=>
-      {
-        this.savedUser = data;
-      });
+  clearAccount() {
+    this.presentDeleteAlert();
+  }
+
+  async presentAlert(error) {
+    const alert = await this.ac.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      message: error,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async presentDeleteAlert() { //present alert
+    const alert = await this.ac.create({
+      header: 'Confirm Clear',
+      message: 'Are you sure you want to  <strong>clear this account?</strong>',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (cancel) => {
+            console.log('Cancelled Delete');
+          }
+        }, {
+          text: 'Clear',
+          handler: (del) => {
+            this.auth.setAccount(null, null);
+            this.modalController.dismiss();
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 
   showLoginForm() {
     this.showLogin = true;
+  }
+
+  hideLoginForm() {
+    this.showLogin = false;
   }
 
 }

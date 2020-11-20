@@ -76,6 +76,16 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
+$colors: (
+   blue:    #387ef5,
+   secondary:  #32db64,
+   danger:     #f53d3d,
+   light:      #f4f4f4,  
+   dark:          #222,
+   black:       #000000
+);
+
+
 @media (prefers-color-scheme: dark) {
   /*
    * Dark Colors

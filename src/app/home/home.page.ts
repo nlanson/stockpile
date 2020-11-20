@@ -16,6 +16,7 @@ export class HomePage {
 
   locations: Observable<any[]>;
   currentLocation: string;
+  toolbarColour: string;
 
   constructor(
     private fbs: FirebaseService,
@@ -23,6 +24,7 @@ export class HomePage {
     private auth: AuthService
   ) {
     this.locations = this.fbs.getLocations();
+    this.toolbarColour = "black";
   }
 
   ngOnInit() {

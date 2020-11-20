@@ -1,15 +1,17 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar [color]="toolbarColour">
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <ion-toolbar [color]="toolbarColour">
     <h2 class="Title"> Login </h2>
   </ion-toolbar>
 
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-button (click)="login()" class="ion-margin"> Login </ion-button>
+<ion-content [fullscreen]="true">  
+  <div class="loginButton">
+    <ion-button (click)="login()" class="ion-margin"> <ion-icon name="key-outline"></ion-icon> </ion-button>
+  </div>
 </ion-content>

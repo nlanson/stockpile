@@ -9,15 +9,18 @@
     
     <div *ngIf="accountExists">
       <p> Logged in as: </p>
+      <h4> {{ savedUser.email }} </h4> 
       <br>
-      <h4> {{ this.email }} </h4> 
-      <br>
-      <ion-buttons (click)="showLoginForm()" class="loginLink">Change Account</ion-buttons>
+      <ion-buttons (click)="showLoginForm()" class="changeAccountLink" *ngIf="!showLogin">Change Account</ion-buttons>
+      <ion-buttons (click)="hideLoginForm()" class="loginLink" *ngIf="showLogin">Hide</ion-buttons>
+      <br><br>
+      <ion-buttons (click)="presentDeleteAlert()" class="clearLink" *ngIf="!showLogin">Clear</ion-buttons>
     </div>
   
     <div *ngIf="!accountExists">
       <p>No account connected.</p>
-      <ion-buttons (click)="showLoginForm()" class="loginLink" size="small">Login</ion-buttons>
+      <ion-buttons (click)="hideLoginForm()" class="loginLink" *ngIf="!showLogin">Login</ion-buttons>
+      <ion-buttons (click)="hideLoginForm()" class="loginLink" *ngIf="showLogin">Hide</ion-buttons>
     </div>
     
     <div *ngIf="showLogin">

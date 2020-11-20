@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="settingsHeading">Settings</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h3>{{ currentUser.displayName }}</h3>
+    <ion-buttons (click)="logout()">
+      <h4>Logout</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
+    </ion-buttons>
+    <br>
+    
+    <!--
+    <ion-buttons (click)="setDisplayName()">
+      <h4>Set DN</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
+    </ion-buttons>
+    -->
+
+  </div>
+</ion-content>

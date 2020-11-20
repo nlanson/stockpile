@@ -1,20 +1,23 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="start" (click)="presentSettings()">
+      <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="presentInfo()">
+      <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  
+  <ion-toolbar>
+    <ion-segment value="Locations">
+      <ion-segment-button *ngFor="let location of locations | async" (click)="showLocation(location.name);">{{location.name}}</ion-segment-button>
+    </ion-segment>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong>{{currentLocation}}</strong>
   </div>
 </ion-content>

@@ -6,7 +6,7 @@ import { AccountSettingsPage } from './account-settings/account-settings.page';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { AlertController } from '@ionic/angular';
-import { Platform } from '@ionic/angular';
+import { timer } from 'rxjs'
 
 
 
@@ -27,14 +27,12 @@ export class LoginPage implements OnInit {
     private asc: AccountSettingsPage,
     private ns: NativeStorage,
     private ac: AlertController,
-    private platform: Platform,
     private faio: FingerprintAIO
   ) {
     this.toolbarColour = "black";
    }
 
   ngOnInit() {
-    setTimeout(function() {
       this.savedUser = this.auth.getSavedAccounts();
 
       if( 
@@ -42,16 +40,12 @@ export class LoginPage implements OnInit {
         (this.savedUser.email == null || undefined) ||
         (this.savedUser.password == null || undefined)
         ) {
-          this.presentSettings();
+          timer(500).subscribe(() => this.presentSettings());
+        } else {
+          timer(1000).subscribe(() => this.login());
         }
-    }, 1750)
-  }
-    
-    
-    
-    //on load, check native storage for any saved accounts, and if empty, open LoginSettings Modal.
-    //if not empty, prompt login with faio/pin
 
+  }
 
   async login() {
     this.savedUser = this.auth.getSavedAccounts();
@@ -71,7 +65,7 @@ export class LoginPage implements OnInit {
           console.log('err: ', error);
         });
     } else {
-      this.presentAlert("No account set.")
+      this.presentAlert("No account set.");
     }
     
   }
@@ -85,7 +79,7 @@ export class LoginPage implements OnInit {
     return await modal.present();
   }
 
-  async presentAlert(error) {
+  async presentAlert(error: string) {
     const alert = await this.ac.create({
       cssClass: 'my-custom-class',
       header: 'Error',

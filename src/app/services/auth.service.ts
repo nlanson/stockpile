@@ -52,6 +52,7 @@ export class AuthService {
     //this.savedUser = JSON.parse(localStorage.getItem('account'));
 
     return this.savedUser;
+
   }
 
   login(email: string, password: string) {

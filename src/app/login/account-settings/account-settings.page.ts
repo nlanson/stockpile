@@ -6,6 +6,8 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AuthService } from '../../services/auth.service';
 import { AlertController } from '@ionic/angular';
 
+import { timer } from 'rxjs';
+
 @Component({
   selector: 'app-account-settings',
   templateUrl: './account-settings.page.html',
@@ -16,8 +18,8 @@ export class AccountSettingsPage implements OnInit {
   email: string;
   password: string;
   LoginForm: FormGroup;
-  savedUser: {email, password};
-  showLogin: boolean = false;
+  savedUser: {email: string, password: string};
+  showLogin: boolean;
   accountExists: boolean;
   cAccount: any;
 
@@ -36,7 +38,7 @@ export class AccountSettingsPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.savedUser = this.auth.getSavedAccounts();
 
     if( 
@@ -49,6 +51,19 @@ export class AccountSettingsPage implements OnInit {
       } else {
         this.accountExists = true;
       }
+
+      timer(500).subscribe(() => {
+        if( 
+          (this.savedUser == null || undefined) ||
+          (this.savedUser.email == null || undefined) ||
+          (this.savedUser.password == null || undefined)
+          ) {
+            this.accountExists = false;
+            this.showLogin = true;
+          } else {
+            this.accountExists = true;
+          }
+      });
   }
 
   refreshAccount() {

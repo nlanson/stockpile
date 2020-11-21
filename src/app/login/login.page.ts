@@ -32,23 +32,12 @@ export class LoginPage implements OnInit {
     this.toolbarColour = "black";
    }
 
-  ngOnInit() {
-      this.savedUser = this.auth.getSavedAccounts();
-
-      if( 
-        (this.savedUser == null || undefined) ||
-        (this.savedUser.email == null || undefined) ||
-        (this.savedUser.password == null || undefined)
-        ) {
-          timer(500).subscribe(() => this.presentSettings());
-        } else {
-          timer(1000).subscribe(() => this.login());
-        }
-
+  async ngOnInit() {
+      this.savedUser = await this.auth.getSavedAccounts();
   }
 
   async login() {
-    this.savedUser = this.auth.getSavedAccounts();
+    this.savedUser = await this.auth.getSavedAccounts();
 
     if ( this.savedUser.email || this.savedUser.password != undefined || null) {
       let idAvail = await this.faio.isAvailable();

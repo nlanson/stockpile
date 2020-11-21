@@ -18,7 +18,7 @@ export class AccountSettingsPage implements OnInit {
   email: string;
   password: string;
   LoginForm: FormGroup;
-  savedUser: {email: string, password: string};
+  savedUser: any;
   showLogin: boolean;
   accountExists: boolean;
   cAccount: any;
@@ -39,7 +39,7 @@ export class AccountSettingsPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.savedUser = this.auth.getSavedAccounts();
+    this.savedUser = await this.auth.getSavedAccounts();
 
     if( 
       (this.savedUser == null || undefined) ||
@@ -52,7 +52,8 @@ export class AccountSettingsPage implements OnInit {
         this.accountExists = true;
       }
 
-      timer(500).subscribe(() => {
+      timer(2000).subscribe(() => {
+        console.log("asPage waited 2 seconds before checking credentials.")
         if( 
           (this.savedUser == null || undefined) ||
           (this.savedUser.email == null || undefined) ||
@@ -73,6 +74,8 @@ export class AccountSettingsPage implements OnInit {
       (this.savedUser.password == null || undefined)
       ) {
         this.presentAlert("Account set failed.");
+        this.accountExists = false;
+        this.showLogin = true;
       } else {
         this.accountExists = true;
       }

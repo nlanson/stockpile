@@ -41,17 +41,19 @@ export class AuthService {
   }
 
   getSavedAccounts() {
-    this.ns.getItem('account')
-    .then(data=>{
-        this.savedUser = data;
+    return new Promise((resolve, reject) => {
+      this.ns.getItem('account')
+      .then(data=>{
+          this.savedUser = data;
+          resolve(this.savedUser);
+      })
+      .catch(err=> {
+        console.log(err);
+        resolve(this.savedUser);
+      });
+      //this.savedUser = JSON.parse(localStorage.getItem('account'));
+      //return this.savedUser;
     })
-    .catch(err=> {
-      console.log(err);
-    });
-
-    //this.savedUser = JSON.parse(localStorage.getItem('account'));
-
-    return this.savedUser;
 
   }
 

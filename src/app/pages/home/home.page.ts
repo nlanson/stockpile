@@ -1,10 +1,11 @@
 import { Component, ComponentRef, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
-import { SettingsComponent } from './settings/settings.component';
-import { InfoComponent } from './info/info.component';
-import { AuthService } from '../services/auth.service';
-import { FirebaseService } from '../services/firebase.service';
+
+import { SettingsComponent } from '../../modals/settings/settings.component';
+import { InfoComponent } from '../../modals/info/info.component';
+import { NewLocationPage } from '../../modals/new-location/new-location.page';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -21,14 +22,13 @@ export class HomePage {
   constructor(
     private fbs: FirebaseService,
     private modalController: ModalController,
-    private auth: AuthService
   ) {
     this.locations = this.fbs.getLocations();
     this.toolbarColour = "black";
   }
 
   ngOnInit() {
-
+    
   }
   
   async presentSettings() {
@@ -36,6 +36,15 @@ export class HomePage {
       component: SettingsComponent,
       swipeToClose: true,
       cssClass: 'default-modal'
+    });
+    return await modal.present();
+  }
+
+  async presentNewLocationModal() {
+    const modal = await this.modalController.create({
+      component: NewLocationPage,
+      swipeToClose: true,
+      cssClass: 'newLocationModal'
     });
     return await modal.present();
   }
@@ -49,7 +58,7 @@ export class HomePage {
     return await modal.present();
   }
 
-  showLocation(name) {
-    this.currentLocation = name;
+  removeLocation(id, name) {
+    this.fbs.removeLocation(id, name);
   }
 }

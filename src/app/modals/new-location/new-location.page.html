@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>newLocation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="modalHideScroll">
+  <form [formGroup]="newLocationForm" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="floating">Locaion Name</ion-label>
+      <ion-input formControlName="newLocationName"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Location Type</ion-label>
+      <ion-input formControlName="newLocationType"></ion-input>
+    </ion-item>
+    <ion-button type="submit" color="primary" class="ion-margin" expand="block">Add</ion-button>
+  </form>
+</ion-content>

@@ -4,18 +4,30 @@ import { AuthGuard } from './services/guard/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./pages/tabs/tabs.module').then( m => m.TabsPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'item',
+    loadChildren: () => import('./pages/item/item.module').then( m => m.ItemPageModule)
+  },
+  {
+    path: 'new-item',
+    loadChildren: () => import('./modals/new-item/new-item.module').then( m => m.NewItemPageModule)
+  },
+  {
+    path: 'new-location',
+    loadChildren: () => import('./modals/new-location/new-location.module').then( m => m.NewLocationPageModule)
   },
 ];
 

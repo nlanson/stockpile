@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { AccountSettingsPage } from './account-settings/account-settings.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -37,25 +37,26 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    this.savedUser = await this.auth.getSavedAccounts();
+    this.auth.login("admin@t2g.com", "admin1");
+    // this.savedUser = await this.auth.getSavedAccounts();
 
-    if ( this.savedUser.email || this.savedUser.password != undefined || null) {
-      let idAvail = await this.faio.isAvailable();
+    // if ( this.savedUser.email || this.savedUser.password != undefined || null) {
+    //   let idAvail = await this.faio.isAvailable();
       
-        this.faio.show({
-          title: 'Login', // (Android Only) | optional |
-          subtitle: 'Unlock to use', // (Android Only) | 
-          description: 'Login', // optional | 
-          fallbackButtonTitle: 'Use Backup', // optional | 
-        }).then(() => {
-          this.auth.login(this.savedUser.email, this.savedUser.password);
-        })
-        .catch((error: any) => {
-          console.log('err: ', error);
-        });
-    } else {
-      this.presentAlert("No account set.");
-    }
+    //     this.faio.show({
+    //       title: 'Login', // (Android Only) | optional |
+    //       subtitle: 'Unlock to use', // (Android Only) | 
+    //       description: 'Login', // optional | 
+    //       fallbackButtonTitle: 'Use Backup', // optional | 
+    //     }).then(() => {
+    //       this.auth.login(this.savedUser.email, this.savedUser.password);
+    //     })
+    //     .catch((error: any) => {
+    //       console.log('err: ', error);
+    //     });
+    // } else {
+    //   this.presentAlert("No account set.");
+    // }
     
   }
 

@@ -7,17 +7,14 @@
       <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
-  
-  <ion-toolbar [color]="toolbarColour">
-    <ion-segment value="Locations">
-      <ion-segment-button *ngFor="let location of locations | async" (click)="showLocation(location.name);">{{location.name}}</ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-  <div id="container">
-    <strong>{{currentLocation}}</strong>
-  </div>
+<ion-content>
+  <ion-list *ngFor="let item of items | async" (click)="gotoItemPage(item.id)">
+    <ion-item>
+      <h3> {{item.name}} </h3>
+    </ion-item>
+  </ion-list>
+  <br>
+  <ion-button (click)="presentNewItemModal()">Add new Item</ion-button>
 </ion-content>

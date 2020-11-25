@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="toolbarColour">
+    <ion-buttons slot="start" (click)="presentSettings()">
+      <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="presentInfo()">
+      <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list *ngFor="let location of locations | async">
+    <ion-item>
+      <h3> {{location.name}} </h3>
+      <ion-button (click)="removeLocation(location.id, location.name)" color="danger" class="ion-margin">delete</ion-button>
+    </ion-item>
+  </ion-list>
+  <br>
+  <ion-button (click)="presentNewLocationModal()" class="ion-margin">New Location</ion-button>
+</ion-content>

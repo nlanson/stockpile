@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [color]="toolbarColour">
+    <ion-buttons slot="start" (click)="presentSettings()">
+      <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" (click)="presentInfo()">
+      <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>this page has logged item info from rtdb</p>
+  <br>
+  <p>please check logs</p>
+</ion-content>

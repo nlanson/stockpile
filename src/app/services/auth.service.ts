@@ -63,7 +63,7 @@ export class AuthService {
       .then(value => {
         console.log('Login Success');
         this.currentUser = value.user; //set the current user here
-        this.navroute.navigate(['/home']);
+        this.navroute.navigate(['/tabs']);
         
       })
       .catch(err => {

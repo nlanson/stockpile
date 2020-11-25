@@ -18,7 +18,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FirebaseService } from './services/firebase.service';
 import { AuthService } from './services/auth.service';
 
-import { AccountSettingsPage } from './login/account-settings/account-settings.page';
+import { AccountSettingsPage } from './pages/login/account-settings/account-settings.page';
 
 
 

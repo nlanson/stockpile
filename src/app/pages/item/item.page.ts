@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
@@ -18,7 +19,7 @@ export class ItemPage implements OnInit {
   id: string;
   toolbarColour: string;
 
-  locations: Observable<any>
+  locations: any;
   item: any;
 
   constructor(
@@ -26,16 +27,19 @@ export class ItemPage implements OnInit {
     private fbs: FirebaseService,
     private modalController: ModalController,
     private route: Router,
+    private fb: FormBuilder
   ) {
     this.toolbarColour = "black";
    }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sub = this.activatedRoute.params.subscribe(params => {
       this.id = params["id"];
     });
     this.item = this.fbs.getItem(this.id);
-    this.locations = this.fbs.getLocations();
+    this.locations = await this.fbs.getLocationsArray();
+    //console.log(this.locations);
+
   }
   
   deleteItem(id) {
@@ -44,8 +48,14 @@ export class ItemPage implements OnInit {
     this.route.navigate(['/tabs/items'])
   }
 
-  updateVal() {
-    console.log("val")
+  plusOne(location, value) {
+    let newValue = value + 1;
+    this.fbs.editItem(this.id, location, newValue);
+  }
+
+  minusOne(location, value) {
+    let newValue = value - 1;
+    this.fbs.editItem(this.id, location, newValue);
   }
 
   async presentSettings() {

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -32,23 +33,44 @@ export class FirebaseService {
   }
 
   getItem(id) {
-    let i = 0;
-    let itemData = {};
-    this.fdb.list(`items/${id}`).snapshotChanges().forEach(item => {
-      item.forEach(item => {
-        let key = item.payload.key;
-        let value = item.payload.val();
-        if (key == "id" || key == "name") {
+    // let i = 0;
+    // let itemData = {};
+    // this.fdb.list(`items/${id}`).snapshotChanges().forEach(item => {
+    //   item.forEach(item => {
+    //     let key = item.payload.key;
+    //     let value = item.payload.val();
+    //     if (key == "id" || key == "name") {
           
-        } else {
-          itemData[key] = value;
-        }
-        i++;
-      })
-    });
+    //     } else {
+    //       itemData[key] = value;
+    //     }
+    //     i++;
+    //   })
+    // });
     
-    return itemData
-    //return this.fdb.list(`items/${id}`).valueChanges();
+    // return itemData
+    return this.fdb.list(`items/${id}`).valueChanges();
+    //need to remove id and name from this array ^^^
+  }
+
+  getLocationsArray() {
+    return new Promise((resolve, reject) => {
+      let i = 0;
+      let locationArray = [];
+      this.fdb.list(`locations`).snapshotChanges().forEach(location => {
+        location.forEach(location => {
+          let locationName:any = location.payload.val();
+          locationName = locationName.name;
+          locationArray.push(locationName);
+        })
+      });
+      
+      resolve(locationArray)
+    })
+  }
+
+  editItem(id, location, newValue) {
+    this.fdb.object("items/" + id).update({[location]: newValue});
   }
 
   addItem(itemName: string) {
@@ -65,7 +87,7 @@ export class FirebaseService {
         
         this.fdb.list('locations').snapshotChanges().forEach(location => {
           location.forEach(location => {
-            let locationName =  location.payload.val();
+            let locationName:any =  location.payload.val();
             ref.update({[locationName.name]: 0 })
           });
         });

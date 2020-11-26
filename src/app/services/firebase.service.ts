@@ -19,6 +19,7 @@ export class FirebaseService {
   }
   
   getItemsBySearchTerm(searchTerm) {
+    searchTerm = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1);
     return new Promise((resolve, reject) => {
       let tempArray = [];
       this.fdb.list('items', ref => ref.orderByChild('name').equalTo(searchTerm)).snapshotChanges().subscribe((res) => {
@@ -50,7 +51,8 @@ export class FirebaseService {
     //return this.fdb.list(`items/${id}`).valueChanges();
   }
 
-  addItem(itemName) {
+  addItem(itemName: string) {
+    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
     let item = {
       name: itemName
     }

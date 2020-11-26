@@ -12,7 +12,7 @@
 <ion-content>
   <ion-list *ngFor="let item of item | keyvalue">
     <ion-item>
-      <strong>{{item.key}} - </strong> <p>{{item.value}}kg</p>
+      <strong>{{item.key}} - </strong> <p >{{item.value}}kg</p>
     </ion-item>
   </ion-list>
   <ion-button class="ion-margin" color="danger" (click)="deleteItem(id)">Delete Item</ion-button>

@@ -44,6 +44,10 @@ export class ItemPage implements OnInit {
     this.route.navigate(['/tabs/items'])
   }
 
+  updateVal() {
+    console.log("val")
+  }
+
   async presentSettings() {
     const modal = await this.modalController.create({
       component: SettingsComponent,

@@ -7,14 +7,29 @@
       <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar [color]="toolbarColour" >
+    <ion-searchbar (ionInput)="filterList($event)" #itemsSearchBar></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let item of items | async" (click)="gotoItemPage(item.id)">
-    <ion-item>
-      <h3> {{item.name}} </h3>
-    </ion-item>
-  </ion-list>
-  <br>
-  <ion-button (click)="presentNewItemModal()">Add new Item</ion-button>
+  <div *ngIf="searchArray">
+    <ion-list *ngFor="let searchedItem of searchArray" (click)="gotoItemPage(searchedItem.id)">
+      <ion-item>
+        <h3> {{searchedItem.name}} </h3>
+      </ion-item>
+    </ion-list>
+    <br>
+  </div>
+  
+  
+  <div *ngIf="!searchArray">
+    <ion-list *ngFor="let item of items | async" (click)="gotoItemPage(item.id)">
+      <ion-item>
+        <h3> {{item.name}} </h3>
+      </ion-item>
+    </ion-list>
+    <br>
+  </div>
+  <ion-button (click)="presentNewItemModal()" class="ion-margin">Add new Item</ion-button>
 </ion-content>

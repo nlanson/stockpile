@@ -18,13 +18,14 @@ export class ItemPage implements OnInit {
   id: string;
   toolbarColour: string;
 
-  item: any[];
+  locations: Observable<any>
+  item: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private fbs: FirebaseService,
     private modalController: ModalController,
-    private router: Router,
+    private route: Router,
   ) {
     this.toolbarColour = "black";
    }
@@ -34,7 +35,14 @@ export class ItemPage implements OnInit {
       this.id = params["id"];
     });
     this.item = this.fbs.getItem(this.id);
-  } 
+    this.locations = this.fbs.getLocations();
+  }
+  
+  deleteItem(id) {
+    console.log(id);
+    this.fbs.removeItem(id);
+    this.route.navigate(['/tabs/items'])
+  }
 
   async presentSettings() {
     const modal = await this.modalController.create({
@@ -55,7 +63,6 @@ export class ItemPage implements OnInit {
   }
 
   ngOnDestroy(){
-    this.item = new Array();
     this.sub.unsubscribe();
   }
 

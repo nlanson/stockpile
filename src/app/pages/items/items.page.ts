@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router'
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
@@ -16,7 +17,8 @@ import { FirebaseService } from '../../services/firebase.service';
 export class ItemsPage implements OnInit {
 
   toolbarColour: string;
-  items: Observable<any[]>;
+  items: any;
+  public searchArray: any;
 
   constructor(
     private fbs: FirebaseService,
@@ -28,10 +30,24 @@ export class ItemsPage implements OnInit {
    }
 
   ngOnInit() {
+    this.items = this.fbs.getItems();
   }
 
   gotoItemPage(id) {
-    this.router.navigate(['/tabs/item', id]);
+    this.router.navigate(['/tabs/items/item', id]);
+  }
+
+  async filterList(evt) {
+    const searchTerm = evt.srcElement.value;
+  
+    if (!searchTerm || searchTerm == '') {
+      console.log(searchTerm)
+      this.searchArray = false;
+      return;
+    }
+
+    this.searchArray = await this.fbs.getItemsBySearchTerm(searchTerm);
+    
   }
 
   async presentSettings() {

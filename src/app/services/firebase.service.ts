@@ -17,18 +17,37 @@ export class FirebaseService {
   getItems() {
     return this.fdb.list('items').valueChanges();
   }
+  
+  getItemsBySearchTerm(searchTerm) {
+    return new Promise((resolve, reject) => {
+      let tempArray = [];
+      this.fdb.list('items', ref => ref.orderByChild('name').equalTo(searchTerm)).snapshotChanges().subscribe((res) => {
+        res.forEach((ele) => {
+          tempArray.push(ele.payload.val())
+        });
+      })
+      resolve(tempArray)
+    })
+  }
 
   getItem(id) {
     let i = 0;
-    let itemData = new Array();
+    let itemData = {};
     this.fdb.list(`items/${id}`).snapshotChanges().forEach(item => {
       item.forEach(item => {
-        itemData[i] = item.payload.val();
-        console.log(item.payload.key + " : " + itemData[i]);
+        let key = item.payload.key;
+        let value = item.payload.val();
+        if (key == "id" || key == "name") {
+          
+        } else {
+          itemData[key] = value;
+        }
         i++;
       })
     });
-    return itemData;
+    
+    return itemData
+    //return this.fdb.list(`items/${id}`).valueChanges();
   }
 
   addItem(itemName) {
@@ -51,6 +70,16 @@ export class FirebaseService {
       }, (error) => {
         console.error(error);
       })
+  }
+
+  removeItem(id) {
+    console.log(`removing ${id}`);
+    this.fdb.object("items/" + id).remove()
+        .then((ref) => {
+          console.log("success");
+        }, (error) => {
+          console.error(error);
+        })
   }
 
   addLocation(locationName, locationType) {

@@ -10,15 +10,13 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let value of item | async  index as i">
-    <ion-item *ngIf="value != id && value != itemStaticInfo.name">
-        <strong>{{locations[i]}} - </strong> <ion-button (click)="minusOne(locations[i], value)">-</ion-button> <p >{{value}} crates</p> <ion-button (click)="plusOne(locations[i], value)">+</ion-button>
+  
+  <ion-list *ngFor="let info of item | async | keyvalue">
+    <ion-item *ngIf="info.value != id && info.value != 'Tomatoes'">
+      <strong>{{info.value.locationName}} - </strong> <ion-button (click)="minusOne(1, 2)">-</ion-button> <p>{{info.value.count}} crates</p> <ion-button (click)="plusOne(locations[i], value)">+</ion-button>
     </ion-item>
   </ion-list>
 
-  
-
   <ion-button class="ion-margin" color="danger" (click)="deleteItem(id)" *ngIf="item">Delete Item</ion-button>
-
 
 </ion-content>

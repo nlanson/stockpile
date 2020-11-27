@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
-import { map } from 'rxjs/operators';
+import { map, subscribeOn, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class FirebaseService {
   }
 
   editItem(id, location, newValue) {
-    this.fdb.object("items/" + id).update({[location]: newValue});
+    this.fdb.object(`items/${id}/${location}`).update({count: newValue});
   }
 
   addItem(itemName: string) {
@@ -49,9 +49,10 @@ export class FirebaseService {
         ref.update({ id: ref.key })
         
         this.fdb.list('locations').snapshotChanges().forEach(location => {
+          console.log(`ovc 3`);
           location.forEach(location => {
             let locationName:any =  location.payload.val();
-            ref.update({[locationName.name]: 0 })
+            ref.update({[locationName.name]: { locationName:[locationName.name], count:0} })
           });
         });
       }, (error) => {
@@ -67,16 +68,6 @@ export class FirebaseService {
         }, (error) => {
           console.error(error);
         })
-  }
-
-  getItemMetaData(id) {
-    let staticItemObj = {};
-    this.fdb.list(`items/${id}`).snapshotChanges().forEach(data => {
-      data.forEach(value => {
-        staticItemObj[value.payload.key] = value.payload.val();
-      })
-    })
-    return staticItemObj;
   }
 
   getLocations() {
@@ -107,13 +98,21 @@ export class FirebaseService {
     
     this.fdb.list('locations').push(location)
       .then((ref) => {
-        console.log(ref);
+        //console.log(ref);
         this.fdb.object('locations/' + ref.key)
         ref.update({ id: ref.key })
 
         this.fdb.list('items').snapshotChanges().forEach(item => {
+          console.log(`ovc5`)
           item.forEach(item => {
-            this.fdb.list(`items`).update(item.payload.key, {[locationName]: 0})
+            let itemInfo: any = item.payload.val();
+            console.log(itemInfo.id, locationName)
+            this.fdb.object(`items/${itemInfo.id}/${locationName}`).set({
+              locationName: [locationName],
+              count: 0
+            });
+            //this.fdb.list(`items/${item.id}`).update(`${locationName}`, {locationName: `${locationName}`});
+            //this.fdb.list(`items/${item.id}`).update(`${locationName}`, {count: 0});
           })
         }); //end for each item
 
@@ -123,15 +122,26 @@ export class FirebaseService {
   }
 
   removeLocation(locationid, locationName) {
-    this.fdb.object("locations/" + locationid).remove()
-        .then((ref) => {
-          this.fdb.list('items').snapshotChanges().forEach(item => {
-            item.forEach(item => {
-              this.fdb.list(`items`).update(item.payload.key, {[locationName]: null})
-            })
-          }); //end for each item
-        }, (error) => {
-          console.error(error);
+    this.fdb.object(`locations/${locationid}`).remove().then(() => {
+      this.fdb.list(`items`).snapshotChanges().forEach(item => {
+        console.log('ovc6')
+        item.forEach(item => {
+          let itemInfo: any = item.payload.val();
+          console.log(`item/${itemInfo.id}/${locationName}`);
+          this.fdb.object(`item/${itemInfo.id}/${locationName}`).remove();
+          /*
+           
+            LINE 131
+                The line for some reason is not removing the deleted location from the item.
+                Maybe could try:
+                      update(), set() or google
+
+          */
         })
+      })
+    })
   }
-}
+
+
+
+}//end class

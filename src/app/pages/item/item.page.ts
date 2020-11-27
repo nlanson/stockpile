@@ -20,7 +20,8 @@ export class ItemPage implements OnInit {
   toolbarColour: string;
 
   locations: any;
-  item: any;
+  item: Observable<any>;
+  itemValueArray = new Array();
   itemStaticInfo: any;
 
   constructor(
@@ -38,26 +39,30 @@ export class ItemPage implements OnInit {
       this.id = params["id"];
     });
     this.item = this.fbs.getItem(this.id);
-    this.locations = await this.fbs.getLocationsArray();
-    this.itemStaticInfo = this.fbs.getItemMetaData(this.id);
+    
+    this.locations = await this.fbs.getLocations();
     //console.log(this.locations);
 
   }
   
   deleteItem(id) {
-    console.log(id);
+    //console.log(id);
     this.fbs.removeItem(id);
     this.route.navigate(['/tabs/items'])
   }
 
   plusOne(location, value) {
+    console.log(location);
+    console.log(value);
     let newValue = value + 1;
-    this.fbs.editItem(this.id, location, newValue);
+    //this.fbs.editItem(this.id, location, newValue);
   }
 
   minusOne(location, value) {
+    console.log(location);
+    console.log(value);
     let newValue = value - 1;
-    this.fbs.editItem(this.id, location, newValue);
+    //this.fbs.editItem(this.id, location, newValue);
   }
 
   async presentSettings() {

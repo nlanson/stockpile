@@ -11,10 +11,6 @@ export class FirebaseService {
     public fdb: AngularFireDatabase,
   ) { }
 
-  getLocations() {
-    return this.fdb.list('locations').valueChanges();
-  }
-
   getItems() {
     return this.fdb.list('items').valueChanges();
   }
@@ -33,40 +29,7 @@ export class FirebaseService {
   }
 
   getItem(id) {
-    // let i = 0;
-    // let itemData = {};
-    // this.fdb.list(`items/${id}`).snapshotChanges().forEach(item => {
-    //   item.forEach(item => {
-    //     let key = item.payload.key;
-    //     let value = item.payload.val();
-    //     if (key == "id" || key == "name") {
-          
-    //     } else {
-    //       itemData[key] = value;
-    //     }
-    //     i++;
-    //   })
-    // });
-    
-    // return itemData
     return this.fdb.list(`items/${id}`).valueChanges();
-    //need to remove id and name from this array ^^^
-  }
-
-  getLocationsArray() {
-    return new Promise((resolve, reject) => {
-      let i = 0;
-      let locationArray = [];
-      this.fdb.list(`locations`).snapshotChanges().forEach(location => {
-        location.forEach(location => {
-          let locationName:any = location.payload.val();
-          locationName = locationName.name;
-          locationArray.push(locationName);
-        })
-      });
-      
-      resolve(locationArray)
-    })
   }
 
   editItem(id, location, newValue) {
@@ -104,6 +67,36 @@ export class FirebaseService {
         }, (error) => {
           console.error(error);
         })
+  }
+
+  getItemMetaData(id) {
+    let staticItemObj = {};
+    this.fdb.list(`items/${id}`).snapshotChanges().forEach(data => {
+      data.forEach(value => {
+        staticItemObj[value.payload.key] = value.payload.val();
+      })
+    })
+    return staticItemObj;
+  }
+
+  getLocations() {
+    return this.fdb.list('locations').valueChanges();
+  }
+  
+  getLocationsArray() {
+    return new Promise((resolve, reject) => {
+      let i = 0;
+      let locationArray = [];
+      this.fdb.list(`locations`).snapshotChanges().forEach(location => {
+        location.forEach(location => {
+          let locationName:any = location.payload.val();
+          locationName = locationName.name;
+          locationArray.push(locationName);
+        })
+      });
+      
+      resolve(locationArray)
+    })
   }
 
   addLocation(locationName, locationType) {

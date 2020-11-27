@@ -11,8 +11,8 @@
 
 <ion-content>
   <ion-list *ngFor="let value of item | async  index as i">
-    <ion-item>
-      <strong>{{locations[i]}} - </strong> <ion-button (click)="minusOne(locations[i], value)">-</ion-button> <p >{{value}}kg</p> <ion-button (click)="plusOne(locations[i], value)">+</ion-button>
+    <ion-item *ngIf="value != id && value != itemStaticInfo.name">
+        <strong>{{locations[i]}} - </strong> <ion-button (click)="minusOne(locations[i], value)">-</ion-button> <p >{{value}} crates</p> <ion-button (click)="plusOne(locations[i], value)">+</ion-button>
     </ion-item>
   </ion-list>
 

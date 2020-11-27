@@ -21,6 +21,7 @@ export class ItemPage implements OnInit {
 
   locations: any;
   item: any;
+  itemStaticInfo: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,6 +39,7 @@ export class ItemPage implements OnInit {
     });
     this.item = this.fbs.getItem(this.id);
     this.locations = await this.fbs.getLocationsArray();
+    this.itemStaticInfo = this.fbs.getItemMetaData(this.id);
     //console.log(this.locations);
 
   }

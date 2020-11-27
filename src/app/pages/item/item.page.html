@@ -13,7 +13,8 @@
   
   <ion-list *ngFor="let info of item | async | keyvalue">
     <ion-item *ngIf="info.value != id && info.value != 'Tomatoes'">
-      <strong>{{info.value.locationName}} - </strong> <ion-button (click)="minusOne(1, 2)">-</ion-button> <p>{{info.value.count}} crates</p> <ion-button (click)="plusOne(locations[i], value)">+</ion-button>
+      <!--  The ngIf info.value=="Tomatoes" needs to be changed to the item name. Need to retrieve item name from click  -->
+      <strong>{{info.value.locationName}} - </strong> <ion-button (click)="minusOne(info.value.locationName, info.value.count)">-</ion-button> <p>{{info.value.count}} crates</p> <ion-button (click)="plusOne(info.value.locationName, info.value.count)">+</ion-button>
     </ion-item>
   </ion-list>
 

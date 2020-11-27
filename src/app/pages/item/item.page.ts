@@ -52,17 +52,13 @@ export class ItemPage implements OnInit {
   }
 
   plusOne(location, value) {
-    console.log(location);
-    console.log(value);
     let newValue = value + 1;
-    //this.fbs.editItem(this.id, location, newValue);
+    this.fbs.editItem(this.id, location[0], newValue);
   }
 
   minusOne(location, value) {
-    console.log(location);
-    console.log(value);
     let newValue = value - 1;
-    //this.fbs.editItem(this.id, location, newValue);
+    this.fbs.editItem(this.id, location[0], newValue);
   }
 
   async presentSettings() {

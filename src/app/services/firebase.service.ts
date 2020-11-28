@@ -1,6 +1,6 @@
-import { Injectable, ɵConsole } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
-import { map, subscribeOn, take } from 'rxjs/operators';
+import { timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -32,42 +32,82 @@ export class FirebaseService {
     return this.fdb.list(`items/${id}`).valueChanges();
   }
 
+  getItemName(id) {
+    let itemName: string;
+    
+    return new Promise((resolve, reject) => {
+      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
+        console.log("get item name sub")
+        item.forEach(item => {
+          let itemInfo:any = item.payload.val();
+          //console.log(itemInfo);
+          if( itemInfo.id == id ) {
+            itemName = itemInfo.name;
+            resolve(itemName);
+          }
+        })
+        sub.unsubscribe();
+      })
+    })
+  }
+
+  getItemUnits(id) {
+    let itemUnits: string;
+    
+    return new Promise((resolve, reject) => {
+      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
+        console.log("get item units sub")
+        item.forEach(item => {
+          let itemInfo:any = item.payload.val();
+          if( itemInfo.id == id ) {
+            itemUnits = itemInfo.units;
+            resolve(itemUnits);
+          }
+        })
+        sub.unsubscribe();
+      })
+    })
+  }
+
   editItem(id, location, newValue) {
+    console.log("edit item");
     this.fdb.object(`items/${id}/${location}`).update({count: newValue});
   }
 
-  addItem(itemName: string) {
+  addItem(itemName: string, units: string) {
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
     let item = {
-      name: itemName
+      name: itemName,
+      units: units
     }
+    this.fdb.list(`items`).push(item).then((ref) => {
+      this.fdb.object(`items/${ref.key}`)
+      ref.update({ id: ref.key })
 
-    this.fdb.list("items").push(item)
-      .then((ref) => {
-        console.log(ref);
-        this.fdb.object('items/' + ref.key)
-        ref.update({ id: ref.key })
-        
-        this.fdb.list('locations').snapshotChanges().forEach(location => {
-          console.log(`ovc 3`);
-          location.forEach(location => {
-            let locationName:any =  location.payload.val();
-            ref.update({[locationName.name]: { locationName:[locationName.name], count:0} })
-          });
-        });
-      }, (error) => {
-        console.error(error);
+      let sub = this.fdb.list(`locations`).snapshotChanges().subscribe(location => {
+        console.log('add item sub');
+        location.forEach(location => {
+          let locationInfo:any = location.payload.val();
+          ref.update(
+            {
+            [locationInfo.name]: { 
+              locationName: `${locationInfo.name}`,
+              count: 0
+            }
+          })
+        })
+        sub.unsubscribe();
       })
+    })
   }
 
   removeItem(id) {
     console.log(`removing ${id}`);
-    this.fdb.object("items/" + id).remove()
-        .then((ref) => {
-          console.log("success");
-        }, (error) => {
-          console.error(error);
-        })
+    this.fdb.object("items/" + id).remove().then((ref) => {
+      console.log("success");
+      }, (error) => {
+        console.error(error);
+      })
   }
 
   getLocations() {
@@ -102,19 +142,18 @@ export class FirebaseService {
         this.fdb.object('locations/' + ref.key)
         ref.update({ id: ref.key })
 
-        this.fdb.list('items').snapshotChanges().forEach(item => {
-          console.log(`ovc5`)
+        let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
+          console.log('add loc sub')
           item.forEach(item => {
-            let itemInfo: any = item.payload.val();
-            console.log(itemInfo.id, locationName)
+            let itemInfo:any = item.payload.val();
+            console.log(itemInfo);
             this.fdb.object(`items/${itemInfo.id}/${locationName}`).set({
-              locationName: [locationName],
+              locationName: `${locationName}`,
               count: 0
-            });
-            //this.fdb.list(`items/${item.id}`).update(`${locationName}`, {locationName: `${locationName}`});
-            //this.fdb.list(`items/${item.id}`).update(`${locationName}`, {count: 0});
+            })
           })
-        }); //end for each item
+          sub.unsubscribe();
+        })
 
       }, (error) => {
         console.error(error);
@@ -123,21 +162,13 @@ export class FirebaseService {
 
   removeLocation(locationid, locationName) {
     this.fdb.object(`locations/${locationid}`).remove().then(() => {
-      this.fdb.list(`items`).snapshotChanges().forEach(item => {
-        console.log('ovc6')
+      let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
+        console.log('rem loc sub');
         item.forEach(item => {
           let itemInfo: any = item.payload.val();
-          console.log(`item/${itemInfo.id}/${locationName}`);
-          this.fdb.object(`item/${itemInfo.id}/${locationName}`).remove();
-          /*
-           
-            LINE 131
-                The line for some reason is not removing the deleted location from the item.
-                Maybe could try:
-                      update(), set() or google
-
-          */
+          this.fdb.object(`items/${itemInfo.id}/${locationName}`).remove();
         })
+        sub.unsubscribe();
       })
     })
   }

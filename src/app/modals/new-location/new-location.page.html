@@ -12,7 +12,10 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">Location Type</ion-label>
-      <ion-input formControlName="newLocationType"></ion-input>
+      <ion-select  formControlName="newLocationType" placeholder="Select Location Type">
+        <ion-select-option value="Restaurant">Restaurant</ion-select-option>
+        <ion-select-option value="Farm">Farm</ion-select-option>
+      </ion-select>
     </ion-item>
     <ion-button type="submit" color="primary" class="ion-margin" expand="block">Add</ion-button>
   </form>

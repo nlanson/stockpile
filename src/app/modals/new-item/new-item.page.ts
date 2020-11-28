@@ -28,13 +28,14 @@ export class NewItemPage implements OnInit {
   ngOnInit() {
     this.newItemForm = this.fb.group(
       {
-        newItemName: [null]
+        newItemName: [null],
+        units: [null]
       }
     );
   }
 
   submit() {
-    this.fbs.addItem(this.newItemForm.value.newItemName);
+    this.fbs.addItem(this.newItemForm.value.newItemName, this.newItemForm.value.units);
     this.newItemForm.reset();
     this.modalController.dismiss();
   }

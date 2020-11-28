@@ -22,7 +22,8 @@ export class ItemPage implements OnInit {
   locations: any;
   item: Observable<any>;
   itemValueArray = new Array();
-  itemStaticInfo: any;
+  itemName: any;
+  itemUnits: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,8 +40,9 @@ export class ItemPage implements OnInit {
       this.id = params["id"];
     });
     this.item = this.fbs.getItem(this.id);
-    
-    this.locations = await this.fbs.getLocations();
+    this.locations = this.fbs.getLocations();
+    this.itemName = await this.fbs.getItemName(this.id);
+    this.itemUnits = await this.fbs.getItemUnits(this.id);
     //console.log(this.locations);
 
   }
@@ -53,12 +55,12 @@ export class ItemPage implements OnInit {
 
   plusOne(location, value) {
     let newValue = value + 1;
-    this.fbs.editItem(this.id, location[0], newValue);
+    this.fbs.editItem(this.id, location, newValue);
   }
 
   minusOne(location, value) {
     let newValue = value - 1;
-    this.fbs.editItem(this.id, location[0], newValue);
+    this.fbs.editItem(this.id, location, newValue);
   }
 
   async presentSettings() {

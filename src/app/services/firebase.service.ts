@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { timer } from 'rxjs';
 
@@ -17,14 +17,20 @@ export class FirebaseService {
   
   getItemsBySearchTerm(searchTerm) {
     searchTerm = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1);
+    let scope = searchTerm.length;
     return new Promise((resolve, reject) => {
-      let tempArray = [];
-      this.fdb.list('items', ref => ref.orderByChild('name').equalTo(searchTerm)).snapshotChanges().subscribe((res) => {
-        res.forEach((ele) => {
-          tempArray.push(ele.payload.val())
+      let ResultsArray = [];
+      let sub;
+      sub = this.fdb.list('items'/*, ref => ref.orderByChild('name').equalTo(searchTerm)*/).snapshotChanges().subscribe((res) => {
+        res.forEach((rresult) => {
+          let result: any = rresult.payload.val();
+          if( result.name.substr(0, scope) == searchTerm ) {
+            ResultsArray.push(result)
+          }
         });
+        sub.unsubscribe();
       })
-      resolve(tempArray)
+      resolve(ResultsArray)
     })
   }
 

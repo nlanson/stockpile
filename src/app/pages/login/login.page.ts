@@ -37,26 +37,29 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    this.auth.login("admin@t2g.com", "admin1");
-    // this.savedUser = await this.auth.getSavedAccounts();
+    //Use this code for debugging
+    //this.auth.login("admin@t2g.com", "admin1");
+    
+    //Use the code below to enabled native login.
+    this.savedUser = await this.auth.getSavedAccounts();
 
-    // if ( this.savedUser.email || this.savedUser.password != undefined || null) {
-    //   let idAvail = await this.faio.isAvailable();
+    if ( this.savedUser.email || this.savedUser.password != undefined || null) {
+      let idAvail = await this.faio.isAvailable();
       
-    //     this.faio.show({
-    //       title: 'Login', // (Android Only) | optional |
-    //       subtitle: 'Unlock to use', // (Android Only) | 
-    //       description: 'Login', // optional | 
-    //       fallbackButtonTitle: 'Use Backup', // optional | 
-    //     }).then(() => {
-    //       this.auth.login(this.savedUser.email, this.savedUser.password);
-    //     })
-    //     .catch((error: any) => {
-    //       console.log('err: ', error);
-    //     });
-    // } else {
-    //   this.presentAlert("No account set.");
-    // }
+        this.faio.show({
+          title: 'Login', // (Android Only) | optional |
+          subtitle: 'Unlock to use', // (Android Only) | 
+          description: 'Login', // optional | 
+          fallbackButtonTitle: 'Use Backup', // optional | 
+        }).then(() => {
+          this.auth.login(this.savedUser.email, this.savedUser.password);
+        })
+        .catch((error: any) => {
+          console.log('err: ', error);
+        });
+    } else {
+      this.presentAlert("No account set.");
+    }
     
   }
 

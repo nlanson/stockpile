@@ -28,7 +28,7 @@ export class HomePage {
   }
 
   ngOnInit() {
-    
+    this.fbs.getStockForSingleLocationTest();
   }
   
   async presentSettings() {

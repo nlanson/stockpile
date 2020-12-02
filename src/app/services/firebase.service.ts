@@ -181,4 +181,17 @@ export class FirebaseService {
 
 
 
+  getStockForSingleLocationTest(){
+    let locationName = "Cromwell"
+    let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
+      item.forEach(item => {
+        let itemInfo:any = item.payload.val();
+        console.log(itemInfo[locationName].count);
+      })
+    })
+    
+  }
+
+
+
 }//end class

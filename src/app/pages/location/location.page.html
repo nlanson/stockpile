@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{locationMetaData.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let item of items | async | keyvalue">
+    <ion-item>
+      <strong> {{ item.value.name }} - </strong> <p>{{item.value.Cromwell.count}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

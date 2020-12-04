@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let location of locations | async">
+  <ion-list *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
     <ion-item>
       <h3> {{location.name}} </h3>
       <ion-button (click)="removeLocation(location.id, location.name)" color="danger" class="ion-margin">delete</ion-button>

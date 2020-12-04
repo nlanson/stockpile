@@ -1,6 +1,7 @@
 import { Component, ComponentRef, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router'
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
@@ -22,6 +23,7 @@ export class HomePage {
   constructor(
     private fbs: FirebaseService,
     private modalController: ModalController,
+    private router: Router,
   ) {
     this.locations = this.fbs.getLocations();
     this.toolbarColour = "black";
@@ -60,5 +62,10 @@ export class HomePage {
 
   removeLocation(id, name) {
     this.fbs.removeLocation(id, name);
+  }
+
+  gotoLocPage(id) {
+    console.log(id);
+    this.router.navigate([`/tabs/home/location/${id}`])
   }
 }

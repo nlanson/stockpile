@@ -1,6 +1,8 @@
  import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { timer } from 'rxjs';
+import { subscribeOn } from 'rxjs/operators';
+import { threadId } from 'worker_threads';
 
 @Injectable({
   providedIn: 'root'
@@ -119,22 +121,6 @@ export class FirebaseService {
   getLocations() {
     return this.fdb.list('locations').valueChanges();
   }
-  
-  getLocationsArray() {
-    return new Promise((resolve, reject) => {
-      let i = 0;
-      let locationArray = [];
-      this.fdb.list(`locations`).snapshotChanges().forEach(location => {
-        location.forEach(location => {
-          let locationName:any = location.payload.val();
-          locationName = locationName.name;
-          locationArray.push(locationName);
-        })
-      });
-      
-      resolve(locationArray)
-    })
-  }
 
   addLocation(locationName, locationType) {
     let location = {
@@ -179,6 +165,16 @@ export class FirebaseService {
     })
   }
 
+  getLocationMetaData(id) { 
+    return new Promise((resolve, reject) => {
+      let sub = this.fdb.object(`locations/${id}`).snapshotChanges().subscribe((res) => {
+        let info = res.payload.val();
+        sub.unsubscribe();
+        resolve(info);
+      });
+    });
+  }
+
 
 
   getStockForSingleLocationTest(){
@@ -186,10 +182,10 @@ export class FirebaseService {
     let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
       item.forEach(item => {
         let itemInfo:any = item.payload.val();
-        console.log(itemInfo[locationName].count);
+        console.log(itemInfo.name + itemInfo[locationName].count);
       })
+      sub.unsubscribe();
     })
-    
   }
 
 

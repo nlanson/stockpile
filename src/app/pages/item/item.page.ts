@@ -53,14 +53,21 @@ export class ItemPage implements OnInit {
     this.route.navigate(['/tabs/items'])
   }
 
-  plusOne(location, value) {
-    let newValue = value + 1;
+  pmOne(operator:string, location, value:number) {
+    let newValue: Number;
+    switch (operator) {
+      case "+":
+        newValue = value + 1;
+        break;
+      case "-":
+        newValue = value - 1
+        break;
+      default:
+        console.log("add/rm error item.page.ts (68)");
+        break;
+    }
     this.fbs.editItem(this.id, location, newValue);
-  }
-
-  minusOne(location, value) {
-    let newValue = value - 1;
-    this.fbs.editItem(this.id, location, newValue);
+    
   }
 
   async presentSettings() {

@@ -3,7 +3,7 @@
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
-    <h3 class="locationName"><!--{{locationMetaData.name}}--></h3>
+    <h3 class="locationName">{{ locationName }}</h3>
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
@@ -13,7 +13,7 @@
 <ion-content>
   <ion-list *ngFor="let item of items | async | keyvalue">
     <ion-item>
-      <strong> {{ item.value.name }} - </strong> <p>{{item.value[locationName].count}}</p>
+      <strong> {{ item.value.name }} - </strong> <ion-button (click)="pmOne('-', item.value.id, item.value[locationMetaData.name].count)">-</ion-button> <p>{{ item.value[locationMetaData.name].count }} {{ item.value.units }}</p> <ion-button (click)="pmOne('+', item.value.id, item.value[locationMetaData.name].count)">+</ion-button>
     </ion-item>
   </ion-list>
 </ion-content>

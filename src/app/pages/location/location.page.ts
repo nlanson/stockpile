@@ -36,10 +36,24 @@ export class LocationPage implements OnInit {
       this.id = params["id"];
     });
     this.items = this.fbs.getItems();
-    this.locationName = "Cromwell" //LocationName hardcoded. need to adjust
     this.locationMetaData = await this.fbs.getLocationMetaData(this.id); // await is too long and causes routing errors
+    this.locationName = this.locationMetaData.name;
+  }
 
-    console.log(this.locationMetaData);
+  pmOne(operator, itemid, value) {
+    let newValue: Number;
+    switch (operator) {
+      case "+":
+        newValue = value + 1;
+        break;
+      case "-":
+        newValue = value - 1
+        break;
+      default:
+        console.log("add/rm error item.page.ts (68)");
+        break;
+    }
+    this.fbs.editItem(itemid, this.locationName, newValue);
   }
 
   async presentSettings() {

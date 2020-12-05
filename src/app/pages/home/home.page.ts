@@ -30,7 +30,7 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.fbs.getStockForSingleLocationTest();
+    
   }
   
   async presentSettings() {
@@ -66,6 +66,8 @@ export class HomePage {
 
   gotoLocPage(id) {
     console.log(id);
-    this.router.navigate([`/tabs/home/location/${id}`])
+    this.router.navigate(['/tabs/home/location', id]);
+    
   }
+
 }

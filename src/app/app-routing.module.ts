@@ -28,11 +28,7 @@ const routes: Routes = [
   {
     path: 'new-location',
     loadChildren: () => import('./modals/new-location/new-location.module').then( m => m.NewLocationPageModule)
-  },
-  {
-    path: 'location',
-    loadChildren: () => import('./pages/location/location.module').then( m => m.LocationPageModule)
-  },
+  }
 ];
 
 @NgModule({

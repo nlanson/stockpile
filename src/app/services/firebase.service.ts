@@ -1,8 +1,8 @@
  import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database'
 import { timer } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
-import { threadId } from 'worker_threads';
+
+
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,20 @@
+bug list:
+
+    when clicking delete location button, because the delete button is overlayed on the view location, it deletes and enters at the same time causing errors.
+
+
+
+need to do:
+    
+    editing detailed stock information:
+        threshhold
+        status
+        description
+    
+    stock/location status:
+        when stock level is below set threshhold, highlight as yellow
+        if a location has any stock below threshold, highlight location
+            ignore feature??
+
+
+    beutify the app

@@ -82,11 +82,12 @@ export class FirebaseService {
     this.fdb.object(`items/${id}/${location}`).update({count: newValue});
   }
 
-  addItem(itemName: string, units: string) {
+  addItem(itemName: string, units: string, category: string) {
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
     let item = {
       name: itemName,
-      units: units
+      units: units,
+      category: category
     }
     this.fdb.list(`items`).push(item).then((ref) => {
       this.fdb.object(`items/${ref.key}`)

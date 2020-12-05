@@ -29,13 +29,14 @@ export class NewItemPage implements OnInit {
     this.newItemForm = this.fb.group(
       {
         newItemName: [null],
-        units: [null]
+        units: [null],
+        category: [null]
       }
     );
   }
 
   submit() {
-    this.fbs.addItem(this.newItemForm.value.newItemName, this.newItemForm.value.units);
+    this.fbs.addItem(this.newItemForm.value.newItemName, this.newItemForm.value.units, this.newItemForm.value.category);
     this.newItemForm.reset();
     this.modalController.dismiss();
   }

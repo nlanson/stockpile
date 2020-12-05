@@ -17,4 +17,10 @@ need to do:
             ignore feature??
 
 
-    beutify the app
+    categories:
+        set category of an item when creating new item. 
+        on items list page, display for each category, list each item in the category.
+    
+    
+    beutify the app:
+        css

@@ -18,6 +18,11 @@ export class ItemsPage implements OnInit {
 
   toolbarColour: string;
   items: any;
+  categories = [
+    "Veges",
+    "Meat",
+    "Other"
+  ]
   public searchArray: any;
 
   constructor(

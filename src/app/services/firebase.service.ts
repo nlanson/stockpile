@@ -77,6 +77,24 @@ export class FirebaseService {
     })
   }
 
+  getItemCategory(id) {
+    let itemCategory: string;
+    
+    return new Promise((resolve, reject) => {
+      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
+        console.log("get item units sub")
+        item.forEach(item => {
+          let itemInfo:any = item.payload.val();
+          if( itemInfo.id == id ) {
+            itemCategory = itemInfo.category;
+            resolve(itemCategory);
+          }
+        })
+        sub.unsubscribe();
+      })
+    })
+  }
+
   editItem(id, location, newValue) {
     console.log("edit item");
     this.fdb.object(`items/${id}/${location}`).update({count: newValue});

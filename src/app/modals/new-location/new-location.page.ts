@@ -33,6 +33,7 @@ export class NewLocationPage implements OnInit {
     console.log("newlocation lol");
     this.fbs.addLocation(this.newLocationForm.value.newLocationName, this.newLocationForm.value.newLocationType);
     this.newLocationForm.reset();
+    this.modalController.dismiss();
   }
 
 }

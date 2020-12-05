@@ -8,12 +8,15 @@ import { ItemsPageRoutingModule } from './items-routing.module';
 
 import { ItemsPage } from './items.page';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ItemsPageRoutingModule
+    ItemsPageRoutingModule,
+    MatExpansionModule
   ],
   declarations: [ItemsPage]
 })

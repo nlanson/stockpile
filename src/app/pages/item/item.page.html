@@ -13,7 +13,7 @@
 <ion-content>
   
   <ion-list *ngFor="let info of item | async | keyvalue">
-    <ion-item *ngIf="info.value != id && info.value != itemName && info.value != itemUnits">
+    <ion-item *ngIf="info.value != id && info.value != itemName && info.value != itemUnits && info.value != itemCategory">
       <!--  The ngIf info.value=="Tomatoes" needs to be changed to the item name. Need to retrieve item name from click  -->
       <strong>{{info.value.locationName}} - </strong> <ion-button (click)="pmOne('-', info.value.locationName, info.value.count)">-</ion-button> <p>{{info.value.count}}  {{itemUnits}}</p> <ion-button (click)="pmOne('+', info.value.locationName, info.value.count)">+</ion-button>
     </ion-item>

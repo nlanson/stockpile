@@ -20,6 +20,9 @@ import { AuthService } from './services/auth.service';
 
 import { AccountSettingsPage } from './pages/login/account-settings/account-settings.page';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 var firebaseConfig = {
@@ -43,7 +46,9 @@ var firebaseConfig = {
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatExpansionModule
   ],
   providers: [
     StatusBar,

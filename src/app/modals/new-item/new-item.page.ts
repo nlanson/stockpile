@@ -35,8 +35,9 @@ export class NewItemPage implements OnInit {
     );
   }
 
-  submit() {
-    this.fbs.addItem(this.newItemForm.value.newItemName, this.newItemForm.value.units, this.newItemForm.value.category);
+  submit() { //need validation
+    let newItemName = this.newItemForm.value.newItemName.charAt(0).toUpperCase() + this.newItemForm.value.newItemName.slice(1);
+    this.fbs.addItem(newItemName, this.newItemForm.value.units, this.newItemForm.value.category);
     this.newItemForm.reset();
     this.modalController.dismiss();
   }

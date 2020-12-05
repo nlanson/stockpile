@@ -24,6 +24,8 @@ export class ItemPage implements OnInit {
   itemValueArray = new Array();
   itemName: any;
   itemUnits: any;
+  itemCategory: any;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,13 +44,12 @@ export class ItemPage implements OnInit {
     this.item = this.fbs.getItem(this.id);
     this.locations = this.fbs.getLocations();
     this.itemName = await this.fbs.getItemName(this.id);
+    this.itemCategory = await this.fbs.getItemCategory(this.id);
     this.itemUnits = await this.fbs.getItemUnits(this.id);
-    //console.log(this.locations);
 
   }
   
   deleteItem(id) {
-    //console.log(id);
     this.fbs.removeItem(id);
     this.route.navigate(['/tabs/items'])
   }

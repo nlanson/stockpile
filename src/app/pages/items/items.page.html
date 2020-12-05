@@ -23,13 +23,29 @@
   </div>
   
   
-  <div *ngIf="!searchArray">
-    <ion-list *ngFor="let item of items | async" (click)="gotoItemPage(item.id)">
-      <ion-item>
-        <h3> {{item.name}} </h3>
-      </ion-item>
+  <!-- <div *ngIf="!searchArray">
+    <ion-list *ngFor="let category of categories">
+      <h3 class="ion-margin"> {{category}} </h3>
+      <ion-list  *ngFor="let item of items | async | keyvalue">
+        <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)"> {{item.value.name}} </ion-item>
+      </ion-list>
     </ion-list>
-    <br>
+  </div> -->
+
+  <div *ngIf="!searchArray">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let category of categories">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3>{{ category }}</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ion-list  *ngFor="let item of items | async | keyvalue">
+          <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)" class="item"> {{item.value.name}} </ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
-  <ion-button (click)="presentNewItemModal()" class="ion-margin">Add new Item</ion-button>
+
+  <ion-button (click)="presentNewItemModal()" class="ion-margin" expand="full">Add new Item</ion-button>
 </ion-content>

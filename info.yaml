@@ -15,12 +15,12 @@ need to do:
         when stock level is below set threshhold, highlight as yellow
         if a location has any stock below threshold, highlight location
             ignore feature??
-
-
-    categories:
-        set category of an item when creating new item. 
-        on items list page, display for each category, list each item in the category.
     
     
     beutify the app:
         css
+
+    item edit:
+        new item edit modal
+            delete button
+            prefilled out edit form

@@ -1,3 +1,21 @@
 .toolbarIcon {
     font-size: 200%;
 }
+
+mat-expansion-panel-header {
+    background-color: black !important
+}
+
+
+
+mat-accordion,
+mat-expansion-panel,
+    .mat-expansion-panel-body
+    {
+            background: black;
+            color: white;
+    }
+
+.matExpansionHeaderTitle {
+    color: white;
+}

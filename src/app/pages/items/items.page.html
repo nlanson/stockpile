@@ -33,11 +33,11 @@
   </div> -->
 
   <div *ngIf="!searchArray">
-    <mat-accordion>
+    <mat-accordion multi>
       <mat-expansion-panel *ngFor="let category of categories">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h3>{{ category }}</h3>
+            <h3 class="matExpansionHeaderTitle">{{ category }}</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">

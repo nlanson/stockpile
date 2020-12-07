@@ -18,6 +18,7 @@ import { timer } from 'rxjs'
 export class LoginPage implements OnInit {
 
   savedUser: any;
+
   showPinPad: boolean;
   toolbarColour: string;
 
@@ -37,8 +38,10 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
-    //Use this code for debugging
-    this.auth.login("admin@t2g.com", "admin1");
+    //Debug Section
+      this.auth.login("admin@t2g.com", "admin1");
+    
+   
     
     //Use the code below to enabled native login.
     // this.savedUser = await this.auth.getSavedAccounts();

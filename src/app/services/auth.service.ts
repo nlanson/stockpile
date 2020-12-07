@@ -49,7 +49,10 @@ export class AuthService {
       })
       .catch(err=> {
         console.log(err);
-        resolve(this.savedUser);
+        resolve({
+          email: null,
+          password: null
+        });
       });
       //this.savedUser = JSON.parse(localStorage.getItem('account'));
       //return this.savedUser;

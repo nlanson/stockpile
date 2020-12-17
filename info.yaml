@@ -6,10 +6,13 @@ bug list:
 
 need to do:
     
+    item page:
+        implement search and category sorting.
+    
     editing detailed stock information:
-        threshhold
-        status
-        description
+        threshhold - for each location.
+        status - for each location
+        description - entire item in general
     
     stock/location status:
         when stock level is below set threshhold, highlight as yellow
@@ -21,6 +24,8 @@ need to do:
         css
 
     item edit:
+        To edit item details for each location.
+        
         new item edit modal
             delete button
             prefilled out edit form

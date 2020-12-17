@@ -5,3 +5,19 @@
 .locationName {
     text-align: center;
 }
+
+mat-expansion-panel-header {
+    background-color: black !important
+}
+
+.matExpansionHeaderTitle {
+    color: white;
+}
+
+mat-accordion,
+mat-expansion-panel,
+    .mat-expansion-panel-body
+    {
+            background: black;
+            color: white;
+    }

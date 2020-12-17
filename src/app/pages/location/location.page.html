@@ -3,17 +3,48 @@
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
-    <h3 class="locationName">{{ locationName }}</h3>
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
+  <ion-toolbar [color]="toolbarColour" >
+    <ion-searchbar (ionInput)="filterList($event)" #itemsSearchBar></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let item of items | async | keyvalue">
+  <div *ngIf="searchArray">
+    <ion-list *ngFor="let searchedItem of searchArray">
+      <ion-item *ngFor="let item of items | async">
+        <div *ngIf="item.id == searchedItem.id">
+          <p> {{ item.name }} - </p><ion-button (click)="pmOne('-', item.id, item[locationMetaData.name].count)">-</ion-button> <p>{{ item[locationMetaData.name].count }} {{ item.units }}</p> <ion-button (click)="pmOne('+', item.id, item[locationMetaData.name].count)">+</ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+    <br>
+  </div>
+  
+  
+  <div *ngIf="!searchArray">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let category of categories">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h3 class="matExpansionHeaderTitle">{{ category }}</h3>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ion-list  *ngFor="let item of items | async | keyvalue">
+          <ion-item *ngIf="item.value.category == category" class="item">
+            <p> {{ item.value.name }} - </p><ion-button (click)="pmOne('-', item.value.id, item.value[locationMetaData.name].count)">-</ion-button> <p>{{ item.value[locationMetaData.name].count }} {{ item.value.units }}</p> <ion-button (click)="pmOne('+', item.value.id, item.value[locationMetaData.name].count)">+</ion-button>
+          </ion-item>
+        </ion-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  
+  <!-- <ion-list *ngFor="let item of items | async | keyvalue">
     <ion-item>
       <strong> {{ item.value.name }} - </strong> <ion-button (click)="pmOne('-', item.value.id, item.value[locationMetaData.name].count)">-</ion-button> <p>{{ item.value[locationMetaData.name].count }} {{ item.value.units }}</p> <ion-button (click)="pmOne('+', item.value.id, item.value[locationMetaData.name].count)">+</ion-button>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

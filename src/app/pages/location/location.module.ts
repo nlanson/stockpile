@@ -8,11 +8,14 @@ import { LocationPageRoutingModule } from './location-routing.module';
 
 import { LocationPage } from './location.page';
 
+import { MatExpansionModule } from '@angular/material/expansion';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    MatExpansionModule,
     LocationPageRoutingModule
   ],
   declarations: [LocationPage]

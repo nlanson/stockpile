@@ -21,6 +21,13 @@ export class LocationPage implements OnInit {
   items: Observable<any[]>;
   locationMetaData:any;
   locationName: string;
+  public searchArray: any;
+
+  categories = [
+    "Veges",
+    "Meat",
+    "Other"
+  ]
   
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -72,6 +79,19 @@ export class LocationPage implements OnInit {
       cssClass: 'default-modal'
     });
     return await modal.present();
+  }
+
+  async filterList(evt) {
+    const searchTerm = evt.srcElement.value;
+  
+    if (!searchTerm || searchTerm == '') {
+      console.log(searchTerm)
+      this.searchArray = false;
+      return;
+    }
+
+    this.searchArray = await this.fbs.getItemsBySearchTerm(searchTerm);
+    
   }
 
 

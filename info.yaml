@@ -9,11 +9,6 @@ need to do:
     item page:
         implement search and category sorting.
     
-    editing detailed stock information:
-        threshhold - for each location.
-        status - for each location
-        description - entire item in general ?
-    
     stock/location status:
         when stock level is below set threshhold, highlight as yellow
         if a location has any stock below threshold, highlight location
@@ -24,8 +19,12 @@ need to do:
         css
 
     item edit:
-        To edit item details for each location.
-        
-        new item edit modal
-            delete button
-            prefilled out edit form
+        Just for each item
+            -Name
+            -Description
+            -Category
+
+        Modal Form
+
+    Detailed Item Edit:
+        For each item at location (threshhold, status)

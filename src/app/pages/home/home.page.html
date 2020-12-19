@@ -10,11 +10,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
-    <ion-item>
-      <h3> {{location.name}} </h3>
-    </ion-item>
-  </ion-list>
-  <br>
-  <ion-button (click)="presentNewLocationModal()" class="ion-margin" expand="full">New Location</ion-button>
+  <div class="ion-margin">
+    <ion-list *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
+      <ion-item>
+        <h3> ・{{location.name}} </h3>
+      </ion-item>
+    </ion-list>
+    <br>
+    <ion-button (click)="presentNewLocationModal()" class="ion-margin" expand="full">New Location</ion-button>
+  </div>
 </ion-content>

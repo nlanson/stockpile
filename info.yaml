@@ -12,7 +12,7 @@ need to do:
     editing detailed stock information:
         threshhold - for each location.
         status - for each location
-        description - entire item in general
+        description - entire item in general ?
     
     stock/location status:
         when stock level is below set threshhold, highlight as yellow

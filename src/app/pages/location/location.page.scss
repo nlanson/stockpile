@@ -16,8 +16,13 @@ mat-expansion-panel-header {
 
 mat-accordion,
 mat-expansion-panel,
-    .mat-expansion-panel-body
-    {
+.mat-expansion-panel-body
+{
             background: black;
             color: white;
-    }
+}
+
+::ng-deep .panel > .mat-expansion-indicator:after {
+    color: white;
+}
+

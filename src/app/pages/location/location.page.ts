@@ -33,7 +33,7 @@ export class LocationPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fbs: FirebaseService,
     private modalController: ModalController,
-
+    private router: Router
   ) {
     this.toolbarColour = "black";
    }
@@ -60,7 +60,13 @@ export class LocationPage implements OnInit {
         console.log("add/rm error item.page.ts (68)");
         break;
     }
-    this.fbs.editItem(itemid, this.locationName, newValue);
+    this.fbs.editItem(itemid, this.id, newValue);
+  }
+
+  deleteLocation() {
+    console.log("del");
+    this.router.navigate(['/tabs/home/']);
+    this.fbs.removeLocation(this.id);
   }
 
   async presentSettings() {
@@ -79,6 +85,10 @@ export class LocationPage implements OnInit {
       cssClass: 'default-modal'
     });
     return await modal.present();
+  }
+
+  async presentLocEditModal() {
+    console.log("lol");
   }
 
   async filterList(evt) {

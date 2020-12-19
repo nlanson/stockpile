@@ -60,10 +60,6 @@ export class HomePage {
     return await modal.present();
   }
 
-  removeLocation(id, name) {
-    this.fbs.removeLocation(id, name);
-  }
-
   gotoLocPage(id) {
     console.log(id);
     this.router.navigate(['/tabs/home/location', id]);

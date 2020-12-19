@@ -37,7 +37,7 @@ export class FirebaseService {
   }
 
   getItem(id) {
-    return this.fdb.list(`items/${id}`).valueChanges();
+    return this.fdb.object(`items/${id}`).valueChanges();
   }
 
   getItemName(id) {
@@ -95,9 +95,9 @@ export class FirebaseService {
     })
   }
 
-  editItem(id, location, newValue) {
+  editItem(itemid, locationid, newValue) {
     console.log("edit item");
-    this.fdb.object(`items/${id}/${location}`).update({count: newValue});
+    this.fdb.object(`items/${itemid}/${locationid}`).update({count: newValue});
   }
 
   addItem(itemName: string, units: string, category: string) {
@@ -117,7 +117,7 @@ export class FirebaseService {
           let locationInfo:any = location.payload.val();
           ref.update(
             {
-            [locationInfo.name]: { 
+            [locationInfo.id]: { 
               locationName: `${locationInfo.name}`,
               count: 0
             }
@@ -158,7 +158,7 @@ export class FirebaseService {
           item.forEach(item => {
             let itemInfo:any = item.payload.val();
             console.log(itemInfo);
-            this.fdb.object(`items/${itemInfo.id}/${locationName}`).set({
+            this.fdb.object(`items/${itemInfo.id}/${ref.key}`).set({
               locationName: `${locationName}`,
               count: 0
             })
@@ -171,13 +171,13 @@ export class FirebaseService {
       })
   }
 
-  removeLocation(locationid, locationName) {
+  removeLocation(locationid) {
     this.fdb.object(`locations/${locationid}`).remove().then(() => {
       let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
         console.log('rem loc sub');
         item.forEach(item => {
           let itemInfo: any = item.payload.val();
-          this.fdb.object(`items/${itemInfo.id}/${locationName}`).remove();
+          this.fdb.object(`items/${itemInfo.id}/${locationid}`).remove();
         })
         sub.unsubscribe();
       })

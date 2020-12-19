@@ -29,7 +29,6 @@ export class EditItemDetailPage implements OnInit {
 
   async ngOnInit() {
     this.item = await this.fbs.getItemMetaData(this.itemId);
-    console.log(this.item[this.locationId].ignore);
     this.ItemDetailForm = this.fb.group({
       count: this.item[this.locationId].count,
       threshhold: this.item[this.locationId].threshhold,

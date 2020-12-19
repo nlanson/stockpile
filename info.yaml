@@ -17,18 +17,6 @@ need to do:
     
     beutify the app:
         css
-        remove retarded ion-fab-button line breaks !important
-
-    item edit:
-        Just for each item
-            -Name
-            -Description
-            -Category
-
-        Modal Form
-
-    Detailed Item Edit:
-        For each item at location (threshhold, status)
 
     User Access:
         Allow edit for location only for the specific location's users.

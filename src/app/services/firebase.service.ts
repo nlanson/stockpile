@@ -82,7 +82,7 @@ export class FirebaseService {
     
     return new Promise((resolve, reject) => {
       let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
-        console.log("get item units sub")
+        console.log("get item cat sub")
         item.forEach(item => {
           let itemInfo:any = item.payload.val();
           if( itemInfo.id == id ) {
@@ -137,6 +137,15 @@ export class FirebaseService {
       })
   }
 
+
+  /*
+
+      START LOCATION FUNCTIONS BELOW
+
+  */
+
+
+
   getLocations() {
     return this.fdb.list('locations').valueChanges();
   }
@@ -157,7 +166,7 @@ export class FirebaseService {
           console.log('add loc sub')
           item.forEach(item => {
             let itemInfo:any = item.payload.val();
-            console.log(itemInfo);
+            //console.log(itemInfo);
             this.fdb.object(`items/${itemInfo.id}/${ref.key}`).set({
               locationName: `${locationName}`,
               count: 0
@@ -192,6 +201,26 @@ export class FirebaseService {
         resolve(info);
       });
     });
+  }
+
+  editLocation(id, name, type) {
+
+    this.fdb.object(`locations/${id}/`).update({name: name, type: type});
+
+    let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
+      console.log("edit loc sub")
+      item.forEach(location => {
+        let itemInfo:any = location.payload.val();
+        let keys = Object.keys(itemInfo);
+        keys.forEach(locid => {
+          if( id == locid ) {
+            //console.log(itemInfo[id]);
+            this.fdb.object(`items/${location.payload.key}/${id}`).update({locationName: name, type: type});
+          }
+        })
+      })
+    sub.unsubscribe();
+    })
   }
 
 

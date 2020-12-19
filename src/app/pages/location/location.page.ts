@@ -6,6 +6,7 @@ import { Observable } from 'rxjs'
 import { FirebaseService } from '../../services/firebase.service';
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
+import { EditLocationPage } from '../../modals/edit-location/edit-location.page';
 
 @Component({
   selector: 'app-location',
@@ -88,7 +89,15 @@ export class LocationPage implements OnInit {
   }
 
   async presentLocEditModal() {
-    console.log("lol");
+    const modal = await this.modalController.create({
+      component: EditLocationPage,
+      swipeToClose: true,
+      cssClass: 'editItemModal',
+      componentProps: { 
+        id: this.id,
+      }
+    });
+    return await modal.present();
   }
 
   async filterList(evt) {

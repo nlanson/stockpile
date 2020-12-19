@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="Heading ion-margin">Edit Location</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+ <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm" class="ion-margin">
+  <ion-item>
+    <ion-label position="floating">Locaion Name</ion-label>
+    <ion-input formControlName="name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Location Type</ion-label>
+    <ion-select  formControlName="type" placeholder="Select Location Type">
+      <ion-select-option value="Restaurant">Restaurant</ion-select-option>
+      <ion-select-option value="Farm">Farm</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button type="submit" color="primary" class="ion-margin" expand="block">Save</ion-button>
+ </form>
+
+</ion-content>

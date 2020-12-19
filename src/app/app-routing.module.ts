@@ -28,6 +28,10 @@ const routes: Routes = [
   {
     path: 'new-location',
     loadChildren: () => import('./modals/new-location/new-location.module').then( m => m.NewLocationPageModule)
+  },
+  {
+    path: 'edit-location',
+    loadChildren: () => import('./modals/edit-location/edit-location.module').then( m => m.EditLocationPageModule)
   }
 ];
 

@@ -5,3 +5,39 @@
 .itemName {
     text-align: center;
 }
+
+.locationName {
+    vertical-align: middle;
+    display: flex;
+}
+
+.pmButton {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.infoCol {
+    display: flex;
+}
+
+.info {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.editButton {
+    font-size: 150%;
+    right: 7px;
+    position: absolute;
+    vertical-align: middle;
+    margin-top: 25%;
+}
+
+.buttons {
+    text-align: center;
+}

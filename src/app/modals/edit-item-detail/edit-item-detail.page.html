@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <h1 class="Heading ion-margin">Edit Item Detail</h1>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="ItemDetailForm" (ngSubmit)="submit()" *ngIf="ItemDetailForm" class="ion-margin">
+    <ion-item>
+      <ion-label position="floating">Count</ion-label>
+      <ion-input formControlName="count" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Min Count</ion-label>
+      <ion-input formControlName="threshhold" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ignore?</ion-label>
+      <ion-select formControlName="ignore" placeholder="Please Select">
+        <ion-select-option value=true>True</ion-select-option>
+        <ion-select-option value=false>False</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" color="primary" class="ion-margin" expand="block">Save</ion-button>
+  </form>
+</ion-content>

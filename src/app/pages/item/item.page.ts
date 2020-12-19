@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
+import { EditItemPage } from '../../modals/edit-item/edit-item.page';
+import { EditItemDetailPage } from '../../modals/edit-item-detail/edit-item-detail.page'
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
@@ -85,6 +87,31 @@ export class ItemPage implements OnInit {
       component: InfoComponent,
       swipeToClose: true,
       cssClass: 'default-modal'
+    });
+    return await modal.present();
+  }
+
+  async presentEditItem() {
+    const modal = await this.modalController.create({
+      component: EditItemPage,
+      swipeToClose: true,
+      cssClass: 'editItemDetailModal',
+      componentProps: {
+        itemId: this.id
+      }
+    });
+    return await modal.present();
+  }
+
+  async presentDetailedEdit(locationId) {
+    const modal = await this.modalController.create({
+      component: EditItemDetailPage,
+      swipeToClose: true,
+      cssClass: 'editItemDetailModal',
+      componentProps: {
+        itemId: this.id,
+        locationId: locationId
+      }
     });
     return await modal.present();
   }

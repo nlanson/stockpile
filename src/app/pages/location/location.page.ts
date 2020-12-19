@@ -92,7 +92,7 @@ export class LocationPage implements OnInit {
     const modal = await this.modalController.create({
       component: EditLocationPage,
       swipeToClose: true,
-      cssClass: 'editItemModal',
+      cssClass: 'editLocModal',
       componentProps: { 
         id: this.id,
       }

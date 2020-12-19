@@ -17,6 +17,7 @@ need to do:
     
     beutify the app:
         css
+        remove retarded ion-fab-button line breaks !important
 
     item edit:
         Just for each item
@@ -28,3 +29,8 @@ need to do:
 
     Detailed Item Edit:
         For each item at location (threshhold, status)
+
+    User Access:
+        Allow edit for location only for the specific location's users.
+            -On loc page (Check for whole page when editing)
+            -On Item page (Check item/id and match to user)

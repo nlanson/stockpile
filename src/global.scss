@@ -31,6 +31,8 @@
     --border-radius: 50px;
 }
 
+//Use pixel height to resolve keyboard height bug
+
 .newItemModal {
     --width: 80%;
     --height: 35%;
@@ -49,7 +51,13 @@
     --border-radius: 20px;
 }
 
-.editItemModal {
+.editLocModal {
+    --width: 95%;
+    --height: 45%;
+    --border-radius: 20px;
+}
+
+.editItemDetailModal {
     --width: 95%;
     --height: 45%;
     --border-radius: 20px;

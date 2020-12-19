@@ -32,6 +32,14 @@ const routes: Routes = [
   {
     path: 'edit-location',
     loadChildren: () => import('./modals/edit-location/edit-location.module').then( m => m.EditLocationPageModule)
+  },
+  {
+    path: 'edit-item',
+    loadChildren: () => import('./modals/edit-item/edit-item.module').then( m => m.EditItemPageModule)
+  },
+  {
+    path: 'edit-item-detail',
+    loadChildren: () => import('./modals/edit-item-detail/edit-item-detail.module').then( m => m.EditItemDetailPageModule)
   }
 ];
 

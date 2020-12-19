@@ -4,6 +4,7 @@ import { timer } from 'rxjs';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,6 +39,16 @@ export class FirebaseService {
 
   getItem(id) {
     return this.fdb.object(`items/${id}`).valueChanges();
+  }
+
+  getItemMetaData(id) { 
+    return new Promise((resolve, reject) => {
+      let sub = this.fdb.object(`items/${id}`).snapshotChanges().subscribe((res) => {
+        let info = res.payload.val();
+        sub.unsubscribe();
+        resolve(info);
+      });
+    });
   }
 
   getItemName(id) {
@@ -100,6 +111,17 @@ export class FirebaseService {
     this.fdb.object(`items/${itemid}/${locationid}`).update({count: newValue});
   }
 
+  editSpecificItemDetails(count, thresh, ignore, itemid, locationid) {
+    console.log(`Path: ${itemid}/${locationid}`);
+    console.log(`${count}, ${thresh}, ${ignore}`);
+
+    this.fdb.object(`items/${itemid}/${locationid}`).update({count: count, threshhold: thresh, ignore: ignore});
+  }
+
+  editItemInfo(itemid, name, category, units) {
+    this.fdb.object(`items/${itemid}`).update({name: name, category: category, units: units})
+  }
+
   addItem(itemName: string, units: string, category: string) {
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
     let item = {
@@ -119,7 +141,10 @@ export class FirebaseService {
             {
             [locationInfo.id]: { 
               locationName: `${locationInfo.name}`,
-              count: 0
+              count: 0,
+              threshhold: 0,
+              status: true,
+              ignore: false
             }
           })
         })
@@ -169,7 +194,10 @@ export class FirebaseService {
             //console.log(itemInfo);
             this.fdb.object(`items/${itemInfo.id}/${ref.key}`).set({
               locationName: `${locationName}`,
-              count: 0
+              count: 0,
+              threshhold: 0,
+              status: true,
+              ignore: false
             })
           })
           sub.unsubscribe();

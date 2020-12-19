@@ -3,7 +3,7 @@
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
-    <h3 class="itemName">{{itemName}}</h3>
+    <h1 class="itemName">{{itemName}}</h1>
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon"></ion-icon>
     </ion-buttons>
@@ -15,10 +15,30 @@
   <ion-list *ngFor="let info of item | async | keyvalue">
     <ion-item *ngIf="info.value != id && info.value != itemName && info.value != itemUnits && info.value != itemCategory">
       <!--  The ngIf info.value=="Tomatoes" needs to be changed to the item name. Need to retrieve item name from click  -->
-      <strong>{{info.value.locationName}} - </strong> <ion-button (click)="pmOne('-', info.key, info.value.count)">-</ion-button> <p>{{info.value.count}}  {{itemUnits}}</p> <ion-button (click)="pmOne('+', info.key, info.value.count)">+</ion-button>
+      <ion-grid>
+        <ion-row>
+          
+          <ion-col>
+            <strong class="locationName">{{info.value.locationName}} - </strong>
+          </ion-col>
+
+          <ion-col size="auto" class="infoCol">
+            <ion-fab-button class="pmButton" (click)="pmOne('-', info.key, info.value.count)" color="danger" >-</ion-fab-button>
+            <span class=" info">{{info.value.count}}  {{itemUnits}}</span>
+            <ion-fab-button class="pmButton" (click)="pmOne('+', info.key, info.value.count)" color="success" >+</ion-fab-button>
+          </ion-col>
+
+          <ion-col>
+            <ion-buttons (click)="presentDetailedEdit(info.key)" ><ion-icon name="create-outline" class="editButton"></ion-icon></ion-buttons>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
     </ion-item>
   </ion-list>
 
-  <ion-button class="ion-margin" color="danger" (click)="deleteItem(id)" *ngIf="item">Delete Item</ion-button>
-
+  <div class="buttons ion-margin">
+    <ion-button class="ion-margin" color="secondary" (click)="presentEditItem()" *ngIf="item">Edit Item</ion-button>
+    <ion-button class="ion-margin" color="danger" (click)="deleteItem(id)" *ngIf="item">Delete Item</ion-button>
+  </div>
 </ion-content>

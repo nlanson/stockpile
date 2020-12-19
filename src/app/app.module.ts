@@ -17,11 +17,13 @@ import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { FirebaseService } from './services/firebase.service';
 import { AuthService } from './services/auth.service';
+import { ItemPage } from './pages/item/item.page';
 
 import { AccountSettingsPage } from './pages/login/account-settings/account-settings.page';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 
@@ -57,6 +59,7 @@ var firebaseConfig = {
     FirebaseService,
     SplashScreen,
     AuthService,
+    ItemPage,
     AccountSettingsPage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

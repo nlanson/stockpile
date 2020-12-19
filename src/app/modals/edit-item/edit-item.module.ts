@@ -16,6 +16,8 @@ import { EditItemPage } from './edit-item.page';
     ReactiveFormsModule,
     EditItemPageRoutingModule
   ],
-  declarations: [EditItemPage]
+  declarations: [
+    EditItemPage,
+  ]
 })
 export class EditItemPageModule {}

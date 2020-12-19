@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { ModalController } from '@ionic/angular';
 
 import { FirebaseService } from '../../services/firebase.service';
+import { ItemPage } from '../../pages/item/item.page';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class EditItemPage implements OnInit {
     private modalController: ModalController,
     private fbs: FirebaseService,
     private fb: FormBuilder,
+    private ip: ItemPage
   ) { }
 
   async ngOnInit() {
@@ -37,6 +39,11 @@ export class EditItemPage implements OnInit {
   submit() {
     let ef = this.editForm.value;
     this.fbs.editItemInfo(this.itemId, ef.name, ef.category, ef.units);
+    
+    this.ip.itemName = ef.name;
+    this.ip.itemCategory = ef.category;
+    this.ip.itemUnits = ef.units;
+    
     this.modalController.dismiss();
   }
 

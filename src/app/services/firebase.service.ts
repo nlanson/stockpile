@@ -119,7 +119,13 @@ export class FirebaseService {
   }
 
   editItemInfo(itemid, name, category, units) {
-    this.fdb.object(`items/${itemid}`).update({name: name, category: category, units: units})
+    let ref = this.fdb.object(`items/${itemid}`);
+    let updateObj = {
+      name: name,
+      category: category,
+      units: units
+    };
+    ref.update(updateObj);
   }
 
   addItem(itemName: string, units: string, category: string) {

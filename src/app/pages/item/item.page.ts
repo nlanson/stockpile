@@ -15,6 +15,7 @@ import { FirebaseService } from '../../services/firebase.service';
   templateUrl: './item.page.html',
   styleUrls: ['./item.page.scss'],
 })
+
 export class ItemPage implements OnInit {
 
   sub: any;
@@ -24,9 +25,10 @@ export class ItemPage implements OnInit {
   locations: any;
   item: Observable<any>;
   itemValueArray = new Array();
-  itemName: any;
-  itemUnits: any;
-  itemCategory: any;
+  
+  public itemName: any;
+  public itemUnits: any;
+  public itemCategory: any;
 
 
   constructor(
@@ -100,7 +102,13 @@ export class ItemPage implements OnInit {
         itemId: this.id
       }
     });
+    modal.onDidDismiss().then(async () => {
+      this.itemName = await this.fbs.getItemName(this.id);
+      this.itemCategory = await this.fbs.getItemCategory(this.id);
+      this.itemUnits = await this.fbs.getItemUnits(this.id);
+    })
     return await modal.present();
+    
   }
 
   async presentDetailedEdit(locationId) {

@@ -26,8 +26,8 @@
   </div>
   
   
-  <div *ngIf="!searchArray" class="ion-margin">
-    <h2>Categories:</h2>
+  <div *ngIf="!searchArray" class="">
+    <h2 class="ion-margin">Categories:</h2>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let category of categories" class="panel">
         <mat-expansion-panel-header>
@@ -37,7 +37,24 @@
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">
           <ion-item *ngIf="item.value.category == category" class="item">
-            <p> {{ item.value.name }} - </p><ion-button (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count)">-</ion-button> <p>{{ item.value[locationMetaData.id].count }} {{ item.value.units }}</p> <ion-button (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count)">+</ion-button>
+            <ion-grid>
+              <ion-row>
+                
+                <ion-col> <!--Location Name-->
+                  <span class="locationName" 
+                  [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
+                  {{ item.value.name }} -
+                  </span>
+                </ion-col>
+               
+                <ion-col size="auto" class="infoCol"> <!--Count display and plus/minus buttons-->
+                  <ion-button class="pmButton" (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count)" color="danger"  >-</ion-button>
+                  <span class=" info">{{ item.value[locationMetaData.id].count }} {{ item.value.units }}</span>
+                  <ion-button class="pmButton" (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count)" color="success" >+</ion-button>
+                </ion-col>
+
+              </ion-row>
+            </ion-grid>
           </ion-item>
         </ion-list>
       </mat-expansion-panel>

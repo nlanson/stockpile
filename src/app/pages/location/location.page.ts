@@ -7,6 +7,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditLocationPage } from '../../modals/edit-location/edit-location.page';
+import { EditItemDetailPage } from '../../modals/edit-item-detail/edit-item-detail.page'
 
 @Component({
   selector: 'app-location',
@@ -58,7 +59,7 @@ export class LocationPage implements OnInit {
         newValue = value - 1
         break;
       default:
-        console.log("add/rm error item.page.ts (68)");
+        console.log("add/rm error location.page.ts (61)");
         break;
     }
     this.fbs.editItem(itemid, this.id, newValue);
@@ -68,6 +69,21 @@ export class LocationPage implements OnInit {
     console.log("del");
     this.router.navigate(['/tabs/home/']);
     this.fbs.removeLocation(this.id);
+  }
+
+  getColor(count, thresh) {
+    if ( count*0.9 > thresh ) {
+      return 'white';
+    }
+    else if ( count > thresh ) {
+      return `yellow`;
+    }
+    else if ( count <= thresh ) {
+      return 'red';
+    }
+    else {
+      return 'white';
+    }
   }
 
   async presentSettings() {
@@ -95,6 +111,19 @@ export class LocationPage implements OnInit {
       cssClass: 'editLocModal',
       componentProps: { 
         id: this.id,
+      }
+    });
+    return await modal.present();
+  }
+
+  async presentDetailedEdit(itemid, locationId) {
+    const modal = await this.modalController.create({
+      component: EditItemDetailPage,
+      swipeToClose: true,
+      cssClass: 'editItemDetailModal',
+      componentProps: {
+        itemId: itemid,
+        locationId: locationId
       }
     });
     return await modal.present();

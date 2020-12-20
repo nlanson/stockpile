@@ -14,24 +14,21 @@
   
   <ion-list *ngFor="let info of item | async | keyvalue">
     <ion-item *ngIf="info.value != id && info.value != itemName && info.value != itemUnits && info.value != itemCategory">
-      <!--  The ngIf info.value=="Tomatoes" needs to be changed to the item name. Need to retrieve item name from click  -->
       <ion-grid>
         <ion-row>
-          
-          <ion-col>
-            <strong class="locationName">{{info.value.locationName}} - </strong>
+          <ion-col> <!--Location Label-->
+            <span class="locationName" [style.color]='getColor(info.value.count, info.value.threshhold, info.value.ignore)'>{{info.value.locationName}} - </span>
           </ion-col>
 
-          <ion-col size="auto" class="infoCol">
-            <ion-fab-button class="pmButton" (click)="pmOne('-', info.key, info.value.count)" color="danger" >-</ion-fab-button>
+          <ion-col size="auto" class="infoCol"> <!--Info and Plus Minus Buttons-->
+            <ion-button class="pmButton" (click)="pmOne('-', info.key, info.value.count)" color="danger"  >-</ion-button> <!--fab-button causing flickering on update.-->
             <span class=" info">{{info.value.count}}  {{itemUnits}}</span>
-            <ion-fab-button class="pmButton" (click)="pmOne('+', info.key, info.value.count)" color="success" >+</ion-fab-button>
+            <ion-button class="pmButton" (click)="pmOne('+', info.key, info.value.count)" color="success" >+</ion-button>
           </ion-col>
 
-          <ion-col>
+          <ion-col> <!--Edit Button-->
             <ion-buttons (click)="presentDetailedEdit(info.key)" ><ion-icon name="create-outline" class="editButton"></ion-icon></ion-buttons>
           </ion-col>
-
         </ion-row>
       </ion-grid>
     </ion-item>

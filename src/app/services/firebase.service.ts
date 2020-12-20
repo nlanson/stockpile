@@ -149,7 +149,6 @@ export class FirebaseService {
               locationName: `${locationInfo.name}`,
               count: 0,
               threshhold: 0,
-              status: true,
               ignore: false
             }
           })
@@ -202,7 +201,6 @@ export class FirebaseService {
               locationName: `${locationName}`,
               count: 0,
               threshhold: 0,
-              status: true,
               ignore: false
             })
           })

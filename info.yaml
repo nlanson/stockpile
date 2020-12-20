@@ -10,9 +10,8 @@ need to do:
         implement search and category sorting.
     
     stock/location status:
-        when stock level is below set threshhold, highlight as yellow
-        if a location has any stock below threshold, highlight location
-            ignore feature??
+        highlight entire item and entire location if any of the item/location are below or nearing threshhold.
+        ignore feature??
     
     
     beutify the app:

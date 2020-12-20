@@ -16,11 +16,12 @@
       <ion-input formControlName="threshhold" type="number"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Ignore?</ion-label>
-      <ion-select formControlName="ignore" placeholder="Please Select">
+      <span>Ignore?</span>
+      <!-- <ion-select formControlName="ignore" placeholder="Please Select">
         <ion-select-option value=true>True</ion-select-option>
         <ion-select-option value=false>False</ion-select-option>
-      </ion-select>
+      </ion-select> -->
+      <ion-toggle formControlName='ignore' class='ignoreToggle'></ion-toggle>
     </ion-item>
     <ion-button type="submit" color="primary" class="ion-margin" expand="block">Save</ion-button>
   </form>

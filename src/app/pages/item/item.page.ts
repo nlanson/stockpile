@@ -58,7 +58,7 @@ export class ItemPage implements OnInit {
     this.route.navigate(['/tabs/items'])
   }
 
-  pmOne(operator:string, location, value:number) {
+  pmOne(operator:string, locationid:string, value:number) {
     let newValue: Number;
     switch (operator) {
       case "+":
@@ -68,11 +68,31 @@ export class ItemPage implements OnInit {
         newValue = value - 1
         break;
       default:
-        console.log("add/rm error item.page.ts (68)");
+        console.log("add/rm error item.page.ts (71)");
         break;
     }
-    this.fbs.editItem(this.id, location, newValue);
+    this.fbs.editItem(this.id, locationid, newValue);
     
+  }
+
+  getColor(count, thresh, ignore) {
+    if ( ignore == true ) {
+      return 'white';
+    } 
+    else {
+      if ( count*0.9 > thresh ) {
+        return 'white';
+      }
+      else if ( count > thresh ) {
+        return `yellow`;
+      }
+      else if ( count <= thresh ) {
+        return 'red';
+      } 
+      else {
+        return 'white';
+      }
+    }
   }
 
   async presentSettings() {

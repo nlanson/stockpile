@@ -54,8 +54,8 @@
 
 .newItemModal {
     --width: 80%;
-    --height: 35%;
-    --min-height: 35%;
+    --height: 300px;
+    --min-height: 300px;
     --border-radius: 20px;
 }
 
@@ -65,20 +65,20 @@
 
 .newLocationModal {
     --width: 80%;
-    --height: 35%;
-    --min-height: 35%;
+    --height: 300px;
+    --min-height: 300px;
     --border-radius: 20px;
 }
 
 .editLocModal {
     --width: 95%;
-    --height: 45%;
+    --height: 300px;
     --border-radius: 20px;
 }
 
 .editItemDetailModal {
     --width: 95%;
-    --height: 45%;
+    --height: 320px;
     --border-radius: 20px;
 }
 

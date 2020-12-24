@@ -8,7 +8,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar [color]="toolbarColour" >
-    <ion-searchbar (ionInput)="filterList($event)" #itemsSearchBar></ion-searchbar>
+    <ion-searchbar (ionInput)="filterList($event)" #itemsSearchBar color="light"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -49,5 +49,5 @@
     </mat-accordion>
   </div>
 
-  <ion-button (click)="presentNewItemModal()" class="ion-margin" expand="full">Add new Item</ion-button>
+  <ion-button (click)="presentNewItemModal()" class="ion-margin" expand="block">Add new Item</ion-button>
 </ion-content>

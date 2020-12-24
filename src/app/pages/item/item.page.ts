@@ -122,11 +122,6 @@ export class ItemPage implements OnInit {
         itemId: this.id
       }
     });
-    modal.onDidDismiss().then(async () => {
-      this.itemName = await this.fbs.getItemName(this.id);
-      this.itemCategory = await this.fbs.getItemCategory(this.id);
-      this.itemUnits = await this.fbs.getItemUnits(this.id);
-    })
     return await modal.present();
     
   }

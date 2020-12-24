@@ -7,6 +7,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditLocationPage } from '../../modals/edit-location/edit-location.page';
+import { NewItemPage } from '../../modals/new-item/new-item.page';
 import { EditItemDetailPage } from '../../modals/edit-item-detail/edit-item-detail.page'
 
 @Component({
@@ -86,6 +87,10 @@ export class LocationPage implements OnInit {
     }
   }
 
+  gotoItemPage(id) {
+    this.router.navigate([`/tabs/items/item/${id}`])
+  }
+
   async presentSettings() {
     const modal = await this.modalController.create({
       component: SettingsComponent,
@@ -124,6 +129,18 @@ export class LocationPage implements OnInit {
       componentProps: {
         itemId: itemid,
         locationId: locationId
+      }
+    });
+    return await modal.present();
+  }
+
+  async presentNewItemModal() {
+    const modal = await this.modalController.create({
+      component: NewItemPage,
+      swipeToClose: true,
+      cssClass: 'newItemModal',
+      componentProps: { 
+        id: this.id,
       }
     });
     return await modal.present();

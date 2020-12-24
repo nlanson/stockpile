@@ -2,6 +2,19 @@
     font-size: 200%;
 }
 
+.Title {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 7px;
+    left:0;
+}
+
+.bulletin {
+    font-size: 130%;
+    vertical-align: middle;
+}
+
 mat-expansion-panel-header {
     background-color: black !important
 }

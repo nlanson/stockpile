@@ -3,7 +3,11 @@
 }
 
 .itemName {
+    position: absolute;
+    width: 100%;
     text-align: center;
+    top: 7px;
+    left:0;
 }
 
 .locationName {

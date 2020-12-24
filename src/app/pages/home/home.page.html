@@ -3,6 +3,11 @@
     <ion-buttons slot="start" (click)="presentSettings()" >
       <ion-icon name="cog-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
+    
+    <ion-text color='white'class="Title">
+      <h1> Locations </h1>
+    </ion-text>
+
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
@@ -10,13 +15,14 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  
   <div class="ion-margin">
-    <ion-list *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
-      <ion-item>
-        <h3> ・{{location.name}} </h3>
-      </ion-item>
-    </ion-list>
-    <br>
-    <ion-button (click)="presentNewLocationModal()" class="ion-margin" expand="block">New Location</ion-button>
+    <ion-card *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
+      <ion-card-header>
+        <ion-card-title>{{location.name}}</ion-card-title>
+        <ion-card-subtitle>Last Updated: ______</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
   </div>
+
 </ion-content>

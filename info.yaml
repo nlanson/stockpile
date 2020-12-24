@@ -1,23 +1,65 @@
 bug list:
+    - Modals where keyboard can be opened ar being shrunk on keyboard open.
+        => Sol -> Change modal size in global.scss to px measurement instead of percentage.
 
-    when clicking delete location button, because the delete button is overlayed on the view location, it deletes and enters at the same time causing errors.
 
-
-
-need to do:
+Need to do:
     
-    item page:
-        implement search and category sorting.
+    Item page:
+        [・] Implement search and category sorting.
+        [・] Change icon to arrow.
+
+    Location Page:
+        [  ] Last updated
     
     stock/location status:
-        highlight entire item and entire location if any of the item/location are below or nearing threshhold.
-        ignore feature??
+        [  ] Highlight entire item and entire location if any of the item/location are below or nearing threshhold.
+                - Location would be hard to implement ( Too resourceful as listening to live location feeds will take too much power )
+                - Item page to high light categories could be possible ( Need to figure out how to loop over each item LIVE to change CSS colour
+                   of the item from HTML or JS.)
+        [・] ignore feature??
+                - Implemented with dropdown -> Fixed to sliders (Feedback)
     
     
     beutify the app:
         css
+            [・] Item increment/decrement buttons
+                    - Green / Red
+            [・] Unift background as black for all user prefs
+                    - Light mode renders for dark now.
+            [  ] Modals -> Cleaner look? (BUG)
+            [  ] Login Page -> More stuff 
+                    - Toolbar that leads to unlock (Similar to MacQ)
+                    - Greeting?
+            [  ]
+        
+       [・] Item and Loc page title
 
     User Access:
-        Allow edit for location only for the specific location's users.
-            -On loc page (Check for whole page when editing)
-            -On Item page (Check item/id and match to user)
+        [  ] 1x Super User that can add and rm locations. All other users can just access DB?
+        [  ] Edit and Delete onjly visible to super users.
+
+
+    Location Settings / Create new Location:
+        [・] Only visible to admin user or hidden within settings modal.
+        [  ] Edit and Delete onjly visible to super users.
+
+
+    Add items from Location Page:
+        [・] Be able to add an item from the location page
+                - Click on item from loc page to redir to item page?
+
+
+    Information Page:
+        IDEA -
+                When in a location page (eg. Cromwell ) and info modal is clicked, display information for the location
+                    - Contact
+                    - Address
+                    - Map ?
+                When in an item page (eg. Tomatoes ) and info modal is clicked, display information for the item
+                    - Supplier
+                    - Description
+
+    
+    Login:
+        [・] No need for FaceID as accounts are already set up in native storage.

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
+import { NewLocationPage } from '../../modals/new-location/new-location.page';
 
 
 
@@ -17,7 +18,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private ModalController: ModalController
+    private modalController: ModalController
   ) { 
     this.currentUser = this.auth.cUser;
     console.log(this.currentUser);
@@ -28,12 +29,21 @@ export class SettingsComponent implements OnInit {
   }
 
   logout() {
-    this.ModalController.dismiss();
+    this.modalController.dismiss();
     this.auth.logout();
   }
 
   setDisplayName() {
     this.auth.updateDisplayName();
+  }
+
+  async presentNewLocationModal() {
+    const modal = await this.modalController.create({
+      component: NewLocationPage,
+      swipeToClose: true,
+      cssClass: 'newLocationModal'
+    });
+    return await modal.present();
   }
 
 }

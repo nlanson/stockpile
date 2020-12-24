@@ -3,6 +3,11 @@
     <ion-buttons slot="start" (click)="presentSettings()">
       <ion-icon name="cog-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
+
+    <ion-text color='white'class="Title">
+      <h1> Items </h1>
+    </ion-text>
+
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
@@ -39,7 +44,7 @@
       <mat-expansion-panel *ngFor="let category of categories">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <h3 class="matExpansionHeaderTitle">・{{ category }}</h3>
+            <h3 class="matExpansionHeaderTitle"><ion-icon name="chevron-forward-outline" class='bulletin'></ion-icon>{{ category }}</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">

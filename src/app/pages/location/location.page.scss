@@ -1,5 +1,14 @@
 .toolbarIcon {
     font-size: 200%;
+    vertical-align: text-top;
+}
+
+.locTitle {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 7px;
+    left:0;
 }
 
 .locationName {
@@ -26,12 +35,14 @@
     margin-right: 5px;
 }
 
-.editButton {
-    font-size: 150%;
-    right: 7px;
-    position: absolute;
+
+.addItemButton {
+    width: 100%;
+}
+
+.bulletin {
+    font-size: 130%;
     vertical-align: middle;
-    margin-top: 30%;
 }
 
 mat-expansion-panel-header {

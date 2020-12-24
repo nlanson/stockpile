@@ -14,11 +14,11 @@ export class FirebaseService {
     public fdb: AngularFireDatabase,
   ) { }
 
-  getItems() {
+  getItems() { //Live Reload Information for ALL items
     return this.fdb.list('items').valueChanges();
   }
   
-  getItemsBySearchTerm(searchTerm) {
+  getItemsBySearchTerm(searchTerm) { //Getting items via search term (Returns an array of items that match the search term.)
     searchTerm = searchTerm.charAt(0).toUpperCase() + searchTerm.slice(1);
     let scope = searchTerm.length;
     return new Promise((resolve, reject) => {
@@ -37,11 +37,11 @@ export class FirebaseService {
     })
   }
 
-  getItem(id) {
+  getItem(id) { // Live Reload Information for a  SINGLE item (ValueChanges => Stock Count)
     return this.fdb.object(`items/${id}`).valueChanges();
   }
 
-  getItemMetaData(id) { 
+  getItemMetaData(id) { //Static Data (Category, ID, Name and Units)
     return new Promise((resolve, reject) => {
       let sub = this.fdb.object(`items/${id}`).snapshotChanges().subscribe((res) => {
         let info = res.payload.val();
@@ -51,7 +51,7 @@ export class FirebaseService {
     });
   }
 
-  getItemName(id) {
+  getItemName(id) { //Retreiving the Item Name (Static)
     let itemName: string;
     
     return new Promise((resolve, reject) => {
@@ -70,7 +70,7 @@ export class FirebaseService {
     })
   }
 
-  getItemUnits(id) {
+  getItemUnits(id) { //Retrieving the Item Units
     let itemUnits: string;
     
     return new Promise((resolve, reject) => {
@@ -88,7 +88,7 @@ export class FirebaseService {
     })
   }
 
-  getItemCategory(id) {
+  getItemCategory(id) { //Retrieving the Item Category
     let itemCategory: string;
     
     return new Promise((resolve, reject) => {
@@ -106,19 +106,22 @@ export class FirebaseService {
     })
   }
 
-  editItem(itemid, locationid, newValue) {
+  editItem(itemid, locationid, newValue) { //Editing Item Count ONLY
     console.log("edit item");
     this.fdb.object(`items/${itemid}/${locationid}`).update({count: newValue});
+    this.logUpdateTime(locationid);
   }
 
-  editSpecificItemDetails(count, thresh, ignore, itemid, locationid) {
+  editSpecificItemDetails(count, thresh, ignore, itemid, locationid) { //Editing Item Count, Thresh and Ignore Status (From DetailedItemEdit Modal)
     console.log(`Path: ${itemid}/${locationid}`);
     console.log(`${count}, ${thresh}, ${ignore}`);
 
     this.fdb.object(`items/${itemid}/${locationid}`).update({count: count, threshhold: thresh, ignore: ignore});
+
+    this.logUpdateTime(locationid)
   }
 
-  editItemInfo(itemid, name, category, units) {
+  editItemInfo(itemid, name, category, units) { //Edit entire item info (Units, Category, Name)
     let ref = this.fdb.object(`items/${itemid}`);
     let updateObj = {
       name: name,
@@ -128,7 +131,7 @@ export class FirebaseService {
     ref.update(updateObj);
   }
 
-  addItem(itemName: string, units: string, category: string) {
+  addItem(itemName: string, units: string, category: string) { //Add a new Item
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
     let item = {
       name: itemName,
@@ -158,7 +161,7 @@ export class FirebaseService {
     })
   }
 
-  removeItem(id) {
+  removeItem(id) { //Delete an Item
     console.log(`removing ${id}`);
     this.fdb.object("items/" + id).remove().then((ref) => {
       console.log("success");
@@ -190,7 +193,13 @@ export class FirebaseService {
       .then((ref) => {
         //console.log(ref);
         this.fdb.object('locations/' + ref.key)
-        ref.update({ id: ref.key })
+        ref.update(
+          { 
+          id: ref.key,
+          }
+        )
+
+        this.logUpdateTime(ref.key);
 
         let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
           console.log('add loc sub')
@@ -225,6 +234,13 @@ export class FirebaseService {
     })
   }
 
+  logUpdateTime(locationID) {
+    let time = new Date();
+    this.fdb.object(`locations/${locationID}`).update({
+      lastUpdated: time
+    })
+  }
+
   getLocationMetaData(id) { 
     return new Promise((resolve, reject) => {
       let sub = this.fdb.object(`locations/${id}`).snapshotChanges().subscribe((res) => {
@@ -239,7 +255,7 @@ export class FirebaseService {
 
     this.fdb.object(`locations/${id}/`).update({name: name, type: type});
 
-    let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
+    let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => { //Update location details for the matching location ID in each item.
       console.log("edit loc sub")
       item.forEach(location => {
         let itemInfo:any = location.payload.val();
@@ -253,6 +269,8 @@ export class FirebaseService {
       })
     sub.unsubscribe();
     })
+
+    this.logUpdateTime(id);
   }
 
 

@@ -17,7 +17,6 @@ import { FirebaseService } from '../../services/firebase.service';
 export class HomePage {
 
   locations: Observable<any[]>;
-  currentLocation: string;
   toolbarColour: string;
 
   constructor(

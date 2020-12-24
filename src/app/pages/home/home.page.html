@@ -20,7 +20,7 @@
     <ion-card *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
       <ion-card-header>
         <ion-card-title>{{location.name}}</ion-card-title>
-        <ion-card-subtitle>Last Updated: ______</ion-card-subtitle>
+        <ion-card-subtitle>Last Updated: {{location.lastUpdated | date: 'MMM d, h:mm a'}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
   </div>

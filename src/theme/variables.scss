@@ -83,7 +83,10 @@ $colors: (
    light:      #f4f4f4,  
    dark:          #222,
    black:       #000000,
-   white:       #ffffff
+   whiteText: (
+     base: #ffffff,
+     contrast: #f4f4f4
+   )
 );
 
 

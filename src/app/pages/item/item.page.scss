@@ -2,6 +2,19 @@
     font-size: 200%;
 }
 
+.transition {
+    transition: visibility 0.5s;
+}
+
+.locationCard {
+    height: 100%;
+}
+
+.cardInfo {
+    text-align: center;
+    vertical-align: middle;
+}
+
 .itemName {
     position: absolute;
     width: 100%;

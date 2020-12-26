@@ -52,6 +52,10 @@ export class LoginPage implements OnInit {
     
   }
 
+  async debugLogin() {
+    this.auth.login('admin@t2g.com', 'admin1');
+  }
+
   async presentSettings() {
     const modal = await this.modalController.create({
       component: AccountSettingsPage,

@@ -12,6 +12,10 @@
 
 <ion-content [fullscreen]="true">  
   <div class="loginButton">
+    <!--DEBUG LOGIN-->
+    <ion-button (click)="debugLogin()" class="ion-margin" color='danger'> <ion-icon name="git-merge-outline"></ion-icon> </ion-button>
+    <br>
+    <!--END DEBUG LOGIN-->
     <ion-button (click)="login()" class="ion-margin"> <ion-icon name="key-outline"></ion-icon> </ion-button>
   </div>
 </ion-content>

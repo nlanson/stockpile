@@ -15,6 +15,14 @@
     vertical-align: middle;
 }
 
+.cardPMButton {
+    vertical-align: middle;
+}
+
+.cardLocationName {
+    text-align: left;
+}
+
 .itemName {
     position: absolute;
     width: 100%;
@@ -23,10 +31,6 @@
     left:0;
 }
 
-.locationName {
-    vertical-align: middle;
-    display: flex;
-}
 
 .pmButton {
     width: 20px;

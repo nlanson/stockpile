@@ -13,27 +13,25 @@
 </ion-header>
 
 <ion-content>
-  
   <ion-list *ngFor="let item of item | async | keyvalue">
+    
     <ion-card
     class='locationCard ion-margin'
     *ngIf="item.key != 'id' && item.key != 'name' && item.key != 'units' && item.key != 'category'"
     (click)="presentDetailedEdit(item.key)"
     >
-     <ion-card-content>
-       <ion-grid>
-         <ion-row>
-          <ion-card-subtitle>
-            <ion-text color='white'>
-             <h3>{{item.value.locationName}}:</h3>
-            </ion-text>
-          </ion-card-subtitle>
-         </ion-row>
-         <ion-row>
+    <ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col size='12'>
+            <ion-card-subtitle> Location </ion-card-subtitle>
+            <ion-card-title class='cardLocationName'>{{item.value.locationName}}</ion-card-title>
+          </ion-col>
+        </ion-row>
+        <ion-row>
           <ion-col size='3'>
             <ion-button
-            class="cardPMButton"
-            (click)="pmOne('-', item.key, item.value.count);  $event.stopPropagation();"
+            (click)="pmOne('-', item.key, item.value.count); $event.stopPropagation()"
             color="danger"
             [ngStyle]="{
               'position':'absolute',
@@ -42,13 +40,15 @@
             >-</ion-button>
           </ion-col>
           <ion-col size='6'>
-            <ion-card-title class='cardInfo' [style.color]="getColor(item.value.count, item.value.threshhold)">
+            <ion-text color='white'>
+              <h1 class='cardInfo' [style.color]="getColor(item.value.count, item.value.threshhold)">
                 {{item.value.count}} {{itemUnits}}
-            </ion-card-title>
+              </h1>
+            </ion-text>
           </ion-col>
           <ion-col size='3'>
             <ion-button
-            class="cardPMButton" (click)="pmOne('+', item.key, item.value.count);  $event.stopPropagation();"
+            (click)="pmOne('+', item.key, item.value.count); $event.stopPropagation()"
             color="success"
             [ngStyle]="{
               'position':'absolute',
@@ -56,11 +56,10 @@
             }" 
             >+</ion-button>
           </ion-col>
-         </ion-row>
-       </ion-grid>
-     </ion-card-content>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header> 
     </ion-card>
-    
     
   </ion-list>
 

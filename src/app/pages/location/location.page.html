@@ -22,11 +22,49 @@
 <ion-content>
   <div *ngIf="searchArray" class="ion-margin">
     <h2>Search:</h2>
-    <ion-list *ngFor="let searchedItem of searchArray">
-      <ion-list *ngFor="let item of items | async">
-        <ion-item *ngIf="searchedItem.id == item.id">
-          <p> {{ item.name }} - </p><ion-button (click)="pmOne('-', item.id, item[locationMetaData.id].count)">-</ion-button> <p>{{ item[locationMetaData.id].count }} {{ item.units }}</p> <ion-button (click)="pmOne('+', item.id, item[locationMetaData.id].count)">+</ion-button>
-        </ion-item>
+    <ion-list *ngFor='let item of items | async | keyvalue'>
+      <ion-list *ngFor="let searchedItem of searchArray">
+
+        <ion-card *ngIf='searchedItem.id == item.value.id' class='transition' (click)='presentDetailedEdit(searchedItem.id, locationMetaData.id)'>
+          <ion-card-header>
+            <ion-card-subtitle> Item </ion-card-subtitle>
+            <ion-card-title> {{ searchedItem.name }} </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size='3'>
+                  <ion-button
+                  (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
+                  color="danger"
+                  [ngStyle]="{
+                    'position':'absolute',
+                    'right':'25%'
+                  }"
+                  >-</ion-button>
+                </ion-col>
+                <ion-col size='6'>
+                  <ion-text color='white'>
+                    <h1 class='searchCardInfo'>
+                      {{item.value[locationMetaData.id].count}} {{item.value.units}}
+                    </h1>
+                  </ion-text>
+                </ion-col>
+                <ion-col size='3'>
+                  <ion-button
+                  (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
+                  color="success"
+                  [ngStyle]="{
+                    'position':'absolute',
+                    'left':'25%'
+                  }" 
+                  >+</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+
       </ion-list>
     </ion-list>
     <br>

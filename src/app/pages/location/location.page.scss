@@ -3,6 +3,14 @@
     vertical-align: text-top;
 }
 
+.transition {
+    transition: visibility 0.5s;
+}
+
+.searchCardInfo {
+    text-align: center;
+}
+
 .locTitle {
     position: absolute;
     width: 100%;
@@ -40,10 +48,6 @@
     width: 100%;
 }
 
-.bulletin {
-    font-size: 130%;
-    vertical-align: middle;
-}
 
 mat-expansion-panel-header {
     background-color: black !important

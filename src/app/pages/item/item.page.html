@@ -17,7 +17,7 @@
     
     <ion-card
     class='locationCard ion-margin'
-    *ngIf="item.key != 'id' && item.key != 'name' && item.key != 'units' && item.key != 'category'"
+    [hidden]="item.key == 'name' || item.key == 'id' || item.key == 'units' || item.key == 'category' || item.key == 'threshhold'"
     (click)="presentDetailedEdit(item.key)"
     >
     <ion-card-header>

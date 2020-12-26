@@ -144,25 +144,3 @@ export class ItemPage implements OnInit {
   }
 
 }
-
-/*
-<ion-item *ngIf="info.key != 'id' && info.key != 'name' && info.key != 'units' && info.key != 'category'">
-      <ion-grid>
-        <ion-row>
-          <ion-col> <!--Location Label-->
-            <span class="locationName" [style.color]='getColor(info.value.count, info.value.threshhold, info.value.ignore)'>{{info.value.locationName}} - </span>
-          </ion-col>
-
-          <ion-col size="auto" class="infoCol"> <!--Info and Plus Minus Buttons-->
-            <ion-button class="pmButton" (click)="pmOne('-', info.key, info.value.count)" color="danger"  >-</ion-button> <!--fab-button causing flickering on update.-->
-            <span class=" info">{{info.value.count}}  {{itemUnits}}</span>
-            <ion-button class="pmButton" (click)="pmOne('+', info.key, info.value.count)" color="success" >+</ion-button>
-          </ion-col>
-
-          <ion-col> <!--Edit Button-->
-            <ion-buttons (click)="presentDetailedEdit(info.key)" ><ion-icon name="create-outline" class="editButton"></ion-icon></ion-buttons>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-*/

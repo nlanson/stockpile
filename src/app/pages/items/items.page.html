@@ -20,10 +20,14 @@
 <ion-content>
   <div *ngIf="searchArray" class="ion-margin">
     <h2>Search:</h2>
+    
     <ion-list *ngFor="let searchedItem of searchArray" (click)="gotoItemPage(searchedItem.id)">
-      <ion-item>
-        <h3> {{searchedItem.name}} </h3>
-      </ion-item>
+      <ion-card (click)="gotoItemPage(searchedItem.id)">
+        <ion-card-header>
+          <ion-card-subtitle> Item </ion-card-subtitle>
+          <ion-card-title> {{ searchedItem.name }} </ion-card-title>
+        </ion-card-header>
+      </ion-card>
     </ion-list>
     <br>
   </div>

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
 import { InfoComponent } from '../../modals/info/info.component';
@@ -93,6 +94,10 @@ export class ItemPage implements OnInit {
         return 'white';
       }
     }
+  }
+
+  trackByFn(item: any) {
+    return item.id
   }
 
   async presentSettings() {

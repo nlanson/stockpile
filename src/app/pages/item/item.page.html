@@ -13,7 +13,10 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let item of item | async | keyvalue">
+  <ion-list
+  *ngFor="let item of item | async | keyvalue; trackBy:trackByFn"
+  
+  >
     
     <ion-card
     class='locationCard ion-margin'
@@ -48,7 +51,10 @@
           </ion-col>
           <ion-col size='3'>
             <ion-button
-            (click)="pmOne('+', item.key, item.value.count); $event.stopPropagation()"
+            (click)="
+            pmOne('+', item.key, item.value.count);
+            $event.stopPropagation();
+            "
             color="success"
             [ngStyle]="{
               'position':'absolute',

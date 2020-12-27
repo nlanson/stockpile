@@ -81,28 +81,38 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">
-          <ion-item *ngIf="item.value.category == category" class="item">
-              <ion-grid>
-                <ion-row>
-                  
-                  <ion-col> <!--Location Name-->
-                    <ion-buttons (click)='gotoItemPage(item.value.id)'>
-                      <span class="locationName" 
-                      [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
-                      {{ item.value.name }} -
-                      </span>
-                    </ion-buttons>
-                  </ion-col>
-                 
-                  <ion-col size="auto" class="infoCol"> <!--Count display and plus/minus buttons-->
-                    <ion-button class="pmButton" (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count)" color="danger"  >-</ion-button>
-                    <span class=" info">{{ item.value[locationMetaData.id].count }} {{ item.value.units }}</span>
-                    <ion-button class="pmButton" (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count)" color="success" >+</ion-button>
-                  </ion-col>
-  
-                </ion-row>
-              </ion-grid>
-          </ion-item>
+            <ion-card *ngIf="item.value.category == category" class="item">
+                  <div class='catCardTitle'>
+                    <strong class="locationName ion-margin">
+                    {{ item.value.name }} -
+                    </strong>
+                  </div>
+                  <div class='catCardInfo'>
+                    <ion-button
+                    class='pmButton'
+                    (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count)"
+                    color="danger"
+                    [ngStyle]="{
+                      'position':'relative',
+                      'right': '12%'
+                    }"
+                    >-</ion-button>
+                    <ion-text color='white' class='catCardInfoSpan'>
+                      <h2 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
+                        {{ item.value[locationMetaData.id].count }} {{ item.value.units }}
+                      </h2>
+                    </ion-text>
+                    <ion-button
+                    class='pmButton'
+                    (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count)"
+                    color="success"
+                    [ngStyle]="{
+                      'position':'relative',
+                      'left': '8%'
+                    }"
+                    >+</ion-button>
+                  </div>
+            </ion-card>
         </ion-list>
       </mat-expansion-panel>
     </mat-accordion>

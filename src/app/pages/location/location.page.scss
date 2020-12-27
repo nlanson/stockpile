@@ -7,6 +7,11 @@
     transition: visibility 0.5s;
 }
 
+ion-card {
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
 .searchCardInfo {
     text-align: center;
     vertical-align: middle;
@@ -22,34 +27,12 @@
 }
 
 .locationName {
+    font-size: medium;
     text-align: center;
     display: flex;
+    color: white;
     
 }
-
-.pmButton {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    text-align: center;
-}
-
-.infoCol {
-    display: flex;
-}
-
-.info {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-
-.addItemButton {
-    width: 100%;
-}
-
 
 mat-expansion-panel-header {
     background-color: black !important
@@ -73,5 +56,36 @@ mat-expansion-panel,
 
 .buttons {
     text-align: center;
+}
+
+.addItemButton {
+    width: 100%;
+}
+
+
+.item ion-card {
+    height: 80px !important;
+}
+
+.catCardInfo {
+    align-content: center;
+    text-align: center;
+    position: relative;
+    bottom: 25%;
+}
+
+.pmButton {
+    width: 20px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+}
+
+.catCardInfoSpan {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+    
 }
 

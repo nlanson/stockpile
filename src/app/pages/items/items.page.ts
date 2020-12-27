@@ -82,4 +82,8 @@ export class ItemsPage implements OnInit {
     return await modal.present();
   }
 
+  trackByFn(item: any) {
+    return item.id
+  }
+
 }

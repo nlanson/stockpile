@@ -17,7 +17,7 @@
 <ion-content [fullscreen]="true">
   
   <div class="ion-margin">
-    <ion-card *ngFor="let location of locations | async" (click)="gotoLocPage(location.id)">
+    <ion-card *ngFor="let location of locations | async; trackBy:trackByFn" (click)="gotoLocPage(location.id)">
       <ion-card-header>
         <ion-card-title>{{location.name}}</ion-card-title>
         <ion-card-subtitle>Last Updated: {{location.lastUpdated | date: 'MMM d, h:mm a'}}</ion-card-subtitle>

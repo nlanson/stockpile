@@ -159,5 +159,7 @@ export class LocationPage implements OnInit {
     
   }
 
-
+  trackByFn(item: any) {
+    return item.id
+  }
 }

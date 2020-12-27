@@ -31,6 +31,10 @@ export class HomePage {
   ngOnInit() {
     
   }
+
+  trackByFn(location: any) {
+    return location.id
+  }
   
   async presentSettings() {
     const modal = await this.modalController.create({

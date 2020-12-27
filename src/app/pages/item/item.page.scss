@@ -2,10 +2,6 @@
     font-size: 200%;
 }
 
-.transition {
-    transition: visibility 0.5s;
-}
-
 .locationCard {
     height: 100%;
 }
@@ -29,25 +25,6 @@
     text-align: center;
     top: 7px;
     left:0;
-}
-
-
-.pmButton {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
-    text-align: center;
-}
-
-.infoCol {
-    display: flex;
-}
-
-.info {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 5px;
-    margin-right: 5px;
 }
 
 .editButton {

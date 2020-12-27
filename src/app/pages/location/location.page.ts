@@ -146,10 +146,6 @@ export class LocationPage implements OnInit {
     return await modal.present();
   }
 
-  lol() {
-    console.log('lol')
-  }
-
   async filterList(evt) {
     const searchTerm = evt.srcElement.value;
   

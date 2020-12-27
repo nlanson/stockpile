@@ -11,8 +11,13 @@
 }
 
 .bulletin {
-    font-size: 130%;
-    vertical-align: middle;
+    position: relative;
+    top: 1px;
+}
+
+ion-card {
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 mat-expansion-panel-header {

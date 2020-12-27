@@ -73,7 +73,7 @@
   
   <div *ngIf="!searchArray" class="ion-margin">
     <h2 class="ion-margin"> Categories: </h2>
-    <mat-accordion>
+    <mat-accordion multi>
       <mat-expansion-panel *ngFor="let category of categories" class="panel">
         <mat-expansion-panel-header>
           <mat-panel-title>
@@ -81,7 +81,7 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">
-            <ion-card *ngIf="item.value.category == category" class="item">
+            <ion-card *ngIf="item.value.category == category" class="item" (click)='gotoItemPage(item.value.id)'>
                   <div class='catCardTitle'>
                     <strong class="locationName ion-margin">
                     {{ item.value.name }} -
@@ -89,8 +89,8 @@
                   </div>
                   <div class='catCardInfo'>
                     <ion-button
-                    class='pmButton'
-                    (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count)"
+                    class='pmButton ion-margin'
+                    (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
                     color="danger"
                     [ngStyle]="{
                       'position':'relative',
@@ -103,8 +103,8 @@
                       </h2>
                     </ion-text>
                     <ion-button
-                    class='pmButton'
-                    (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count)"
+                    class='pmButton ion-margin'
+                    (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
                     color="success"
                     [ngStyle]="{
                       'position':'relative',

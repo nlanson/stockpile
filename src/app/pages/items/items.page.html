@@ -22,7 +22,7 @@
     <h2>Search:</h2>
     
     <ion-list *ngFor="let searchedItem of searchArray" (click)="gotoItemPage(searchedItem.id)">
-      <ion-card (click)="gotoItemPage(searchedItem.id)">
+      <ion-card (click)="gotoItemPage(searchedItem.id)" class='searchCard'>
         <ion-card-header>
           <ion-card-subtitle> Item </ion-card-subtitle>
           <ion-card-title> {{ searchedItem.name }} </ion-card-title>
@@ -31,16 +31,6 @@
     </ion-list>
     <br>
   </div>
-  
-  
-  <!-- <div *ngIf="!searchArray">
-    <ion-list *ngFor="let category of categories">
-      <h3 class="ion-margin"> {{category}} </h3>
-      <ion-list  *ngFor="let item of items | async | keyvalue">
-        <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)"> {{item.value.name}} </ion-item>
-      </ion-list>
-    </ion-list>
-  </div> -->
 
   <div *ngIf="!searchArray" class="ion-margin">
     <h2>Categories:</h2>
@@ -52,7 +42,13 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue">
-          <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)" class="item"> ・{{item.value.name}} </ion-item>
+          <ion-card [hidden]="item.value.category != category" (click)="gotoItemPage(item.value.id)" class='catCard'>
+            <ion-card-header>
+              <ion-card-subtitle>Item</ion-card-subtitle>
+              <ion-card-title> {{ item.value.name }} </ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          <!-- <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)" class="item"> ・{{item.value.name}} </ion-item> -->
         </ion-list>
       </mat-expansion-panel>
     </mat-accordion>

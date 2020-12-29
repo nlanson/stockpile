@@ -4,7 +4,7 @@
       <ion-icon name="cog-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
     <ion-text color='white'class="itemName">
-      <h1>{{itemName}}</h1>
+      <h1>{{itemMetaData.name}}</h1>
     </ion-text>
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon" color="white"></ion-icon>
@@ -44,7 +44,7 @@
           <ion-col size='6'>
             <ion-text color='white'>
               <h1 class='cardInfo' [style.color]="getColor(item.value.count, item.value.threshhold)">
-                {{item.value.count}} {{itemUnits}}
+                {{item.value.count}} {{itemMetaData.units}}
               </h1>
             </ion-text>
           </ion-col>

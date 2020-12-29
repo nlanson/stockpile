@@ -90,61 +90,6 @@ export class FirebaseService {
     });
   }
 
-  getItemName(id) { //Retreiving the Item Name (Static)
-    let itemName: string;
-    
-    return new Promise((resolve, reject) => {
-      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
-        console.log("get item name sub")
-        item.forEach(item => {
-          let itemInfo:any = item.payload.val();
-          //console.log(itemInfo);
-          if( itemInfo.id == id ) {
-            itemName = itemInfo.name;
-            resolve(itemName);
-          }
-        })
-        sub.unsubscribe();
-      })
-    })
-  }
-
-  getItemUnits(id) { //Retrieving the Item Units
-    let itemUnits: string;
-    
-    return new Promise((resolve, reject) => {
-      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
-        console.log("get item units sub")
-        item.forEach(item => {
-          let itemInfo:any = item.payload.val();
-          if( itemInfo.id == id ) {
-            itemUnits = itemInfo.units;
-            resolve(itemUnits);
-          }
-        })
-        sub.unsubscribe();
-      })
-    })
-  }
-
-  getItemCategory(id) { //Retrieving the Item Category
-    let itemCategory: string;
-    
-    return new Promise((resolve, reject) => {
-      let sub = this.fdb.list('items').snapshotChanges().subscribe(item => {
-        console.log("get item cat sub")
-        item.forEach(item => {
-          let itemInfo:any = item.payload.val();
-          if( itemInfo.id == id ) {
-            itemCategory = itemInfo.category;
-            resolve(itemCategory);
-          }
-        })
-        sub.unsubscribe();
-      })
-    })
-  }
-
   editItem(itemid, locationid, newValue) { //Editing Item Count ONLY
     console.log("edit item");
     this.fdb.object(`items/${itemid}/${locationid}`).update({count: newValue});

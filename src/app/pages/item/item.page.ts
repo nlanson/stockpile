@@ -26,10 +26,11 @@ export class ItemPage implements OnInit {
   locations: any;
   item: Observable<any>;
   itemValueArray = new Array();
-  
-  public itemName: any;
-  public itemUnits: any;
-  public itemCategory: any;
+  itemMetaData: any = { // Values are preset here to prevent page rendering issues. 
+    name: 'ItemName',  //  The values are updated straight away in ngOnInit() function to the values found in the database.
+    units: 'PLACEHOLDER',
+    category: "Veges"
+  }
 
 
   constructor(
@@ -48,9 +49,7 @@ export class ItemPage implements OnInit {
     });
     this.item = this.fbs.getItem(this.id);
     this.locations = this.fbs.getLocations();
-    this.itemName = await this.fbs.getItemName(this.id);
-    this.itemCategory = await this.fbs.getItemCategory(this.id);
-    this.itemUnits = await this.fbs.getItemUnits(this.id);
+    this.itemMetaData = await this.fbs.getItemMetaData(this.id);
 
   }
   
@@ -128,9 +127,7 @@ export class ItemPage implements OnInit {
       }
     });
     modal.onDidDismiss().then(async () => {
-      this.itemName = await this.fbs.getItemName(this.id);
-      this.itemCategory = await this.fbs.getItemCategory(this.id);
-      this.itemUnits = await this.fbs.getItemUnits(this.id);
+      this.itemMetaData = this.fbs.getItemMetaData(this.id);
     })
     return await modal.present();
     

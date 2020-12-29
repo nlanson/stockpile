@@ -10,9 +10,13 @@ import { timer } from 'rxjs';
 })
 export class FirebaseService {
 
+  threshDifferenceValue: number;
+
   constructor(
     public fdb: AngularFireDatabase,
-  ) { }
+  ) { 
+    this.threshDifferenceValue = 3;
+  }
 
   addItem(itemName: string, units: string, category: string) { //Add a new Item
     itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
@@ -113,6 +117,10 @@ export class FirebaseService {
       units: units
     };
     ref.update(updateObj);
+  }
+
+  get getColorThreshDifferenceValue() {
+    return this.threshDifferenceValue;
   }
 
   

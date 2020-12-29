@@ -22,6 +22,8 @@ export class ItemPage implements OnInit {
   sub: any;
   id: string;
   toolbarColour: string;
+  threshDifferenceValue: number;
+
 
   locations: any;
   item: Observable<any>;
@@ -41,6 +43,7 @@ export class ItemPage implements OnInit {
     private fb: FormBuilder
   ) {
     this.toolbarColour = "black";
+    this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
    }
 
   async ngOnInit() {
@@ -76,22 +79,17 @@ export class ItemPage implements OnInit {
   }
 
   getColor(count, thresh, ignore) {
-    if ( ignore == true ) {
+    if ( count > thresh+this.threshDifferenceValue ) {
       return 'white';
-    } 
+    }
+    else if ( count > thresh ) {
+      return `yellow`;
+    }
+    else if ( count <= thresh ) {
+      return 'red';
+    }
     else {
-      if ( count*0.9 > thresh ) {
-        return 'white';
-      }
-      else if ( count > thresh ) {
-        return `yellow`;
-      }
-      else if ( count <= thresh ) {
-        return 'red';
-      } 
-      else {
-        return 'white';
-      }
+      return 'white';
     }
   }
 

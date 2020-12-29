@@ -20,6 +20,7 @@ export class LocationPage implements OnInit {
   sub: any;
   id: string;
   toolbarColour: string;
+  threshDifferenceValue: number;
 
   items: Observable<any[]>;
   locationMetaData:any;
@@ -39,6 +40,7 @@ export class LocationPage implements OnInit {
     private router: Router
   ) {
     this.toolbarColour = "black";
+    this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
    }
 
   async ngOnInit() {
@@ -73,7 +75,7 @@ export class LocationPage implements OnInit {
   }
 
   getColor(count, thresh) {
-    if ( count*0.9 > thresh ) {
+    if ( count > thresh+this.threshDifferenceValue ) {
       return 'white';
     }
     else if ( count > thresh ) {

@@ -14,6 +14,45 @@ export class FirebaseService {
     public fdb: AngularFireDatabase,
   ) { }
 
+  addItem(itemName: string, units: string, category: string) { //Add a new Item
+    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
+    let item = {
+      name: itemName,
+      units: units,
+      category: category
+    }
+    this.fdb.list(`items`).push(item).then((ref) => {
+      this.fdb.object(`items/${ref.key}`)
+      ref.update({ id: ref.key })
+
+      let sub = this.fdb.list(`locations`).snapshotChanges().subscribe(location => {
+        console.log('add item sub');
+        location.forEach(location => {
+          let locationInfo:any = location.payload.val();
+          ref.update(
+            {
+            [locationInfo.id]: { 
+              locationName: `${locationInfo.name}`,
+              count: 0,
+              threshhold: 0,
+              ignore: false
+            }
+          })
+        })
+        sub.unsubscribe();
+      })
+    })
+  }
+
+  removeItem(id) { //Delete an Item
+    console.log(`removing ${id}`);
+    this.fdb.object("items/" + id).remove().then((ref) => {
+      console.log("success");
+      }, (error) => {
+        console.error(error);
+      })
+  }
+  
   getItems() { //Live Reload Information for ALL items
     return this.fdb.list('items').valueChanges();
   }
@@ -131,44 +170,7 @@ export class FirebaseService {
     ref.update(updateObj);
   }
 
-  addItem(itemName: string, units: string, category: string) { //Add a new Item
-    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1);
-    let item = {
-      name: itemName,
-      units: units,
-      category: category
-    }
-    this.fdb.list(`items`).push(item).then((ref) => {
-      this.fdb.object(`items/${ref.key}`)
-      ref.update({ id: ref.key })
-
-      let sub = this.fdb.list(`locations`).snapshotChanges().subscribe(location => {
-        console.log('add item sub');
-        location.forEach(location => {
-          let locationInfo:any = location.payload.val();
-          ref.update(
-            {
-            [locationInfo.id]: { 
-              locationName: `${locationInfo.name}`,
-              count: 0,
-              threshhold: 0,
-              ignore: false
-            }
-          })
-        })
-        sub.unsubscribe();
-      })
-    })
-  }
-
-  removeItem(id) { //Delete an Item
-    console.log(`removing ${id}`);
-    this.fdb.object("items/" + id).remove().then((ref) => {
-      console.log("success");
-      }, (error) => {
-        console.error(error);
-      })
-  }
+  
 
 
   /*
@@ -271,19 +273,6 @@ export class FirebaseService {
     })
 
     this.logUpdateTime(id);
-  }
-
-
-
-  getStockForSingleLocationTest(){
-    let locationName = "Cromwell"
-    let sub = this.fdb.list(`items`).snapshotChanges().subscribe(item => {
-      item.forEach(item => {
-        let itemInfo:any = item.payload.val();
-        console.log(itemInfo.name + itemInfo[locationName].count);
-      })
-      sub.unsubscribe();
-    })
   }
 
 

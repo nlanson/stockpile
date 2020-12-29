@@ -71,8 +71,9 @@
   </div>
   
   
-  <div *ngIf="!searchArray" class="ion-margin">
-    <h2 class="ion-margin"> Categories: </h2>
+  <!-- Category -->
+  <div *ngIf="!searchArray">
+      <h2 class='ion-margin'>Categories:</h2>
     <mat-accordion multi>
       <mat-expansion-panel *ngFor="let category of categories" class="panel">
         <mat-expansion-panel-header>
@@ -82,36 +83,38 @@
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue; trackBy:trackByFn">
             <ion-card *ngIf="item.value.category == category" class="item" (click)='gotoItemPage(item.value.id)'>
-                  <div class='catCardTitle'>
-                    <strong class="locationName ion-margin">
-                    {{ item.value.name }} -
-                    </strong>
-                  </div>
-                  <div class='catCardInfo'>
-                    <ion-button
-                    class='pmButton ion-margin'
-                    (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
-                    color="danger"
-                    [ngStyle]="{
-                      'position':'relative',
-                      'right': '12%'
-                    }"
-                    >-</ion-button>
-                    <ion-text color='white' class='catCardInfoSpan'>
-                      <h2 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
-                        {{ item.value[locationMetaData.id].count }} {{ item.value.units }}
-                      </h2>
-                    </ion-text>
-                    <ion-button
-                    class='pmButton ion-margin'
-                    (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
-                    color="success"
-                    [ngStyle]="{
-                      'position':'relative',
-                      'left': '8%'
-                    }"
-                    >+</ion-button>
-                  </div>
+              <div class='catCardContainer'>
+                <strong [style.color]="getColor(item.value.count, item.value.threshhold)">
+                  {{item.value.name}} -
+                </strong>
+                <div class='catCardInfo'>
+                <ion-button
+                  class='pmButton ion-margin'
+                  (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
+                  color="danger"
+                  size='small'
+                  [ngStyle]="{
+                    'position':'relative',
+                    'right': '0%'
+                  }"
+                  >-</ion-button>
+                  <ion-text color='white' class='catCardInfoSpan'>
+                    <h4 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
+                      {{ item.value[locationMetaData.id].count }}x {{ item.value.units }}
+                    </h4>
+                  </ion-text>
+                  <ion-button
+                  class='pmButton ion-margin'
+                  (click)="pmOne('+', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
+                  color="success"
+                  size='small'
+                  [ngStyle]="{
+                    'position':'relative',
+                    'left': '0%'
+                  }"
+                >+</ion-button>
+                </div>
+              </div>
             </ion-card>
         </ion-list>
       </mat-expansion-panel>

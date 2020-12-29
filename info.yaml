@@ -1,7 +1,3 @@
-bug list:
-    - Modals where keyboard can be opened ar being shrunk on keyboard open.
-        => Sol -> Change modal size in global.scss to px measurement instead of percentage.
-
 
 Need to do:
     
@@ -27,7 +23,7 @@ Need to do:
                     - Green / Red
             [・] Unift background as black for all user prefs
                     - Light mode renders for dark now.
-            [  ] Modals -> Cleaner look? (BUG)
+            [  ] Modals -> Cleaner look?
             [  ] Login Page -> More stuff 
                     - Toolbar that leads to unlock (Similar to MacQ)
                     - Greeting?

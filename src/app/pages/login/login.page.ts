@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
       this.savedUser = await this.auth.getSavedAccounts();
 
       if ( (this.savedUser.email != null) || (this.savedUser.password != null) || (this.savedUser.email != undefined) || (this.savedUser.password != null) ) {
-        this.auth.login("admin@t2g.com", "admin1");
+        this.auth.login(this.savedUser.email, this.savedUser.password);
       } else {
         this.presentAlert("No account set.");
       }

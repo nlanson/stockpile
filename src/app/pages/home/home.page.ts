@@ -41,7 +41,7 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: Settings2,
       swipeToClose: true,
-      cssClass: 'default-modal'
+      cssClass: 'settingsModal'
     });
     return await modal.present();
   }
@@ -59,7 +59,7 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: InfoComponent,
       swipeToClose: true,
-      cssClass: 'cardModal'
+      cssClass: 'infoModal'
     });
     return await modal.present();
   }

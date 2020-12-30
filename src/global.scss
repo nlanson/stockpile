@@ -44,7 +44,20 @@
 }
 
 
-.default-modal{
+.settingsModal{
+    --width: 100%;
+    --min-height: 30%;
+    --max-height: 63%;
+}
+
+.infoModal {
+    --width: 80%;
+    --height: 150px; //change here as more information gets added into the info modal
+    --min-height: 50px;
+    --border-radius: 20px;
+}
+
+.loginSettingsModal{
     --width: 100%;
     --height: 95%;
     --border-radius: 50px;
@@ -71,23 +84,18 @@
 }
 
 .editLocModal {
-    --width: 95%;
+    --width: 80%;
     --height: 325px;
     --border-radius: 20px;
 }
 
 .editItemDetailModal {
-    --width: 95%;
+    --width: 85%;
     --height: 370px;
     --border-radius: 20px;
 }
 
-.cardModal {
-    --width: 80%;
-    --height: 100px; //change here as more information gets added into the info modal
-    --min-height: 50px;
-    --border-radius: 20px;
-}
+
 
 .ion-color-white {
     --ion-color-base: var(--ion-color-white) !important;

@@ -2,12 +2,18 @@
     text-align: center;
 }
 
-ion-card {
-    margin: 3%;
+.settingsCard {
+    margin: 0;
+    padding: 0;
 }
 
 .tileCard {
-    width: 44%;
+    width: 45%;
     display: inline-block;
+}
+
+.stackedCard {
+    background-color: #323233;
+    margin: 2%;
 }
 

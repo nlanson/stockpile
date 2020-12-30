@@ -1,89 +1,90 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <h1 class="settingsHeading">Settings</h1>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="modalHideScroll">
-    <ion-card *ngIf='currentUser == null'>
-      <ion-card-content>
-        <span>
-          Looks like an authentication error has occured...
-        </span><br><br>
-        <ion-button (click)='logout()' color='warning'>Return to Login</ion-button>
-      </ion-card-content>
-    </ion-card>
-
-  
-    <ion-card *ngIf='currentUser != null' [class.tileCard]="currentUser.displayName === 'Admin'">
-        <ion-card-header>
-          <ion-card-subtitle>
-            Logged in as:
-          </ion-card-subtitle>
-          <ion-card-title>
-            {{ currentUser.displayName }}
-          </ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <ion-button class='accCardLogoutButton' color='danger' expand="block" (click)='logout()'>Logout</ion-button>
-        </ion-card-content>
-    </ion-card>
-
-    <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'">
+    <ion-card class='settingsCard'>
       <ion-card-header>
-        <ion-card-subtitle>
-          Add Location
-        </ion-card-subtitle>
-        <ion-card-title>
-          New Loc
-        </ion-card-title>
+        <ion-card-title> Settings </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-button (click)="presentNewLocationModal()" expand="block">+ Location</ion-button>
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'">
-      <ion-card-header>
-        <ion-card-subtitle>
-          Edit a Location
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <form [formGroup]="locationForm" (ngSubmit)="openEditModal()">
-          <ion-item>
-            <ion-label position="floating">Location</ion-label>
-            <ion-select  formControlName="location" placeholder="Select" class='formInput'>
-              <ion-select-option *ngFor='let location of locations | async' [value]='location'>{{location.name}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-button type="submit" color="success" class="ion-margin" expand="block">Edit</ion-button>
-        </form>   
-      </ion-card-content>
-    </ion-card>
-
-    <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'">
-      <ion-card-header>
-        <ion-card-subtitle>
-          Delete a Location
-        </ion-card-subtitle>
-      </ion-card-header>
-      <ion-card-content>
-        <form [formGroup]="locationForm" (ngSubmit)="deleteLocation()">
-          <ion-item>
-            <ion-label position="floating">Location</ion-label>
-            <ion-select  formControlName="location" placeholder="Select" class='formInput'>
-              <ion-select-option *ngFor='let location of locations | async' [value]='location'>{{location.name}}</ion-select-option>
-            </ion-select>
-          </ion-item>
-          <ion-button type="submit" color="danger" class="ion-margin" expand="block">Delete</ion-button>
-        </form>   
-      </ion-card-content>
-    </ion-card>
+        <ion-card *ngIf='currentUser == null'>
+          <ion-card-content>
+            <span>
+              Looks like an authentication error has occured...
+            </span><br><br>
+            <ion-button (click)='logout()' color='warning'>Return to Login</ion-button>
+          </ion-card-content>
+        </ion-card>
     
-    <!--
-    <ion-buttons (click)="setDisplayName()">
-      <h4>Set DN</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
-    </ion-buttons>
-    -->
+      
+        <ion-card *ngIf='currentUser != null' [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
+            <ion-card-header>
+              <ion-card-subtitle>
+                Logged in as:
+              </ion-card-subtitle>
+              <ion-card-title>
+                {{ currentUser.displayName }}
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-button class='accCardLogoutButton' color='danger' expand="block" (click)='logout()'>Logout</ion-button>
+            </ion-card-content>
+        </ion-card>
+    
+        <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
+          <ion-card-header>
+            <ion-card-subtitle>
+              Add Location
+            </ion-card-subtitle>
+            <ion-card-title>
+              New Loc
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-button (click)="presentNewLocationModal()" expand="block">+ Location</ion-button>
+          </ion-card-content>
+        </ion-card>
+    
+        <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
+          <ion-card-header>
+            <ion-card-subtitle>
+              Edit Location
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="locationForm" (ngSubmit)="openEditModal()">
+              <ion-item>
+                <ion-label position="floating">Location</ion-label>
+                <ion-select  formControlName="location" placeholder="Select" class='formInput'>
+                  <ion-select-option *ngFor='let location of locations | async' [value]='location'>{{location.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-button type="submit" color="success" class="ion-margin" expand="block">Edit</ion-button>
+            </form>   
+          </ion-card-content>
+        </ion-card>
+    
+        <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
+          <ion-card-header>
+            <ion-card-subtitle>
+              Delete Location
+            </ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <form [formGroup]="locationForm" (ngSubmit)="deleteLocation()">
+              <ion-item>
+                <ion-label position="floating">Location</ion-label>
+                <ion-select  formControlName="location" placeholder="Select" class='formInput'>
+                  <ion-select-option *ngFor='let location of locations | async' [value]='location'>{{location.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-button type="submit" color="danger" class="ion-margin" expand="block">Delete</ion-button>
+            </form>   
+          </ion-card-content>
+        </ion-card>
+        
+        <!--
+        <ion-buttons (click)="setDisplayName()">
+          <h4>Set DN</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
+        </ion-buttons>
+        -->
+      </ion-card-content>
+    </ion-card>
 </ion-content>

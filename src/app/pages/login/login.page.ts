@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
     const modal = await this.modalController.create({
       component: AccountSettingsPage,
       swipeToClose: true,
-      cssClass: 'default-modal'
+      cssClass: 'loginSettingsModal'
     });
     return await modal.present();
   }

@@ -83,11 +83,19 @@
         </mat-expansion-panel-header>
         <ion-list  *ngFor="let item of items | async | keyvalue; trackBy:trackByFn">
             <ion-card *ngIf="item.value.category == category" class="item" (click)='gotoItemPage(item.value.id)'>
-              <div class='catCardContainer'>
-                <strong [style.color]="getColor(item.value.count, item.value.threshhold)">
-                  {{item.value.name}} -
-                </strong>
-                <div class='catCardInfo'>
+              <div class='catCardContainer catCardLeftSide'>
+                <div class='catCardTitle'>
+                  <strong [style.color]="getColor(item.value.count, item.value.threshhold)">
+                    {{item.value.name}}
+                  </strong>
+                </div>
+
+                <div class='catCardSubInformation'>
+                  <span>{{item.value.units}}</span>
+                </div>
+              </div>
+      
+              <div class='catCardInfo'>
                 <ion-button
                   class='pmButton ion-margin'
                   (click)="pmOne('-', item.value.id, item.value[locationMetaData.id].count); $event.stopPropagation()"
@@ -100,7 +108,7 @@
                   >-</ion-button>
                   <ion-text color='white' class='catCardInfoSpan'>
                     <h4 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
-                      {{ item.value[locationMetaData.id].count }}x {{ item.value.units }}
+                      {{ item.value[locationMetaData.id].count }}
                     </h4>
                   </ion-text>
                   <ion-button
@@ -113,7 +121,6 @@
                     'left': '0%'
                   }"
                 >+</ion-button>
-                </div>
               </div>
             </ion-card>
         </ion-list>

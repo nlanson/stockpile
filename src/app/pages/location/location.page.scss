@@ -67,14 +67,6 @@ mat-expansion-panel,
     width: 100%;
 }
 
-.catCardContainer {
-    margin: 3%;
-}
-
-.catCardInfo {
-    float: right;
-    display: inline;
-}
 
 .pmButton {
     width: 20px;
@@ -84,10 +76,37 @@ mat-expansion-panel,
     vertical-align: middle;
 }
 
+
+//Category Card
+.catCardTitle {
+    display:  inline;
+    font-size: 16px;
+}
+
+.catCardContainer {
+    margin: 3%;
+}
+
+.catCardLeftSide {
+    display: inline-block;
+    //float: left;
+    width: 50%;
+}
+
+.catCardSubInfo {
+    width: 30%;
+    display: inline;
+    margin-left: 1%;
+}
+
+.catCardInfo {
+    float: right;
+    display: inline;
+}
+
 .catCardInfoSpan {
     display: inline-block;
     text-align: center;
-    vertical-align: middle;
     position: relative;
     
 }

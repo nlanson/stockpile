@@ -40,6 +40,10 @@ const routes: Routes = [
   {
     path: 'edit-item-detail',
     loadChildren: () => import('./modals/edit-item-detail/edit-item-detail.module').then( m => m.EditItemDetailPageModule)
+  },
+  {
+    path: 'settings2',
+    loadChildren: () => import('./modals/settings2/settings2.module').then( m => m.Settings2PageModule)
   }
 ];
 

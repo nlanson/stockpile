@@ -71,4 +71,4 @@ export class LoginPage implements OnInit {
   }
 
 
-}
+}//end class

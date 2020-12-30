@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs'
 
 import { FirebaseService } from '../../services/firebase.service';
-import { SettingsComponent } from '../../modals/settings/settings.component';
+import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditLocationPage } from '../../modals/edit-location/edit-location.page';
 import { NewItemPage } from '../../modals/new-item/new-item.page';
@@ -95,7 +95,7 @@ export class LocationPage implements OnInit {
 
   async presentSettings() {
     const modal = await this.modalController.create({
-      component: SettingsComponent,
+      component: Settings2,
       swipeToClose: true,
       cssClass: 'default-modal'
     });

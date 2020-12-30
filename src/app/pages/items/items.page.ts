@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router'
 
-import { SettingsComponent } from '../../modals/settings/settings.component';
+import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { NewItemPage } from '../../modals/new-item/new-item.page';
 import { FirebaseService } from '../../services/firebase.service';
@@ -57,7 +57,7 @@ export class ItemsPage implements OnInit {
 
   async presentSettings() {
     const modal = await this.modalController.create({
-      component: SettingsComponent,
+      component: Settings2,
       swipeToClose: true,
       cssClass: 'default-modal'
     });

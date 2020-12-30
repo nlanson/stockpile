@@ -1,28 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <h1 class="Heading ion-margin">Edit Item Detail</h1>
-  </ion-toolbar>
-</ion-header>
-
-
-<ion-content>
-  <form [formGroup]="ItemDetailForm" (ngSubmit)="submit()" *ngIf="ItemDetailForm" class="ion-margin">
-    <ion-item>
-      <ion-label position="floating">Count</ion-label>
-      <ion-input formControlName="count" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Min Count</ion-label>
-      <ion-input formControlName="threshhold" type="number"></ion-input>
-    </ion-item>
-    <ion-item>
-      <span>Ignore?</span>
-      <!-- <ion-select formControlName="ignore" placeholder="Please Select">
-        <ion-select-option value=true>True</ion-select-option>
-        <ion-select-option value=false>False</ion-select-option>
-      </ion-select> -->
-      <ion-toggle formControlName='ignore' class='ignoreToggle'></ion-toggle>
-    </ion-item>
-    <ion-button type="submit" color="primary" class="ion-margin" expand="block">Save</ion-button>
-  </form>
+<ion-content class="modalHideScroll">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        Edit Item for Location
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="ItemDetailForm" (ngSubmit)="submit()" *ngIf="ItemDetailForm" class="ion-margin">
+        <ion-item>
+          <ion-label position="floating">Count</ion-label>
+          <ion-input formControlName="count" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Min Count</ion-label>
+          <ion-input formControlName="threshhold" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <span>Ignore?</span>
+          <!-- <ion-select formControlName="ignore" placeholder="Please Select">
+            <ion-select-option value=true>True</ion-select-option>
+            <ion-select-option value=false>False</ion-select-option>
+          </ion-select> -->
+          <ion-toggle formControlName='ignore' class='ignoreToggle'></ion-toggle>
+        </ion-item>
+        <ion-button type="submit" color="primary" class="ion-margin" expand="block">Save</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+

@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IonInfiniteScroll } from '@ionic/angular';
 
-import { SettingsComponent } from '../../modals/settings/settings.component';
+import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditItemPage } from '../../modals/edit-item/edit-item.page';
 import { EditItemDetailPage } from '../../modals/edit-item-detail/edit-item-detail.page'
@@ -99,7 +99,7 @@ export class ItemPage implements OnInit {
 
   async presentSettings() {
     const modal = await this.modalController.create({
-      component: SettingsComponent,
+      component: Settings2,
       swipeToClose: true,
       cssClass: 'default-modal'
     });
@@ -125,7 +125,7 @@ export class ItemPage implements OnInit {
       }
     });
     modal.onDidDismiss().then(async () => {
-      this.itemMetaData = this.fbs.getItemMetaData(this.id);
+      this.itemMetaData = await this.fbs.getItemMetaData(this.id);
     })
     return await modal.present();
     

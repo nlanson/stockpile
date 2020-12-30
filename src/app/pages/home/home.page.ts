@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router'
 
 import { SettingsComponent } from '../../modals/settings/settings.component';
+import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { NewLocationPage } from '../../modals/new-location/new-location.page';
 import { FirebaseService } from '../../services/firebase.service';
@@ -38,7 +39,7 @@ export class HomePage {
   
   async presentSettings() {
     const modal = await this.modalController.create({
-      component: SettingsComponent,
+      component: Settings2,
       swipeToClose: true,
       cssClass: 'default-modal'
     });
@@ -58,7 +59,7 @@ export class HomePage {
     const modal = await this.modalController.create({
       component: InfoComponent,
       swipeToClose: true,
-      cssClass: 'default-modal'
+      cssClass: 'cardModal'
     });
     return await modal.present();
   }

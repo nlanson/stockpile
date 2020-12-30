@@ -54,7 +54,7 @@
 
 .newItemModal {
     --width: 80%;
-    --height: 325px;
+    --height: 335px;
     --min-height: 300px;
     --border-radius: 20px;
 }
@@ -78,7 +78,14 @@
 
 .editItemDetailModal {
     --width: 95%;
-    --height: 350px;
+    --height: 370px;
+    --border-radius: 20px;
+}
+
+.cardModal {
+    --width: 80%;
+    --height: 100px; //change here as more information gets added into the info modal
+    --min-height: 50px;
     --border-radius: 20px;
 }
 

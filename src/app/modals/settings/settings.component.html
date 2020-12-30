@@ -5,12 +5,25 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-    <h3>{{ currentUser.displayName }}</h3>
-    <ion-buttons (click)="logout()">
-      <h4>Logout</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
-    </ion-buttons>
-    <br>
+  <div *ngIf='currentUser != null'>
+    <ion-card class='accCard'>
+      <ion-card-content>
+        <div class='accCardLeft'>
+          <ion-card-subtitle>
+            Logged in as:
+          </ion-card-subtitle>
+          <ion-card-title>
+            {{currentUser.displayName}}
+          </ion-card-title>
+        </div>
+        <div class='accCardRight'>
+          <ion-button color='danger' (click)="logout()" class='accPanelLogoutButton'>
+            Logout <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
     
     <!--
     <ion-buttons (click)="setDisplayName()">
@@ -19,6 +32,4 @@
     -->
 
     <ion-button (click)="presentNewLocationModal()" class="ion-margin" expand="block">New Location</ion-button>
-
-  </div>
 </ion-content>

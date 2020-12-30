@@ -1,27 +1,30 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>New Item</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content class="modalHideScroll">
-  <form [formGroup]="newItemForm" (ngSubmit)="submit()">
-    <ion-item>
-      <ion-label position="floating">Item Name</ion-label>
-      <ion-input formControlName="newItemName"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Units</ion-label>
-      <ion-input formControlName="units"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Category</ion-label>
-      <ion-select formControlName="category" placeholder="Select One">
-        <ion-select-option value="Veges">Veges</ion-select-option>
-        <ion-select-option value="Meat">Meat</ion-select-option>
-        <ion-select-option value="Other">Other</ion-select-option>
-      </ion-select>
-    </ion-item>
-    <ion-button type="submit" color="primary" class="ion-margin" expand="block">Add</ion-button>
-  </form>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        New Item
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="newItemForm" (ngSubmit)="submit()">
+        <ion-item>
+          <ion-label position="floating">Item Name</ion-label>
+          <ion-input formControlName="newItemName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Units</ion-label>
+          <ion-input formControlName="units"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Category</ion-label>
+          <ion-select formControlName="category" placeholder="Select One">
+            <ion-select-option value="Veges">Veges</ion-select-option>
+            <ion-select-option value="Meat">Meat</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button type="submit" color="primary" class="ion-margin" expand="block">Add</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -23,7 +23,7 @@ Need to do:
                     - Green / Red
             [・] Unift background as black for all user prefs
                     - Light mode renders for dark now.
-            [  ] Modals -> Cleaner look?
+            [・] Modals -> Cleaner look?
             [  ] Login Page -> More stuff 
                     - Toolbar that leads to unlock (Similar to MacQ)
                     - Greeting?
@@ -31,8 +31,8 @@ Need to do:
        [・] Item and Loc page title
 
     User Access:
-        [  ] 1x Super User that can add and rm locations. All other users can just access DB?
-        [  ] Edit and Delete Location only visible to super users.
+        [・] 1x Super User that can add and rm locations. All other users can just access DB?
+        [・] Edit and Delete Location only visible to super users.
 
 
 

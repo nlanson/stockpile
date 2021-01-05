@@ -1,9 +1,11 @@
 <ion-content class="modalHideScroll">
+    <!--Settings Card-->
     <ion-card class='settingsCard'>
       <ion-card-header>
         <ion-card-title> Settings </ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <!--USER NOT LOGGED IN-->
         <ion-card *ngIf='currentUser == null'>
           <ion-card-content>
             <span>
@@ -13,7 +15,7 @@
           </ion-card-content>
         </ion-card>
     
-      
+        <!--User Card-->
         <ion-card *ngIf='currentUser != null' [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
             <ion-card-header>
               <ion-card-subtitle>
@@ -28,6 +30,7 @@
             </ion-card-content>
         </ion-card>
     
+        <!--Admin Card (New Location)-->
         <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
           <ion-card-header>
             <ion-card-subtitle>
@@ -42,6 +45,7 @@
           </ion-card-content>
         </ion-card>
     
+        <!-- Admin Card (Edit Location) -->
         <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
           <ion-card-header>
             <ion-card-subtitle>
@@ -61,6 +65,7 @@
           </ion-card-content>
         </ion-card>
     
+        <!-- Admin Card (Delete Location) -->
         <ion-card *ngIf="currentUser.displayName === 'Admin'" [class.tileCard]="currentUser.displayName === 'Admin'" class='stackedCard'>
           <ion-card-header>
             <ion-card-subtitle>
@@ -80,7 +85,7 @@
           </ion-card-content>
         </ion-card>
         
-        <!--
+        <!-- To set display name. (debug)
         <ion-buttons (click)="setDisplayName()">
           <h4>Set DN</h4> <ion-icon name="log-out-outline" class="logoutIcon"></ion-icon>
         </ion-buttons>

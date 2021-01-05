@@ -46,6 +46,7 @@
 
 .settingsModal{
     --width: 100%;
+    //--height: auto;
     --min-height: 30%;
     --max-height: 63%;
 }
@@ -97,6 +98,7 @@
 
 
 
+//White Custom Colour for Use on HTML Attributes (Forced Dark Mode Counter)
 .ion-color-white {
     --ion-color-base: var(--ion-color-white) !important;
     --ion-color-base-rgb: var(--ion-color-white-rgb) !important;

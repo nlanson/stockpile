@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.nlanson.stockpile" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.nlanson.stockpileapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Stockpile</name>
-    <description>An app to manage inventory accross multiple locations.</description>
+    <description>Inventory Management App for Thai2Go NZ</description>
     <author email="lanson.noah@gmail.com" href="http://github.com/nlanson">Noah Lanson</author>
     <content src="index.html" />
     <access origin="*" />

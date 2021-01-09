@@ -100,7 +100,7 @@ export class AuthService {
     var user = firebase.auth().currentUser;
 
     user.updateProfile({
-      displayName: "Frankton", //To set display name of new user.
+      displayName: "User", //To set display name of new user.
     }).then(function() {
       console.log("success")
     }).catch(function(error) {

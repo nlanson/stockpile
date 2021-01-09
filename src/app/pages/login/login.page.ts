@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
   }
 
   async debugLogin() {
-    this.auth.login('admin@t2g.com', 'admin1');
+    this.auth.login('accounts@organicsolutions.co.nz', 'stockpile');
   }
 
   async presentSettings() {

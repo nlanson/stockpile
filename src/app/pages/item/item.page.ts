@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IonInfiniteScroll } from '@ionic/angular';
 
 import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
@@ -40,7 +40,8 @@ export class ItemPage implements OnInit {
     private fbs: FirebaseService,
     private modalController: ModalController,
     private route: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private ac: AlertController
   ) {
     this.toolbarColour = "black";
     this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
@@ -56,9 +57,29 @@ export class ItemPage implements OnInit {
 
   }
   
-  deleteItem(id) {
-    this.fbs.removeItem(id);
-    this.route.navigate(['/tabs/items'])
+  async deleteItem(id) {
+    const alert = await this.ac.create({
+      header: 'Are you sure you want to delete this item?',
+      message: `Delete means forever, unrecoverable. ${id}`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (cancel) => {
+            console.log('Cancelled Delete');
+          }
+        }, {
+          text: 'Delete',
+          handler: (del) => {
+            this.fbs.removeItem(id);
+            this.route.navigate(['/tabs/items'])
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   pmOne(operator:string, locationid:string, value:number) {

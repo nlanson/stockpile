@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {  FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
 import { FirebaseService } from '../../services/firebase.service';
@@ -13,11 +14,13 @@ import { FirebaseService } from '../../services/firebase.service';
 export class NewLocationPage implements OnInit {
 
   newLocationForm: FormGroup;
+  formFailed: boolean = false;
 
   constructor(
     private fbs: FirebaseService,
     private fb: FormBuilder,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private ac: AlertController
   ) { }
 
   ngOnInit() {
@@ -29,11 +32,38 @@ export class NewLocationPage implements OnInit {
     );
   }
 
-  submit() {
-    console.log("newlocation lol");
-    this.fbs.addLocation(this.newLocationForm.value.newLocationName, this.newLocationForm.value.newLocationType);
-    this.newLocationForm.reset();
-    this.modalController.dismiss();
+  async submit() {
+    console.log("newlocation submitted");
+    let newLocName = this.newLocationForm.value.newLocationName;
+    let newLocType = this.newLocationForm.value.newLocationType;
+
+    //Validating whether the submitted form has any null values (empty/unfilled)
+    if((newLocName == null) || (newLocType == null)) {
+      const alert = await this.ac.create({
+        header: 'Invalid Input',
+        message: `Location name or type cannot be empty`,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (cancel) => {
+              this.modalController.dismiss()
+            }
+          }, {
+            text: 'Retry',
+            handler: (del) => {
+              
+            }
+          }
+        ]
+      });
+      await alert.present();
+    } else {
+      this.fbs.addLocation(newLocName, newLocType);
+      this.newLocationForm.reset();
+      this.modalController.dismiss();
+    }
   }
 
 }

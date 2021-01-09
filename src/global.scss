@@ -51,6 +51,13 @@
     --max-height: 63%;
 }
 
+/*
+Change settingsModal to the same presentation as loginSettingsModal.
+Settings2Component will need to be redesigned:
+    - regular modal background not a card page
+    - cards on the background.
+*/
+
 .infoModal {
     --width: 80%;
     --height: 150px; //change here as more information gets added into the info modal

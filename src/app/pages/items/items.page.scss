@@ -20,11 +20,10 @@ ion-card {
     margin-bottom: 2%;
 }
 
+//Expansion Panel
 mat-expansion-panel-header {
     background-color: black !important
 }
-
-
 
 mat-accordion,
 mat-expansion-panel,
@@ -36,4 +35,27 @@ mat-expansion-panel,
 
 .matExpansionHeaderTitle {
     color: white;
+}
+
+//Category Card
+.catCardTitle {
+    display:  inline;
+    font-size: 16px;
+    color: white;
+}
+
+.catCardContainer {
+    margin: 3%;
+}
+
+.catCardLeftSide {
+    display: inline-block;
+    //float: left;
+    width: 50%;
+}
+
+.catCardSubInfo {
+    width: 30%;
+    display: inline;
+    margin-left: 1%;
 }

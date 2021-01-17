@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
     private ns: NativeStorage,
     private ac: AlertController,
   ) {
-    this.toolbarColour = "black";
+    this.toolbarColour = "broccoGreen";
    }
 
   async ngOnInit() {

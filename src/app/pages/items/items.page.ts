@@ -24,6 +24,7 @@ export class ItemsPage implements OnInit {
     "Other"
   ]
   public searchArray: any;
+  itemTotals: any;
 
   constructor(
     private fbs: FirebaseService,
@@ -35,7 +36,29 @@ export class ItemsPage implements OnInit {
    }
 
   ngOnInit() {
+    let totalsObj = {};
     this.items = this.fbs.getItems();
+
+    //This section is extracting the count of easch item at each location and tallying the total amount of each item.
+    this.items.forEach(items => {
+      items.forEach(item => {
+        let keysArray = Object.keys(item); //Array of every key in an item object.
+        let totalForItem: number = 0; //To tally the total amount of an item accross all locations.
+        keysArray.forEach(key => { //Traversing the item Object keys and only using the Object keys that arent equal to category, name, id or units.
+          if (key == `category` || key == 'id' || key == 'name' || key == 'units') { //This is done because the item Obj is made of the 4 unwanted keys + 4 randomly generated keys that we do not know of.
+            /*for some reason i cant do 
+              if (key != 'category' || key != 'id' ...) {}  because of some raondom error.
+            */
+          } else {
+            //console.log(item[key].count)
+            totalForItem = totalForItem + item[key].count;
+            totalsObj[item.name] = totalForItem;
+          }
+        });
+      });
+    });
+
+    this.itemTotals = totalsObj;
   }
 
   gotoItemPage(id) {
@@ -46,7 +69,7 @@ export class ItemsPage implements OnInit {
     const searchTerm = evt.srcElement.value;
   
     if (!searchTerm || searchTerm == '') {
-      console.log(searchTerm)
+      //console.log(searchTerm)
       this.searchArray = false;
       return;
     }

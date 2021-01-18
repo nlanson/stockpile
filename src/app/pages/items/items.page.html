@@ -64,6 +64,9 @@
                 <span>{{item.value.units}}</span>
               </div>
             </div>
+            <div class='catCardContainer catCardRightSide'>
+              Total: {{itemTotals[item.value.name]}}
+            </div>
           </ion-card>
           <!-- <ion-item *ngIf="item.value.category == category" (click)="gotoItemPage(item.value.id)" class="item"> ・{{item.value.name}} </ion-item> -->
         </ion-list>

@@ -9,11 +9,11 @@
       <form [formGroup]="ItemDetailForm" (ngSubmit)="submit()" *ngIf="ItemDetailForm" class="ion-margin">
         <ion-item>
           <ion-label position="floating">Count</ion-label>
-          <ion-input formControlName="count" type="tel"></ion-input>
+          <ion-input formControlName="count" type="number"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Min Count</ion-label>
-          <ion-input formControlName="threshhold" type="tel"></ion-input>
+          <ion-input formControlName="threshhold" type="number"></ion-input>
         </ion-item>
         <ion-item>
           <span>Ignore?</span>

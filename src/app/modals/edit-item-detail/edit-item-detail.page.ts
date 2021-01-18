@@ -16,6 +16,7 @@ export class EditItemDetailPage implements OnInit {
   locationId: string = this.navParams.get(`locationId`);
 
   item: any;
+  location: any;
 
   ItemDetailForm: FormGroup;
 
@@ -33,7 +34,8 @@ export class EditItemDetailPage implements OnInit {
       count: this.item[this.locationId].count,
       threshhold: this.item[this.locationId].threshhold,
       ignore: this.item[this.locationId].ignore
-    })
+    });
+    this.location = await this.fbs.getLocationMetaData(this.locationId);
   }
 
   submit() {

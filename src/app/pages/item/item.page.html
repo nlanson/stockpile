@@ -43,7 +43,7 @@
           </ion-col>
           <ion-col size='6'>
             <ion-text color='white'>
-              <h1 class='cardInfo' [style.color]="getColor(item.value.count, item.value.threshhold)">
+              <h1 class='cardInfo' [style.color]="getColor(item.value.count, item.value.threshhold, item.value.ignore)">
                 {{item.value.count}}x {{itemMetaData.units}}
               </h1>
             </ion-text>

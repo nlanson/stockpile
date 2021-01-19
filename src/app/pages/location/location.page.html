@@ -45,7 +45,7 @@
                 </ion-col>
                 <ion-col size='6'>
                   <ion-text color='white'>
-                    <h1 class='searchCardInfo' [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
+                    <h1 class='searchCardInfo' [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold, item.value[locationMetaData.id].ignore)">
                       {{item.value[locationMetaData.id].count}} {{item.value.units}}
                     </h1>
                   </ion-text>
@@ -85,7 +85,7 @@
             <ion-card *ngIf="item.value.category == category" class="item" (click)='gotoItemPage(item.value.id)'>
               <div class='catCardContainer catCardLeftSide'>
                 <div class='catCardTitle'>
-                  <strong [style.color]="getColor(item.value.count, item.value.threshhold)">
+                  <strong [style.color]="getColor(item.value.count, item.value.threshhold, item.value.ignore)">
                     {{item.value.name}}
                   </strong>
                 </div>
@@ -107,7 +107,7 @@
                   }"
                   >-</ion-button>
                   <ion-text color='white' class='catCardInfoSpan'>
-                    <h4 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold)">
+                    <h4 [style.color]="getColor(item.value[locationMetaData.id].count, item.value[locationMetaData.id].threshhold, item.value.ignore)">
                       {{ item.value[locationMetaData.id].count }}
                     </h4>
                   </ion-text>

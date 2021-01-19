@@ -100,13 +100,14 @@ export class ItemPage implements OnInit {
   }
 
   getColor(count, thresh, ignore) {
-    if ( count > thresh+this.threshDifferenceValue ) {
+    //console.log(count, thresh, ignore);
+    if ( count > thresh+this.threshDifferenceValue && ignore == false) {
       return 'white';
     }
-    else if ( count > thresh ) {
+    else if ( count > thresh && ignore == false) {
       return `yellow`;
     }
-    else if ( count <= thresh ) {
+    else if ( count <= thresh && ignore == false) {
       return 'red';
     }
     else {

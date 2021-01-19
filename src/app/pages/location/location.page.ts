@@ -74,14 +74,14 @@ export class LocationPage implements OnInit {
     this.fbs.removeLocation(this.id);
   }
 
-  getColor(count, thresh) {
-    if ( count > thresh+this.threshDifferenceValue ) {
+  getColor(count, thresh, ignore) {
+    if ( count > thresh+this.threshDifferenceValue && ignore == false) {
       return 'white';
     }
-    else if ( count > thresh ) {
+    else if ( count > thresh && ignore == false) {
       return `yellow`;
     }
-    else if ( count <= thresh ) {
+    else if ( count <= thresh && ignore == false) {
       return 'red';
     }
     else {

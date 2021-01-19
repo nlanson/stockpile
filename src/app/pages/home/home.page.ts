@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router'
 
-import { SettingsComponent } from '../../modals/settings/settings.component';
 import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { NewLocationPage } from '../../modals/new-location/new-location.page';

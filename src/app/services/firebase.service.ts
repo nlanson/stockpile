@@ -95,7 +95,6 @@ export class FirebaseService {
   }
 
   editItem(itemid, locationid, newValue) { //Editing Item Count ONLY
-    console.log("edit item");
     this.fdb.object(`items/${itemid}/${locationid}`).update({count: newValue});
     this.logUpdateTime(locationid);
   }

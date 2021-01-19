@@ -64,16 +64,17 @@ export class LocationPage implements OnInit {
         newValue = value - 1
         break;
       default:
-        console.log("add/rm error location.page.ts (61)");
+        console.log("add/rm error location.page.ts (67)");
         break;
     }
-    if ( newValue >= 0 ) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
-      this.fbs.editItem(this.id, itemid, newValue);
+
+    if ( newValue >= 0 || (newValue < 0 && operator == '+')) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
+      this.fbs.editItem(itemid, this.id, newValue);
     } else {
       const alert = await this.ac.create({ //present error alert that stock cant be negative.
         cssClass: '',
         header: 'Error',
-        message: `You can't have a negative amount of ${itemid}`, //Eventually replace this itemid with the proper item name
+        message: `You can't have a negative amount of ${itemid}`,
         buttons: ['OK']
       });
       await alert.present();

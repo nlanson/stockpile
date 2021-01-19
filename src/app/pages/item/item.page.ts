@@ -95,7 +95,7 @@ export class ItemPage implements OnInit {
         console.log("add/rm error item.page.ts (71)");
         break;
     }
-    if ( newValue >= 0 ) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
+    if ( newValue >= 0 || (newValue < 0 && operator == '+')) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
       this.fbs.editItem(this.id, locationid, newValue);
     } else {
       const alert = await this.ac.create({ //present error alert that stock cant be negative.

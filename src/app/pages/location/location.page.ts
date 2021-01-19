@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs'
 
 import { FirebaseService } from '../../services/firebase.service';
@@ -37,7 +38,8 @@ export class LocationPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private fbs: FirebaseService,
     private modalController: ModalController,
-    private router: Router
+    private router: Router,
+    private ac: AlertController
   ) {
     this.toolbarColour = "broccoGreen"; //Variable to set the toolbar colour. 
     this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
@@ -52,7 +54,7 @@ export class LocationPage implements OnInit {
     this.locationName = this.locationMetaData.name;
   }
 
-  pmOne(operator, itemid, value) {
+  async pmOne(operator, itemid, value) {
     let newValue: Number;
     switch (operator) {
       case "+":
@@ -65,7 +67,17 @@ export class LocationPage implements OnInit {
         console.log("add/rm error location.page.ts (61)");
         break;
     }
-    this.fbs.editItem(itemid, this.id, newValue);
+    if ( newValue >= 0 ) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
+      this.fbs.editItem(this.id, itemid, newValue);
+    } else {
+      const alert = await this.ac.create({ //present error alert that stock cant be negative.
+        cssClass: '',
+        header: 'Error',
+        message: `You can't have a negative amount of ${itemid}`, //Eventually replace this itemid with the proper item name
+        buttons: ['OK']
+      });
+      await alert.present();
+    }//end IF
   }
 
   deleteLocation() {

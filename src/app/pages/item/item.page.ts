@@ -82,7 +82,7 @@ export class ItemPage implements OnInit {
     await alert.present();
   }
 
-  pmOne(operator:string, locationid:string, value:number) {
+  async pmOne(operator:string, locationid:string, value:number) { //Plus Minus One Function.
     let newValue: Number;
     switch (operator) {
       case "+":
@@ -95,11 +95,20 @@ export class ItemPage implements OnInit {
         console.log("add/rm error item.page.ts (71)");
         break;
     }
-    this.fbs.editItem(this.id, locationid, newValue);
-    
+    if ( newValue >= 0 ) { //Only send to DB if the newValue is 0 or above since there cant be negative stock
+      this.fbs.editItem(this.id, locationid, newValue);
+    } else {
+      const alert = await this.ac.create({ //present error alert that stock cant be negative.
+        cssClass: '',
+        header: 'Error',
+        message: `You can't have a negative amount of ${this.itemMetaData.name}`,
+        buttons: ['OK']
+      });
+      await alert.present();
+    }//end IF
   }
 
-  getColor(count, thresh, ignore) {
+  getColor(count, thresh, ignore) { //figures which stock warning colour should be used by comparing count and thresh.
     //console.log(count, thresh, ignore);
     if ( count > thresh+this.threshDifferenceValue && ignore == false) {
       return 'white';

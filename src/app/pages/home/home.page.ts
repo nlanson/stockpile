@@ -26,7 +26,7 @@ export class HomePage {
     private router: Router,
   ) {
     this.locations = this.fbs.getLocations();
-    this.toolbarColour = "black";
+    this.toolbarColour = "broccoGreen";
   }
 
   ngOnInit() {

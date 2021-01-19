@@ -32,7 +32,7 @@ export class ItemsPage implements OnInit {
     private router: Router,
   ) {
     this.items = this.fbs.getItems();
-    this.toolbarColour = "black";
+    this.toolbarColour = "broccoGreen";
    }
 
   ngOnInit() {

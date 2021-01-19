@@ -39,7 +39,7 @@ export class LocationPage implements OnInit {
     private modalController: ModalController,
     private router: Router
   ) {
-    this.toolbarColour = "black";
+    this.toolbarColour = "broccoGreen"; //Variable to set the toolbar colour. 
     this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
    }
 

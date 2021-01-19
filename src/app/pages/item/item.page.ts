@@ -43,7 +43,7 @@ export class ItemPage implements OnInit {
     private fb: FormBuilder,
     private ac: AlertController
   ) {
-    this.toolbarColour = "black";
+    this.toolbarColour = "broccoGreen";
     this.threshDifferenceValue = this.fbs.getColorThreshDifferenceValue;
    }
 

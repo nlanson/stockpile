@@ -66,6 +66,7 @@ export class NewItemPage implements OnInit {
       await alert.present();
     } else {
       newItemName = this.newItemForm.value.newItemName.charAt(0).toUpperCase() + this.newItemForm.value.newItemName.slice(1);
+      newItemUnits = newItemUnits.charAt(0).toUpperCase() + newItemUnits.slice(1);
       this.fbs.addItem(newItemName, newItemUnits, newItemCategory);
       this.newItemForm.reset();
       this.modalController.dismiss();

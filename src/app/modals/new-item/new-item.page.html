@@ -8,8 +8,12 @@
     <ion-card-content>
       <form [formGroup]="newItemForm" (ngSubmit)="submit()">
         <ion-item>
-          <ion-label position="floating">Item Name</ion-label>
-          <ion-input formControlName="newItemName"></ion-input>
+          <ion-label position="floating">Short Name</ion-label>
+          <ion-input formControlName="shortName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Long Name</ion-label>
+          <ion-input formControlName="longName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Units</ion-label>

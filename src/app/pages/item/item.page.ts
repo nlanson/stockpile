@@ -150,7 +150,7 @@ export class ItemPage implements OnInit {
     const modal = await this.modalController.create({
       component: EditItemPage,
       swipeToClose: true,
-      cssClass: 'editItemDetailModal',
+      cssClass: 'editItemModal',
       componentProps: {
         itemId: this.id
       }

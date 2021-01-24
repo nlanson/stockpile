@@ -8,8 +8,12 @@
     <ion-card-content>
       <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm" class="ion-margin">
         <ion-item>
-          <ion-label position="floating">Item Name</ion-label>
+          <ion-label position="floating">Short Name</ion-label>
           <ion-input formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Long Name</ion-label>
+          <ion-input formControlName="longName"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Item Units</ion-label>

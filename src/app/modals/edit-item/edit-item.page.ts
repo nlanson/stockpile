@@ -29,6 +29,7 @@ export class EditItemPage implements OnInit {
 
     this.editForm = this.fb.group({
       name: this.item.name,
+      longName: this.item.longName,
       category: this.item.category,
       units: this.item.units
     })
@@ -36,7 +37,7 @@ export class EditItemPage implements OnInit {
 
   submit() {
     let ef = this.editForm.value;
-    this.fbs.editItemInfo(this.itemId, ef.name, ef.category, ef.units);
+    this.fbs.editItemInfo(this.itemId, ef.name, ef.longName, ef.category, ef.units);
     
     this.modalController.dismiss();
   }

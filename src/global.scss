@@ -75,7 +75,7 @@ Settings2Component will need to be redesigned:
 
 .newItemModal {
     --width: 80%;
-    --height: 335px;
+    --height: 400px;
     --min-height: 300px;
     --border-radius: 20px;
 }
@@ -94,6 +94,12 @@ Settings2Component will need to be redesigned:
 .editLocModal {
     --width: 80%;
     --height: 325px;
+    --border-radius: 20px;
+}
+
+.editItemModal {
+    --width: 85%;
+    --height: 420px;
     --border-radius: 20px;
 }
 

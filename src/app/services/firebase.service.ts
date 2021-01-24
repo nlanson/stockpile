@@ -18,10 +18,12 @@ export class FirebaseService {
     this.threshDifferenceValue = 3;
   }
 
-  addItem(itemName: string, units: string, category: string) { //Add a new Item
-    itemName = itemName.charAt(0).toUpperCase() + itemName.slice(1); //Make the first letter of the new item capital letter.
+  addItem(name: string, longName: any, units: string, category: string) { //Add a new Item
+    name = name.charAt(0).toUpperCase() + name.slice(1); //Make the first letter of the new item capital letter.
+    longName = longName.charAt(0).toUpperCase() + longName.slice(1);
     let item = { //Create new object item with the input parameters.
-      name: itemName,
+      name: name,
+      longName: longName,
       units: units,
       category: category
     }
@@ -70,9 +72,17 @@ export class FirebaseService {
       sub = this.fdb.list('items'/*, ref => ref.orderByChild('name').equalTo(searchTerm)*/).snapshotChanges().subscribe((res) => {
         res.forEach((rresult) => { //for each item in the "items/" database, look for any item names that have the same characters with the search term for the scope.
           let result: any = rresult.payload.val();
-          if( result.name.substr(0, scope) == searchTerm ) { //Slice result.name to the scope length.
-            ResultsArray.push(result) //If match, push to the result array
+          if (result.longName) { //If longName property exists, search through those too!
+            if( result.name.substr(0, scope) == searchTerm || result.longName.substr(0, scope) == searchTerm) { //Slice result.name to the scope length.
+              ResultsArray.push(result) //If match, push to the result array
+            }
+          } else {
+            if( result.name.substr(0, scope) == searchTerm ) { //Slice result.name to the scope length.
+              ResultsArray.push(result) //If match, push to the result array
+            }
           }
+          
+          
         });
         sub.unsubscribe();
       })
@@ -108,10 +118,12 @@ export class FirebaseService {
     this.logUpdateTime(locationid); //Call function logUpdateTime to record the time of update.
   }
 
-  editItemInfo(itemid, name, category, units) { //Edit entire item info (Units, Category, Name)
+  editItemInfo(itemid, name, longName, category, units) { //Edit entire item info (Units, Category, Name)
     let ref = this.fdb.object(`items/${itemid}`); //Sets database reference to input param IDs.
+    
     let updateObj = { //Creates an object with the updated info from the input params.
       name: name,
+      longName: longName,
       category: category,
       units: units
     };

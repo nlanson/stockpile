@@ -4,7 +4,8 @@
       <ion-icon name="cog-outline" class="toolbarIcon" color="white"></ion-icon>
     </ion-buttons>
     <ion-text color='white'class="itemName">
-      <h1>{{itemMetaData.name}}</h1>
+      <h1 *ngIf="itemMetaData.longName != null || undefined">{{itemMetaData.longName}}</h1>
+      <h1 *ngIf="itemMetaData.longName == null || undefined">{{itemMetaData.name}}</h1>
     </ion-text>
     <ion-buttons slot="end" (click)="presentInfo()">
       <ion-icon name="information-outline" class="toolbarIcon" color="white"></ion-icon>
@@ -19,7 +20,7 @@
     
     <ion-card
     class='locationCard ion-margin'
-    [hidden]="item.key == 'name' || item.key == 'id' || item.key == 'units' || item.key == 'category' || item.key == 'threshhold'"
+    [hidden]="item.key == 'name' || item.key == 'longName' || item.key == 'id' || item.key == 'units' || item.key == 'category' || item.key == 'threshhold'"
     (click)="presentDetailedEdit(item.key)"
     >
     <ion-card-header>

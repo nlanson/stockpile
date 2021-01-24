@@ -23,10 +23,13 @@ export class FirebaseService {
     longName = longName.charAt(0).toUpperCase() + longName.slice(1);
     let item = { //Create new object item with the input parameters.
       name: name,
-      longName: longName,
+      longName: name,
       units: units,
       category: category
     }
+    item.longName = (longName != null || undefined) ? longName : name; //Ternary Operator (Fireship NaN)
+    console.log(item.longName);
+
     this.fdb.list(`items`).push(item).then((ref) => {
       this.fdb.object(`items/${ref.key}`) //Create new entry in the "items/" database with the randomly generated reference key.
       ref.update({ id: ref.key }) //set the new item ID to the randomlyt generated ref key.

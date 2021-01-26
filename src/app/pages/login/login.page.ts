@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/authentication/auth.service';
 import { AccountSettingsPage } from './account-settings/account-settings.page';
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';

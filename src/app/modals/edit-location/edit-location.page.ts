@@ -3,7 +3,7 @@ import { NavParams } from '@ionic/angular';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 @Component({
   selector: 'app-edit-location',

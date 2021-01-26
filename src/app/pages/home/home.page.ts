@@ -6,7 +6,7 @@ import { Router } from '@angular/router'
 import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { NewLocationPage } from '../../modals/new-location/new-location.page';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 @Component({
   selector: 'app-home',
@@ -64,7 +64,7 @@ export class HomePage {
   }
 
   gotoLocPage(id) {
-    console.log(id);
+    //console.log(id);
     this.router.navigate(['/tabs/home/location', id]);
     
   }

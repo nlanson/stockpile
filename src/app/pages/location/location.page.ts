@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs'
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditLocationPage } from '../../modals/edit-location/edit-location.page';

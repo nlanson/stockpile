@@ -4,8 +4,8 @@ import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import {  FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { AuthService } from '../../services/auth.service';
-import { FirebaseService } from '../../services/firebase.service';
+import { AuthService } from '../../services/authentication/auth.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 import { NewLocationPage } from '../../modals/new-location/new-location.page';
 import { EditLocationPage } from '../../modals/edit-location/edit-location.page';
 

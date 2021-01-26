@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 @Component({
   selector: 'app-new-location',

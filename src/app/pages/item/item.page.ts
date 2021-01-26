@@ -9,7 +9,7 @@ import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { EditItemPage } from '../../modals/edit-item/edit-item.page';
 import { EditItemDetailPage } from '../../modals/edit-item-detail/edit-item-detail.page'
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 @Component({
   selector: 'app-item',

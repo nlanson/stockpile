@@ -7,7 +7,7 @@ import { Router } from '@angular/router'
 import { Settings2 } from '../../modals/settings2/settings2.page';
 import { InfoComponent } from '../../modals/info/info.component';
 import { NewItemPage } from '../../modals/new-item/new-item.page';
-import { FirebaseService } from '../../services/firebase.service';
+import { FirebaseService } from '../../services/database/firebase.service';
 
 @Component({
   selector: 'app-items',

@@ -13,8 +13,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { FirebaseService } from './services/firebase.service';
-import { AuthService } from './services/auth.service';
+import { FirebaseService } from './services/database/firebase.service';
+import { AuthService } from './services/authentication/auth.service';
 import { ItemPage } from './pages/item/item.page';
 
 import { AccountSettingsPage } from './pages/login/account-settings/account-settings.page';

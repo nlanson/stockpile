@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AuthService } from '../../../services/authentication/auth.service';
 import { AlertController } from '@ionic/angular';

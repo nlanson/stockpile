@@ -21,6 +21,8 @@ export class LoginPage implements OnInit {
   showPinPad: boolean;
   toolbarColour: string;
 
+  accountConnected: boolean = false;
+
   constructor(
     private auth: AuthService,
     private modalController: ModalController,
@@ -33,6 +35,8 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
       this.savedUser = await this.auth.getSavedAccounts();
+      this.accountConnected = ( (this.savedUser.email != null) || (this.savedUser.password != null) || (this.savedUser.email != undefined) || (this.savedUser.password != null) ) ? true:false;
+      console.log(this.accountConnected);
   }
 
   async login() {
@@ -57,7 +61,9 @@ export class LoginPage implements OnInit {
       swipeToClose: true,
       cssClass: 'loginSettingsModal'
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onDidDismiss();
+    this.refreshAccountStatus();
   }
 
   async presentAlert(error: string) {
@@ -69,6 +75,12 @@ export class LoginPage implements OnInit {
     });
 
     await alert.present();
+  }
+
+  async refreshAccountStatus() {
+    this.savedUser = await this.auth.getSavedAccounts();
+    this.accountConnected = ( (this.savedUser.email != null) || (this.savedUser.password != null) || (this.savedUser.email != undefined) || (this.savedUser.password != null) ) ? true:false;
+    console.log(this.accountConnected);
   }
 
 

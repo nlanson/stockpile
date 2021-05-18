@@ -31,36 +31,36 @@ export class AuthService {
   }
 
   setAccount(email, password) {
-    //Uncomment to revert to nativeStorage
-    // this.ns.setItem('account', {email: email, password: password})
-    // .then(
-    //   () => console.log('Account stored for ' + email),
-    //   error => console.error('Error storing item', error)
-    // );
+    //NATIVE STORAGE
+    this.ns.setItem('account', {email: email, password: password})
+    .then(
+      () => console.log('Account stored for ' + email),
+      error => console.error('Error storing item', error)
+    );
 
     //LOCALSTORAGE
-    localStorage.setItem('account', JSON.stringify({"email": email, "password": password}));
+    //localStorage.setItem('account', JSON.stringify({"email": email, "password": password}));
   }
 
   getSavedAccounts() {
     return new Promise((resolve, reject) => {
-      //Uncomment to revert to nativeStorage.
-      // this.ns.getItem('account')
-      // .then(data=>{
-      //     this.savedUser = data;
-      //     resolve(this.savedUser);
-      // })
-      // .catch(err=> {
-      //   console.log(err);
-      //   resolve({
-      //     email: null,
-      //     password: null
-      //   });
-      // });
+      //NATIVE STORAGE
+      this.ns.getItem('account')
+      .then(data=>{
+          this.savedUser = data;
+          resolve(this.savedUser);
+      })
+      .catch(err=> {
+        console.log(err);
+        resolve({
+          email: null,
+          password: null
+        });
+      });
       
       //LOCALSTORAGE
-      this.savedUser = JSON.parse(localStorage.getItem('account'));
-      resolve(this.savedUser);
+      // this.savedUser = JSON.parse(localStorage.getItem('account'));
+      // resolve(this.savedUser);
     })
 
   }
